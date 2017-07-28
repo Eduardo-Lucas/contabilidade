@@ -1,0 +1,154 @@
+{% extends 'ctb/base.html' %}
+{% block historico_active %}active{% endblock %}
+
+{% block body %}
+<div class="historicos-container container-fluid">
+
+    <!-- historicos -->
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="row">
+
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Lista de Históricos Padrões</strong></h4>
+                </div>
+
+
+
+                <!-- Pesquisa -->
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <form method="GET" action="" id="searchform" style="margin-top: 0px;">
+                        {% csrf_token %}
+                        <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
+                            placeholder="Pesquisa...">
+                    </form>
+                </div>
+                <div class="btn-group" role="group">
+                <!-- PDF -->
+
+                    <a href="#">
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" title="Gera PDF"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
+                        </button>
+                    </a>
+
+
+                 <!-- EXCEL -->
+                    <a href="#">
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" title="Gera Excel"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+
+                    <!-- Botão Cria Registro -->
+                    <a href="#">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                        </button>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+        {% if all_historicos %}
+                <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
+                   style="margin-bottom: 0px;">
+                    <tbody>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Ativo</th>
+                            <th>Opções</th>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ativo</th>
+                                <th>Opções</th>
+                            </tr>
+                        </tfoot>
+                        {% for historico in all_historicos %}
+                            <tr>
+
+                                <td>{{ historico.codigo_historico  }}</td>
+                                <td>{{ historico.descricao  }}</td>
+                                <td>{{ historico.ativo  }}</td>
+
+                                <!-- Detalhes -->
+                                <td>
+                                     <a href="{% url 'ctb:detail' historico.id %}" class="btn btn-default btn-sm"
+                                        role="button" data-toggle="tooltip" title="Detalhes do registro"><span
+                                             class="glyphicon glyphicon-info-sign"></span></a>
+
+
+                                <!-- Edita -->
+                                 <a href="{% url 'ctb:historico-update' historico.id %}"
+                                        class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                                        title="Altera o registro">
+                                        <span class="glyphicon glyphicon-edit"></span></a>
+
+
+                                <!-- Deleta -->
+                                    <form action="{% url 'ctb:historico-delete' historico.id %}"
+                                          method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="historico_id" value="{{ historico.id }}" />
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                    title="Exclui o registro">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                    <script>
+                         $(document).ready(function(){
+                         $('[data-toggle="tooltip"]').tooltip();
+                          });
+                    </script>
+
+
+
+                </table>
+
+                    <div class="panel panel-default">
+                        {% if is_paginated %}
+                           <ul class="pager">
+                              {% if page_obj.has_previous %}
+                                 <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                              {% else %}
+                                 <li class="disabled"><span>&laquo;</span></li>
+                              {% endif %}
+                              {% for i in paginator.page_range %}
+                                 {% if page_obj.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                 {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                 {% endif %}
+                              {% endfor %}
+                              {% if page_obj.has_next %}
+                                 <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                              {% endif %}
+                           </ul>
+                        {% endif %}
+                    </div>
+
+        {% else %}
+            <h1>Não existem Históricos Cadastrados</h1>
+        {% endif %}
+    </div>
+
+
+</div>
+{% endblock %}

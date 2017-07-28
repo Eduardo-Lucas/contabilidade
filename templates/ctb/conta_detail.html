@@ -1,0 +1,39 @@
+{% extends 'ctb/base.html' %}
+{% block title %}Detalhes do Plano de Contas{% endblock %}
+{% block contas_active %}active{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Left Plano de Contas Info -->
+    <h1>{{ conta.codigo_conta }} - {{ conta.descricao }}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{% url 'ctb:conta-home' %}">
+                   <span class="glyphicon glyphicon-arrow-left"></span>  Voltar
+                </a>
+                <h3>Origem: {{ conta.origem  }} Natureza: {{ conta.natureza }}</h3>
+                <h3>Grau: {{ conta.grau_conta }} Ativo: {{ conta.conta_ativa }}</h3>
+                <h3>Conta Superior: {{ conta.conta_superior  }}</h3>
+                <h3>Conta Saldo Balanço: {{ conta.conta_saldo_balanco }}</h3>
+                <h3>Data de Inclusão: {{ conta.data_inclusao }}</h3>
+                {% if conta.conta_referencial_bacen %}
+                    <h3>Conta Referencial BACEN: {{ conta.conta_referencial_bacen }}</h3>
+                {% endif %}
+                {% if conta.conta_referencial_dinamica %}
+                    <h3>Conta Referencial Dinâmica: {{ conta.conta_referencial_dinamica }}</h3>
+                {% endif %}
+                {% if conta.conta_referencial_susep %}
+                    <h3>Conta Referencial SUSEP: {{ conta.conta_referencial_susep }}</h3>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+{% endblock %}

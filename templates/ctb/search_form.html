@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>search</title>
+    </head>
+    <body>
+        <form action="{% url 'ctb:search-form' %}" method="get">
+            {% csrf_token %}
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+    </body>
+</html>
