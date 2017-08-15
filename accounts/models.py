@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from choices.models import SIM_NAO_CHOICES
-from glb.models import GlobalEmpresa, GlobalCodigoEstado
+from glb.models import GlobalCodigoEstado
 
 from django.db.models.signals import post_save
 
@@ -11,7 +11,6 @@ from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    empresa = models.ForeignKey(GlobalEmpresa, on_delete=models.CASCADE, default=0)
     nome = models.CharField(max_length=50, default='')
     apelido = models.CharField(max_length=50, default='', null=True, blank=True)
     endereco = models.CharField(max_length=50, default='', null=True, blank=True)
@@ -58,13 +57,13 @@ class UserProfile(models.Model):
     banco_numero = models.IntegerField(null=True, default=0)
     banco_agencia = models.IntegerField(null=True, default=0)
     banco_digito_verficador = models.IntegerField(null=True, default=0)
-    data_nascimento = models.DateField(null=True, blank=True, default='2000-12-31')
+    data_nascimento = models.DateField(null=True, blank=True, default='2009-12-31')
     regiao_venda = models.CharField("Região de Venda", max_length=13, default='', blank=True, null=True)
     departamento = models.CharField(max_length=15, default='', blank=True, null=True)
     matricula = models.CharField(max_length=20, default='', blank=True, null=True)
     # Grupo vem da tabela User
     identidade = models.CharField(max_length=20, blank=True, null=True )
-    data_emissao = models.DateField(blank=True, null=True, default='2000-12-31')
+    data_emissao = models.DateField(blank=True, null=True, default='2009-12-31')
     orgao_emissor = models.CharField(max_length=10, blank=True, null=True)
     fisica_juridica = models.CharField(max_length=1, default='F')
     cpf_cnpj = models.IntegerField(default=0)
@@ -90,4 +89,3 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(usuario=kwargs['instance'])
 
 post_save.connect(create_profile, sender=User)
-

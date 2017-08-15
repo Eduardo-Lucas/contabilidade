@@ -19,12 +19,11 @@ def login_view(request):
         password = form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect("/")
+        return redirect("/ctb")
     return render(request, "accounts/form.html", {'form': form, 'title': title})
 
 
 def register_view(request):
-    print(request.user.is_authenticated())
     title = "Registro"
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
@@ -34,7 +33,7 @@ def register_view(request):
         user.save()
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("/")
+        return redirect("/ctb")
 
     context = {
         'form': form,
@@ -45,4 +44,4 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/")
+    return redirect("/acc/login")

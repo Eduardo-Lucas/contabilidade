@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES
-from glb.models import GlobalEmpresa, GlobContaReferencialDinamica, GlobContaReferencialSusep, \
-    GlobalContaReferencialBacen
+from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES
+from glb.models import GlobContaReferencialDinamica, GlobContaReferencialSusep, \
+    GlobalContaReferencialBacen, GlobalMunicipio, GlobalCodigoEstado, GlobalCodigoCnae, GlobalNaturezaJuridica
 
 SIM_NAO_CHOICES = (('S', 'Sim'), ('N', 'Não'))
 
@@ -12,10 +13,68 @@ SIM_NAO_CHOICES = (('S', 'Sim'), ('N', 'Não'))
 # Create your models here.
 
 # **********************************************************************************************
+# ARQUIVO DE EMPRESAS USUARIAS DO SISTEMA - TABELAS GENERICAS DO SISTEMA USESOFT-R3
+# (usesoft=KSBIUS)
+# Tabela base default = usesoftR3\TabelasGlobais\glob_naturezas_de_custos.txt
+# **********************************************************************************************
+class Empresa(models.Model):
+    codigo = models.CharField("Código", max_length=15, null=False, default="MATRIZ")
+    razao_social = models.CharField("Razão Social", max_length=60, null=False)
+    nome_fantasia = models.CharField("Nome Fantasia", max_length=60, null=False)
+    endereco = models.CharField('Endereço', max_length=60, null=False)
+    complemento = models.CharField(max_length=60, default='', null=True, blank=True)
+    numero = models.CharField('Número', max_length=10)
+    bairro = models.CharField(max_length=30, null=False)
+    cep = models.PositiveIntegerField("CEP", null=False, validators=[MaxValueValidator(99999999)])
+    municipio = models.ForeignKey(GlobalMunicipio)
+    estado = models.ForeignKey(GlobalCodigoEstado)
+    telefone1 = models.CharField("Telefone #1", max_length=15, default=0)
+    telefone2 = models.CharField("Telefone #2", max_length=15, default=0)
+
+    data_processamento = models.DateField(max_length=8)
+    data_competencia = models.DateField('Data de Competência', max_length=8)
+
+    natureza_juridica = models.ForeignKey(GlobalNaturezaJuridica)
+
+    site_empresa = models.CharField("Site da Empresa", max_length=100, blank=True, null=True)
+    email_empresa = models.EmailField("Email da Empresa", max_length=100, blank=True, null=True)
+    cnpj = models.PositiveSmallIntegerField("CNPJ", unique=True, null=False,
+                                            validators=[MaxValueValidator(99999999999999)])
+    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=15)
+    inscricao_municipal = models.CharField('Inscrição Municipal', max_length=15, blank=True, null=True)
+    codigo_cnae = models.ForeignKey(GlobalCodigoCnae)
+    # "SN" - simples nacional
+    # "LP" - Lucro presumido
+    # "LR" - Lucro REAL
+    tipo_empresa = models.CharField(max_length=2, choices=TIPO_EMPRESA_CHOICES, default='LR')
+    gerente_empresa = models.ForeignKey(User, related_name='gerente', blank=True, null=True)
+    diretor_empresa = models.ForeignKey(User, related_name='diretor', blank=True, null=True)
+    contador_empresa = models.ForeignKey(User, related_name='contador', blank=True, null=True)
+
+    # configuracoes customizaveis por empresa
+    # "S" neste campo para que sistema agrupe numero de itens na venda balcao por codigo se houver codigos repetidos
+    agrupa_itens_pedido = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="N")
+
+    # "S" neste campo para que o cliente seja automaticamente bloqueado durante"
+    # o fechamento de uma venda no balcao ou no caixa
+    bloqueia_clientes_em_atraso = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="S")
+    grau_conta = models.PositiveIntegerField("Grau da Conta Contábil", null=False, validators=[MaxValueValidator(9)],
+                                             default=5)
+    mascara_conta = models.CharField(max_length=15, default="9.9.99.99.999")
+
+    def __str__(self):
+        return self.codigo + " - " + self.razao_social
+
+    class Meta:
+        ordering = ('codigo',)
+        verbose_name = 'Empresa'
+        verbose_name_plural = 'Empresas'
+
+
+# **********************************************************************************************
 # HISTORICO PADRAO
 # **********************************************************************************************
 class Historico(models.Model):
-    empresa = models.ForeignKey(GlobalEmpresa, default=1)
     codigo_historico = models.PositiveSmallIntegerField(validators=[MaxValueValidator(999)])
     descricao = models.CharField(max_length=60)
     ativo = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="S")
@@ -29,7 +88,6 @@ class Historico(models.Model):
     class Meta:
         ordering = ['descricao']
         unique_together = ('codigo_historico', 'descricao')
-        # unique_together = ("empresa", 'codigo_historico',)
         verbose_name = 'Histórico Padrão'
         verbose_name_plural = 'Históricos Padrões'
 
@@ -39,7 +97,6 @@ class Historico(models.Model):
 # (usesoft=KCGI03)
 # **********************************************************************************************
 class Conta(models.Model):
-    empresa = models.ForeignKey(GlobalEmpresa)
     codigo_conta = models.PositiveSmallIntegerField("Código da Conta", unique=True, null=False)
     descricao = models.CharField("Descrição da Conta", max_length=80, null=False)
     # [A] Analitica [S] Sintetica [G] Grupo
@@ -77,6 +134,6 @@ class Conta(models.Model):
 
     class Meta:
         ordering = ["codigo_conta"]
-        unique_together = (('empresa', 'codigo_conta'),)
+        unique_together = ('codigo_conta', 'descricao')
         verbose_name = 'Plano de Conta'
         verbose_name_plural = 'Plano de Contas'

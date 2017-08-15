@@ -1,10 +1,57 @@
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 from django.db import models
+from tenant_schemas.models import TenantMixin
+
 from choices.models import TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES, TIPO_CONTA_REFERENCIAL_CHOICES, DEBITO_CREDITO_CHOICES
 
 
 # Create your models here.
+
+# *********************************************************************************************************************
+#  Welcome to DJANGO-TENANT-SCHEMAS documentation!
+# *********************************************************************************************************************
+# This application enables Django powered websites to have multiple tenants via PostgreSQL schemas. A vital feature for
+# every Software-as-a-Service website.
+# Django provides currently no simple way to support multiple tenants using the same project instance, even when only
+# the data is different. Because we don’t want you running many copies of your project, you’ll be able to have:
+#
+# => Multiple customers running on the same instance
+# *********************************************************************************************************************
+# ==> Shared and Tenant-Specific data ==> that´s the option
+# *********************************************************************************************************************
+# => Tenant View-Routing
+#
+# What are schemas?
+# A schema can be seen as a directory in an operating system, each directory (schema) with it’s own set of files
+# (tables and objects). This allows the same table name and objects to be used in different schemas without conflict.
+# For an accurate description on schemas, see PostgreSQL’s official documentation on schemas.
+#
+# Why schemas?
+# There are typically three solutions for solving the multitenancy problem.
+#
+# Isolated Approach: Separate Databases. Each tenant has it’s own database.
+# Semi Isolated Approach: Shared Database, Separate Schemas. One database for all tenants, but one schema per tenant.
+# Shared Approach: Shared Database, Shared Schema. All tenants share the same database and schema. There is a main
+# tenant-table, where all other tables have a foreign key pointing to.
+# This application implements the second approach, which in our opinion, represents the ideal compromise between
+# simplicity and performance.
+#
+# Simplicity: barely make any changes to your current code to support multitenancy. Plus, you only manage one database.
+# Performance: make use of shared connections, buffers and memory.
+# Each solution has it’s up and down sides, for a more in-depth discussion, see Microsoft’s excellent article on
+# Multi-Tenant Data Architecture.
+# *********************************************************************************************************************
+
+class Cliente(TenantMixin):
+    nome = models.CharField(max_length=100)
+    pago_ate = models.DateField()
+    em_teste = models.BooleanField(default=True)
+    criado_em = models.DateField(auto_now_add=True)
+
+    # default True, o schema será automaticamente criado e sincronizado quando for salvo.
+    auto_create_schema = True
+
 
 # *********************************************************************************************************************
 # Código CNAE|Descrição do CNAE|Tipo de Atividade Econômica|O CNAE está no Simples?|Anexo Simples Nacional|Alíquota (%)
@@ -71,7 +118,7 @@ class GlobalNaturezaJuridica(models.Model):
 class GlobalCodigoEstado(models.Model):
     codigo = models.PositiveIntegerField(null=False, unique=True, validators=[MaxValueValidator(99)])
     estado = models.CharField(null=False, max_length=2)
-    data_inicial = models.DateField(max_length=10, default='01/01/2009')
+    data_inicial = models.DateField(max_length=10, default='2009-01-01')
 
     def __str__(self):
         return self.estado
@@ -103,62 +150,6 @@ class GlobalMunicipio(models.Model):
         ordering = ('descricao',)
         verbose_name = 'Município'
         verbose_name_plural = 'Municípios'
-
-
-# **********************************************************************************************
-# ARQUIVO DE EMPRESAS USUARIAS DO SISTEMA - TABELAS GENERICAS DO SISTEMA USESOFT-R3
-# (usesoft=KSBIUS)
-# Tabela base default = usesoftR3\TabelasGlobais\glob_naturezas_de_custos.txt
-# **********************************************************************************************
-class GlobalEmpresa(models.Model):
-    codigo = models.CharField("Código", max_length=15, null=False, default="MATRIZ")
-    razao_social = models.CharField("Razão Social", max_length=60, null=False)
-    nome_fantasia = models.CharField("Nome Fantasia", max_length=60, null=False)
-    endereco = models.CharField('Endereço', max_length=60, null=False)
-    complemento = models.CharField(max_length=60, default='', null=True, blank=True)
-    numero = models.CharField('Número', max_length=10)
-    bairro = models.CharField(max_length=30, null=False)
-    cep = models.PositiveIntegerField("CEP", null=False, validators=[MaxValueValidator(99999999)])
-    municipio = models.ForeignKey(GlobalMunicipio)
-    estado = models.ForeignKey(GlobalCodigoEstado)
-    telefone1 = models.CharField("Telefone #1", max_length=15, default=0)
-    telefone2 = models.CharField("Telefone #2", max_length=15, default=0)
-
-    data_processamento = models.DateField(max_length=8)
-    data_competencia = models.DateField('Data de Competência', max_length=8)
-
-    natureza_juridica = models.ForeignKey(GlobalNaturezaJuridica)
-
-    site_empresa = models.CharField("Site da Empresa", max_length=100, blank=True, null=True)
-    email_empresa = models.EmailField("Email da Empresa", max_length=100, blank=True, null=True)
-    cnpj = models.PositiveSmallIntegerField("CNPJ", unique=True, null=False,
-                                            validators=[MaxValueValidator(99999999999999)])
-    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=15)
-    inscricao_municipal = models.CharField('Inscrição Municipal', max_length=15, blank=True, null=True)
-    codigo_cnae = models.ForeignKey(GlobalCodigoCnae)
-    # "SN" - simples nacional
-    # "LP" - Lucro presumido
-    # "LR" - Lucro REAL
-    tipo_empresa = models.CharField(max_length=2, choices=TIPO_EMPRESA_CHOICES, default='LR')
-    gerente_empresa = models.ForeignKey(User, related_name='gerente', blank=True, null=True)
-    diretor_empresa = models.ForeignKey(User, related_name='diretor', blank=True, null=True)
-    contador_empresa = models.ForeignKey(User, related_name='contador', blank=True, null=True)
-
-    # configuracoes customizaveis por empresa
-    # "S" neste campo para que sistema agrupe numero de itens na venda balcao por codigo se houver codigos repetidos
-    agrupa_itens_pedido = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="N")
-
-    # "S" neste campo para que o cliente seja automaticamente bloqueado durante"
-    # o fechamento de uma venda no balcao ou no caixa
-    bloqueia_clientes_em_atraso = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="S")
-
-    def __str__(self):
-        return self.codigo + " - " + self.razao_social
-
-    class Meta:
-        ordering = ('codigo',)
-        verbose_name = 'Empresa'
-        verbose_name_plural = 'Empresas'
 
 
 # *********************************************************************************************************************

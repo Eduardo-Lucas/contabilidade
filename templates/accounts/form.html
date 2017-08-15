@@ -1,8 +1,8 @@
 {% extends 'ctb/base_login.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+
 <div class="col-sm-6 col-offset-3" id="login">
-    <h1>{{ title }}</h1>
     <hr/>
 
     <form method="POST" action='' enctype="multipart/form-data" >{% csrf_token %}

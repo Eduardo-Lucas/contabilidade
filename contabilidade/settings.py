@@ -25,30 +25,67 @@ SECRET_KEY = '(jyrb1zr5e3&bh&fbj0jf%4u57r7p@aoy^)ti-o#q+^7cis_ff'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tenant.comercialtoes-saas.com', 'tenant.oleobahia-saas.com', '127.0.0.1']
 
 
 # Application definition
+SHARED_APPS = (
+    # mandatory, should be before any django app
+    'tenant_schemas',
 
-INSTALLED_APPS = [
+    # you must list the app where your tenant models resides in
+    'glb',
+
+    # everything below here is optional
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'templated_docs',
-    'crispy_forms',
+
+)
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+
+    # your tenant specific apps
     'accounts',
     'choices',
     'ctb',
-    'glb',
+    'templated_docs',
+    'crispy_forms',
 
-]
+)
+
+INSTALLED_APPS = (
+    'tenant_schemas',
+    'glb',
+    'accounts',
+    'choices',
+    'ctb',
+    'templated_docs',
+    'crispy_forms',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.staticfiles',
+
+)
+
+
+TENANT_MODEL = 'glb.Cliente'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
+    'tenant_schemas.middleware.TenantMiddleware',
+    # 'tenant_schemas.middleware.SuspiciousMiddleware',
+    # 'tenant_schemas.middleware.DefaultMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,11 +119,30 @@ WSGI_APPLICATION = 'contabilidade.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'tenant_schemas.postgresql_backend',
+
+        # Or path to database file if using sqlite3.
+        'NAME': 'contabilidade',
+
+        'USER': 'postgres',
+        'PASSWORD': 'usesoft2017#',
+
+        # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': 'localhost',
+
+        # Set to empty string for default
+        'PORT': '',
     }
+
+}
+
+DATABASE_ROUTERS = {
+    'tenant_schemas.routers.TenantSyncRouter'
 }
 
 
