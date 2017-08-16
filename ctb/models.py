@@ -3,11 +3,9 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES
+from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES
 from glb.models import GlobContaReferencialDinamica, GlobContaReferencialSusep, \
     GlobalContaReferencialBacen, GlobalMunicipio, GlobalCodigoEstado, GlobalCodigoCnae, GlobalNaturezaJuridica
-
-SIM_NAO_CHOICES = (('S', 'Sim'), ('N', 'Não'))
 
 
 # Create your models here.

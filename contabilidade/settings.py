@@ -34,11 +34,9 @@ SHARED_APPS = (
     'tenant_schemas',
 
     # you must list the app where your tenant models resides in
-    'glb',
+    'clientes',
 
     # everything below here is optional
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
@@ -48,23 +46,25 @@ SHARED_APPS = (
 )
 
 TENANT_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
 
     # your tenant specific apps
     'accounts',
     'choices',
     'ctb',
-    'templated_docs',
     'crispy_forms',
+    'glb',
 
 )
 
 INSTALLED_APPS = (
     'tenant_schemas',
-    'glb',
     'accounts',
     'choices',
     'ctb',
+    'glb',
     'templated_docs',
     'crispy_forms',
     'django.contrib.admin',

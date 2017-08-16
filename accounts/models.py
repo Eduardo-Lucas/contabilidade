@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 from choices.models import SIM_NAO_CHOICES
 from glb.models import GlobalCodigoEstado
-
-from django.db.models.signals import post_save
 
 # Create your models here.
 
@@ -62,7 +61,7 @@ class UserProfile(models.Model):
     departamento = models.CharField(max_length=15, default='', blank=True, null=True)
     matricula = models.CharField(max_length=20, default='', blank=True, null=True)
     # Grupo vem da tabela User
-    identidade = models.CharField(max_length=20, blank=True, null=True )
+    identidade = models.CharField(max_length=20, blank=True, null=True)
     data_emissao = models.DateField(blank=True, null=True, default='2009-12-31')
     orgao_emissor = models.CharField(max_length=10, blank=True, null=True)
     fisica_juridica = models.CharField(max_length=1, default='F')
@@ -89,3 +88,5 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(usuario=kwargs['instance'])
 
 post_save.connect(create_profile, sender=User)
+
+
