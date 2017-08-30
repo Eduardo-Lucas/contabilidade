@@ -18,14 +18,14 @@ from django.contrib import admin
 
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home_principal
 
+from contabilidade import views
 
 urlpatterns = [
-    url(r'$/', home_principal),
+    url(r'^$', views.home_principal, name='home'),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^ctb/', include('ctb.urls')),
-    url(r'^acc/', include('accounts.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls, name='admin'),
 
 ]
 

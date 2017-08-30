@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import contabilidade
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -25,7 +27,7 @@ SECRET_KEY = '(jyrb1zr5e3&bh&fbj0jf%4u57r7p@aoy^)ti-o#q+^7cis_ff'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tenant.comercialtoes-saas.com', 'tenant.oleobahia-saas.com', '127.0.0.1']
+ALLOWED_HOSTS = ['comercialtoes-saas.com', 'oleobahia-saas.com', '127.0.0.1']
 
 
 # Application definition
@@ -40,7 +42,6 @@ SHARED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
 
 )
@@ -49,6 +50,7 @@ TENANT_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
 
     # your tenant specific apps
     'accounts',
@@ -63,6 +65,7 @@ INSTALLED_APPS = (
     'tenant_schemas',
     'accounts',
     'choices',
+    'clientes',
     'ctb',
     'glb',
     'templated_docs',
@@ -74,11 +77,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
 
 )
 
+# During development only
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-TENANT_MODEL = 'glb.Cliente'
+TENANT_MODEL = 'clientes.Cliente'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -100,7 +106,7 @@ ROOT_URLCONF = 'contabilidade.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,6 +118,9 @@ TEMPLATES = [
         },
     },
 ]
+
+
+LOGIN_REDIRECT_URL = '/ctb'
 
 WSGI_APPLICATION = 'contabilidade.wsgi.application'
 
@@ -165,6 +174,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+LOGGING_CONFIG = None
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -180,6 +193,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATE_FORMAT = 'd/m/Y'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

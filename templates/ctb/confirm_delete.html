@@ -1,0 +1,13 @@
+{% extends 'ctb/base.html' %}
+
+{% block body %}
+<div class="col-sm-6 col-sm-offset-3">
+        <h1>Confirma Apagar</h1>
+        <form method="post">{% csrf_token %}
+            <p>Tem certeza que quer apagar: "{{ object }}" ?</p>
+            <input type="submit" value="Confirma" class="btn btn-warning"/>
+            <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Cancela</a>
+        </form>
+</div>
+{% endblock %}
+

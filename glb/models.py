@@ -1,6 +1,5 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
-from tenant_schemas.models import TenantMixin
 
 from choices.models import SIM_NAO_CHOICES, TIPO_CONTA_REFERENCIAL_CHOICES, DEBITO_CREDITO_CHOICES
 

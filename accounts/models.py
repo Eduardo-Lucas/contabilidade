@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.urls import reverse
 
 from choices.models import SIM_NAO_CHOICES
 from glb.models import GlobalCodigoEstado
@@ -17,7 +18,7 @@ class UserProfile(models.Model):
     cep = models.IntegerField(default=0, null=True, blank=True)
     bairro = models.CharField(max_length=30, default='Bairro')
     cidade = models.CharField(max_length=50, default='Cidade')
-    uf = models.ForeignKey(GlobalCodigoEstado, default=5)
+    uf = models.ForeignKey(GlobalCodigoEstado, default='', null=True, blank=True)
     # Login e Senha vem da tabela User
     nivel_acesso = models.IntegerField(default=0)
     supervisor = models.BooleanField(default=False)
@@ -73,6 +74,9 @@ class UserProfile(models.Model):
     tel_celular = models.IntegerField(null=True, default=0)
     informacoes_adicionais = models.TextField(max_length=256, default='', blank=True, null=True)
     email = models.EmailField(max_length=50, default='usuario@email.com')
+
+    def get_absolute_url(self):
+        return reverse('accounts:perfil-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.nome

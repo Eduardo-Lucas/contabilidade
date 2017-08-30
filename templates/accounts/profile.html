@@ -1,0 +1,17 @@
+{% extends 'ctb/base_login.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="container" id="profile">
+
+        <h2>Profile</h2>
+    <strong>Nome: </strong>{{ userprofile.nome }}<br>
+    <strong>Apelido: </strong>{{ userprofile.apelido }}<br>
+    <strong>Supervisor: </strong>{{ userprofile.supervisor }}
+
+
+</div>
+{% endblock %}
+
+
+

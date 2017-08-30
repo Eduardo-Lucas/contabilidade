@@ -1,24 +1,21 @@
 {% extends 'ctb/base.html' %}
-{% block conta_active %}active{% endblock %}
+{% block historico_active %}active{% endblock %}
 
 {% block body %}
-<div class="contas-container container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="historicos-historicoiner container-fluid">
 
-    <!-- contas -->
+    <!-- historico -->
     <div class="container">
         <div class="panel panel-default">
             <div class="row">
 
                 <div class="col-xs-3 .col-sm-3 .col-md-3">
-                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Plano de Contas</strong></h4>
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Históricos Padrões</strong></h4>
                 </div>
 
                 <!-- Pesquisa -->
                 <div class="col-xs-3 .col-sm-3 .col-md-3">
-                    <form method="GET" action="">
-                        <input type="text" name="q" placeholder="Pesquisar contas..." value="{{ request.GET.q }}" lue/>
-                        <input type="submit" value="Pesquisar" />
-                    </form>
+
                 </div>
 
                 <div class="btn-group" role="group">
@@ -40,7 +37,7 @@
                     </a>
 
                     <!-- Botão Cria Registro -->
-                    <a href="{% url 'ctb:conta-add' %}">
+                    <a href="{% url 'ctb:historico-add' %}">
                         <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
@@ -59,36 +56,36 @@
                         <tr>
                             <th>Código</th>
                             <th>Descrição</th>
-                            <th>Grau</th>
+                            <th>Ativo</th>
 
                         </tr>
                         <tfoot>
                             <tr>
                                 <th>Código</th>
                                 <th>Descrição</th>
-                                <th>Grau</th>
+                                <th>Ativo</th>
 
                             </tr>
                         </tfoot>
-                        {% for conta in object_list %}
+                        {% for historico in object_list %}
                             <tr>
 
-                                <td> <a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
-                                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
-                                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.grau_conta  }}</a></td>
+                                <td><a href="{% url 'ctb:historico-detail' historico.id %}">{{ historico.codigo_historico  }}</a></td>
+                                <td><a href="{% url 'ctb:historico-detail' historico.id %}">{{ historico.descricao  }}</a></td>
+                                <td><a href="{% url 'ctb:historico-detail' historico.id %}">{{ historico.ativo  }}</a></td>
 
                                 <!-- Edita -->
                                 <td>
-                                 <a href="{% url 'ctb:conta-edit' conta.id %}"
+                                 <a href="{% url 'ctb:historico-edit' historico.id %}"
                                         class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
                                         title="Altera o registro">
                                         <span class="glyphicon glyphicon-edit"></span></a>
-                                    
+
                                 <!-- Deleta -->
-                                    <form action="{% url 'ctb:conta-delete' conta.id %}"
+                                    <form action="{% url 'ctb:historico-delete' historico.id %}"
                                            style="display: inline;">
                                         {% csrf_token %}
-                                        <input type="hidden" name="conta_id" value="{{ conta.id }}" />
+                                        <input type="hidden" name="historico_id" value="{{ historico.id }}" />
                                             <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                     title="Exclui o registro">
                                                 <span class="glyphicon glyphicon-trash"></span>
@@ -97,26 +94,6 @@
                                 </td>
                             </tr>
                         {% endfor %}
-
-                        <div class="pagination">
-                            <span class="step-links">
-                                {% if object_list.has_previous %}
-                                    <a href="?page={{ object_list.previous_page_number }}">
-                                        <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
-                                {% endif %}
-
-                                <span class="current">
-                                    Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
-                                </span>
-
-                                {% if object_list.has_next %}
-                                    <a href="?page={{ object_list.next_page_number }}">
-                                        <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
-                                {% endif %}
-                            </span>
-                        </div>
-
-
                     </tbody>
 
                     <script>
@@ -154,10 +131,14 @@
                     </div>
 
         {% else %}
-            <h1>Não existem Contas Contábeis Cadastradas</h1>
+            <h1>Não existem Históricos Padrões Cadastrados</h1>
         {% endif %}
     </div>
 
 
 </div>
 {% endblock %}
+
+
+
+

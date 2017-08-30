@@ -1,24 +1,25 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import  request
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from ctb.models import Historico, Conta, Empresa
+from ctb.models import Conta, Historico
 
-from .forms import ContaForm
 
 """
     PÁGINA PRINCIPAL DA CONTABILIDADE 
 """
 
 
+@login_required(login_url='/acc/login')
 def ctb_index(request):
     context = {
                 'title': 'Menu Principal',
                 'current_user': request.user,
-                'empresas': {},
     }
 
     return render(request, "index.html", context)
@@ -28,49 +29,75 @@ def ctb_index(request):
 """
 
 
-@login_required(login_url="acc/login")
-def conta_create(request):
-    # empresa = UserProfile.objects.filter(usuario=request.user.id)
-    print(request.user.id)
-    form = ContaForm(request.POST or None, initial={'empresa': 1})
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-    context = {
-        "title": "Cria Nova Conta Contábil",
-        "form": form
-    }
-    return render(request, "ctb/conta_form.html", context)
+class ContaList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    model = Conta
+    template_name = "ctb/conta.html"
+
+    def get_queryset(self):
+        descricao = self.request.GET.get('q')
+        if descricao:
+            object_list = self.model.objects.filter(descricao__icontains=descricao)
+        else:
+            object_list = self.model.objects.all()
+
+        paginator = Paginator(object_list, 9)  # Show 10 contas per page
+
+        page = self.request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+
+        # return object_list
+        return queryset
 
 
-@login_required(login_url="acc/login")
-def conta_detail(request, conta_id):
-    # instance = Conta.objects.get(id=1)
-    conta = get_object_or_404(Conta, pk=conta_id)
-    context = {
-        "conta": conta
-    }
-    return render(request, "ctb/conta_detail.html", context)
+class ContaDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = Conta
+    success_message = 'Detalhe registro apresentado com sucesso!'
+    template_name = "ctb/conta_detail.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.descricao,
+        )
 
 
-@login_required(login_url="acc/login")
-def conta_list(request):
-    all_contas = Conta.objects.all()
-    context = {
-        "all_contas": all_contas
-    }
-    return render(request, "ctb/conta.html", context)
+class ContaCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Conta
+    fields = '__all__'
+    success_message = '%(descricao)s criado com sucesso!'
+    template_name = "ctb/conta_form.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.descricao,
+        )
 
 
-@login_required(login_url="acc/login")
-def conta_update(request):
-    return HttpResponse("<h1>Update</h1>")
+class ContaUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Conta
+    fields = '__all__'
+    success_message = '%(descricao)s alterado com sucesso!'
+    template_name = "ctb/conta_form.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.descricao,
+        )
 
 
-@login_required(login_url="acc/login")
-def conta_delete(request):
-    return HttpResponse("<h1>Delete</h1>")
-
+class ContaDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    model = Conta
+    template_name = "ctb/confirm_delete.html"
+    success_url = reverse_lazy('ctb:conta-list')
 
 """
     WORK IN PROGRESS
@@ -79,3 +106,46 @@ def conta_delete(request):
 
 def work_in_progress(request):
     return render(request, "wip.html", {})
+
+"""
+    Historico - GENERIC VIEWS
+"""
+
+
+class HistoricoList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    model = Historico
+    template_name = 'ctb/historico-index.html'
+
+
+class HistoricoDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = Historico
+    template_name = 'ctb/historico-detail.html'
+
+
+class HistoricoCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Historico
+    fields = '__all__'
+    success_message = 'Registro criado com sucesso!'
+    template_name = 'ctb/historico_form.html'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message
+
+
+class HistoricoUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Historico
+    fields = '__all__'
+    success_message = '%(descricao)s alterado com sucesso!'
+    template_name = 'ctb/historico_form.html'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.descricao,
+        )
+
+
+class HistoricoDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    model = Historico
+    template_name = 'ctb/confirm_delete.html'
+    success_url = reverse_lazy('ctb:historico-list')

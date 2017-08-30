@@ -8,19 +8,11 @@
 
           <h1 class="page-header">{{ title }} - Usuário: {{ current_user.username }}</h1>
 
-            <select>
-              {% for e in empresas %}
-                  <option value="{{ e.empresa }}">{{ e.empresa }}</option>
-              {% endfor %}
-            </select>
-          <br>
-          <br>
-
           <div class="row">
 
             <div class="col-xs-4 col-sm-1 placeholder">
               <img src="/static/ctb/images/planodecontas.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h5><a href="{% url 'ctb:conta-list' 1 %}">Plano de Contas</a></h5>
+              <h5><a href="{% url 'ctb:conta-list' %}">Plano de Contas</a></h5>
             </div>
 
             <div class="col-xs-4 col-sm-1 placeholder">

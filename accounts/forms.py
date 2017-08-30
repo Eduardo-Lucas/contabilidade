@@ -6,6 +6,8 @@ from django.contrib.auth import (
     logout,
 )
 
+from accounts.models import UserProfile
+
 User = get_user_model()
 
 
@@ -57,3 +59,10 @@ class UserRegisterForm(forms.ModelForm):
         if email_qs.exists():
             raise forms.ValidationError('Este Email já foi registrado!')
         return email
+
+
+class UserProfileForm(forms.Form):
+
+    class Meta:
+        model = UserProfile
+        fields = '__all__'

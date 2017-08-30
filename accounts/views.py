@@ -4,9 +4,13 @@ from django.contrib.auth import (
     login,
     logout,
 )
+
 from django.shortcuts import render, redirect
 
-from .forms import UserLoginForm, UserRegisterForm
+from django.views.generic import ListView, DetailView, UpdateView
+from accounts.models import UserProfile
+from .forms import UserLoginForm
+
 
 # Create your views here.
 
@@ -20,9 +24,31 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect("/ctb")
-    return render(request, "accounts/form.html", {'form': form, 'title': title})
+
+    context = {
+        'form': form,
+        'title': title
+    }
+    return render(request, "accounts/form.html", context)
 
 
+class ProfileList(ListView):
+    model = UserProfile
+    template_name = 'accounts/profile-index.html'
+
+
+class ProfileDetalhe(DetailView):
+    model = UserProfile
+    template_name = 'accounts/profile-detail.html'
+
+
+class ProfileUpdate(UpdateView):
+    model = UserProfile
+    exclude = ['usuario']
+    fields = '__all__'
+    template_name = 'accounts/userprofile_form.html'
+
+"""
 def register_view(request):
     title = "Registro"
     form = UserRegisterForm(request.POST or None)
@@ -45,3 +71,4 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/acc/login")
+"""

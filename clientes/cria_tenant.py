@@ -1,5 +1,5 @@
 # 3
-from glb.models import Cliente
+from clientes.models import Cliente
 
 # 1
 import django

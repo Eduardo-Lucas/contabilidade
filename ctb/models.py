@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -6,6 +7,15 @@ from django.core.urlresolvers import reverse
 from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES
 from glb.models import GlobContaReferencialDinamica, GlobContaReferencialSusep, \
     GlobalContaReferencialBacen, GlobalMunicipio, GlobalCodigoEstado, GlobalCodigoCnae, GlobalNaturezaJuridica
+
+
+# Validators
+def validate_maior_que_zero(value):
+    if value <= 0:
+        raise ValidationError(
+            'O código da Conta tem que ser MAIOR QUE ZERO',
+            params={'value': value},
+        )
 
 
 # Create your models here.
@@ -78,7 +88,7 @@ class Historico(models.Model):
     ativo = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="S")
 
     def get_absolute_url(self):
-        return reverse('ctb:detail', kwargs={'pk': self.pk})
+        return reverse('ctb:historico-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return str(self.codigo_historico) + " - " + str(self.descricao)
@@ -95,7 +105,8 @@ class Historico(models.Model):
 # (usesoft=KCGI03)
 # **********************************************************************************************
 class Conta(models.Model):
-    codigo_conta = models.PositiveSmallIntegerField("Código da Conta", unique=True, null=False)
+    codigo_conta = models.PositiveIntegerField("Código da Conta", unique=True, null=False,
+                                               validators=[validate_maior_que_zero])
     descricao = models.CharField("Descrição da Conta", max_length=80, null=False)
     # [A] Analitica [S] Sintetica [G] Grupo
     tipo_conta = models.CharField("Tipo da Conta", max_length=1, choices=TIPO_CONTA_CHOICES)
@@ -127,11 +138,14 @@ class Conta(models.Model):
     conta_referencial_susep = models.ForeignKey(GlobContaReferencialSusep, related_name='Referencial_Susep',
                                                 blank=True, null=True)
 
+    def get_absolute_url(self):
+        return reverse('ctb:conta-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return str(self.codigo_conta) + " " + str(self.descricao)
 
     class Meta:
-        ordering = ["codigo_conta"]
+        ordering = ['codigo_conta']
         unique_together = ('codigo_conta', 'descricao')
         verbose_name = 'Plano de Conta'
         verbose_name_plural = 'Plano de Contas'
