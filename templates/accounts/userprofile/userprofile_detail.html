@@ -2,22 +2,25 @@
 {% load crispy_forms_tags %}
 
 {% block body %}
+<div class="container">
 
+    <h1>Detalhes do Perfil do usuário: {{ userprofile.usuario }}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-        <div class="container">
-            <div class="container">
-            <h2>Detalhes do Perfil de {{ userprofile.nome }}</h2>
-
-                    <a href="{% url 'accounts:perfil-edit' userprofile.id %}">
-                        <span class="glyphicon glyphicon-edit" > Editar </span>
+                {% if user.is_superuser %}
+                    <a href="{% url 'accounts:userprofile-list' %}">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Voltar </span>
                     </a>
-                    <a href="{% url 'accounts:perfil-list' %}">
-                        <span class="glyphicon glyphicon-step-backward" > Voltar </span>
-
+                {% else %}
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Voltar </span>
                     </a>
-            </div>
+                {% endif %}
 
-                <p><strong>Usuário:</strong> {{ userprofile.usuario }}
+                <hr>
+                <p><strong>Usuário:</strong> {{ userprofile.nome }}
                 <strong>Apelido: </strong>{{ userprofile.apelido }}</p>
                 <h3>Endereço</h3>
                 <hr>
@@ -94,7 +97,11 @@
                 <hr>
                 <h4>Informações Adicionais: </h4>
                 <p>{{ userprofile.informacoes_adicionais }}</p>
+
+            </div>
         </div>
+    </div>
+</div>
 
 
 

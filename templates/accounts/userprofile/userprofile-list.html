@@ -1,0 +1,144 @@
+{% extends 'ctb/base.html' %}
+{% block conta_active %}active{% endblock %}
+
+{% block body %}
+<div class="userprofile-container container-fluid" xmlns="http://www.w3.org/1999/html">
+
+    <!-- contas -->
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="row">
+
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Perfis de Usuários</strong></h4>
+                </div>
+
+                <!-- Pesquisa -->
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <form method="GET" action="">
+                        <input type="text" name="q" placeholder="Pesquisar Perfis..." value="{{ request.GET.q }}" />
+                        <input type="submit" value="Pesquisar" />
+                    </form>
+                </div>
+
+                <div class="btn-group" role="group">
+
+                <!-- PDF -->
+                    <a href="#">
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" title="Gera PDF"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
+                        </button>
+                    </a>
+
+                 <!-- EXCEL -->
+                    <a href="#">
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" title="Gera Excel"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+                    <!-- Botão Cria Registro -->
+                    <!-- ESSE REGISTRO É CRIADO AUTOMATICAMENTE TODA VEZ QUE UM USUARIO DO SISTEMA É CRIADO VIA
+                         Admin -->
+                    <a href="#">
+                        <button type="button" class="btn btn-success" disabled data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                        </button>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+        {% if object_list %}
+                <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
+                   style="margin-bottom: 0px;">
+                    <tbody>
+                        <tr>
+                            <th>Nome de Usuário</th>
+                            <th>Nome</th>
+                            <th>Apelido</th>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <th>Nome de Usuário</th>
+                                <th>Nome</th>
+                                <th>Apelido</th>
+                            </tr>
+                        </tfoot>
+                        {% for userprofile in object_list %}
+                            <tr>
+
+                                <td> <a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.usuario }}</a></td>
+                                <td><a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.nome }}</a></td>
+                                <td><a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.apelido }}</a></td>
+
+                                <!-- Edita -->
+                                <td>
+                                 <a href="{% url 'accounts:userprofile-edit' userprofile.id %}"
+                                        class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                                        title="Altera o registro">
+                                        <span class="glyphicon glyphicon-edit"></span></a>
+
+                                <!-- Deleta -->
+                                    <form action="{% url 'accounts:userprofile-delete' userprofile.id %}"
+                                           style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="conta_id" value="{{ conta.id }}" />
+                                            <button type="submit" disabled class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                    title="Exclui o registro">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if object_list.has_previous %}
+                                    <a href="?page={{ object_list.previous_page_number }}">
+                                        <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
+                                </span>
+
+                                {% if object_list.has_next %}
+                                    <a href="?page={{ object_list.next_page_number }}">
+                                        <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                                {% endif %}
+                            </span>
+                        </div>
+
+
+                    </tbody>
+
+                    <script>
+                         $(document).ready(function(){
+                         $('[data-toggle="tooltip"]').tooltip();
+                          });
+                    </script>
+
+
+
+                </table>
+
+
+        {% else %}
+            <h1>Não existem Perfis de Usuários Cadastrados</h1>
+        {% endif %}
+    </div>
+
+
+</div>
+{% endblock %}
+
+
+
+

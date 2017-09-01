@@ -16,7 +16,7 @@ from ctb.models import Conta, Historico
 """
 
 
-@login_required(login_url='/acc/login')
+@login_required(login_url='/admin/login')
 def ctb_index(request):
     context = {
                 'title': 'Menu Principal',
@@ -107,16 +107,6 @@ def conta_delete(request, id=None):
     }
 
     return render(request, 'ctb/confirm_delete.html', context)
-
-
-
-
-
-
-
-
-
-
 
 
 """

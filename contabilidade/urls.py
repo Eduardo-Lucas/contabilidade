@@ -23,7 +23,7 @@ from contabilidade import views
 
 urlpatterns = [
     url(r'^$', views.home_principal, name='home'),
-    url(r'^accounts/', include('accounts.urls')),
+    url(r'^acc/', include('accounts.urls')),
     url(r'^ctb/', include('ctb.urls')),
     url(r'^admin/', admin.site.urls, name='admin'),
 

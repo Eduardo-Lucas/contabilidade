@@ -8,6 +8,8 @@ app_name = 'ctb'
 
 urlpatterns = [
     url(r'^$', views.ctb_index, name='ctb-index'),
+
+    # Contas
     url(r'^conta-list/$', ContaList.as_view(), name='conta-list'),
     url(r'^conta-list/(?P<pk>[0-9]+)/$', ContaDetalhe.as_view(), name="conta-detail"),
     url(r'^conta-add/$', ContaCreate.as_view(), name='conta-add'),

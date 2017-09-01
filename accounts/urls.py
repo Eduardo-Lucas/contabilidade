@@ -4,7 +4,7 @@ from django.contrib.auth.views import LogoutView
 from django.core.urlresolvers import reverse_lazy
 
 from accounts import views
-from accounts.views import ProfileList, ProfileDetalhe, ProfileUpdate
+from accounts.views import UserprofileList, UserprofileDetalhe, UserprofileUpdate, userprofile_delete
 
 app_name = 'accounts'
 
@@ -20,9 +20,10 @@ urlpatterns = [
     ), name='password_reset'),
     url(r'^reset-password/done/$', auth_views.PasswordResetDoneView, name='password_reset_done'),
 
-    url(r'perfil-list/$', ProfileList.as_view(), name='perfil-list'),
-    url(r'perfil-list/(?P<pk>[0-9]+)/$', ProfileDetalhe.as_view(), name='perfil-detail'),
-    url(r'perfil-edit/(?P<pk>[0-9]+)/$', ProfileUpdate.as_view(), name='perfil-edit'),
+    url(r'^userprofile-list/$', UserprofileList.as_view(), name='userprofile-list'),
+    url(r'^userprofile-list/(?P<pk>[0-9]+)/$', UserprofileDetalhe.as_view(), name='userprofile-detail'),
+    url(r'^userprofile/(?P<pk>[0-9]+)/edit/$', UserprofileUpdate.as_view(), name='userprofile-edit'),
+    url(r'^userprofile/(?P<id>[0-9]+)/delete/$', userprofile_delete, name='userprofile-delete'),
 
 ]
 
