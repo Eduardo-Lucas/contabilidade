@@ -14,7 +14,6 @@
                 </div>
 
 
-
                 <!-- Pesquisa -->
                 <div class="col-xs-3 .col-sm-3 .col-md-3">
                     <form method="GET" action="" id="searchform" style="margin-top: 0px;">
@@ -44,7 +43,7 @@
 
 
                     <!-- Botão Cria Registro -->
-                    <a href="#">
+                    <a href="{% url 'ctb:historico-add' %}">
                         <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
@@ -56,7 +55,7 @@
             </div>
 
         </div>
-        {% if all_historicos %}
+        {% if object_list %}
                 <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
                    style="margin-bottom: 0px;">
                     <tbody>
@@ -74,7 +73,7 @@
                                 <th>Opções</th>
                             </tr>
                         </tfoot>
-                        {% for historico in all_historicos %}
+                        {% for historico in object_list %}
                             <tr>
 
                                 <td>{{ historico.codigo_historico  }}</td>
@@ -83,13 +82,9 @@
 
                                 <!-- Detalhes -->
                                 <td>
-                                     <a href="{% url 'ctb:detail' historico.id %}" class="btn btn-default btn-sm"
-                                        role="button" data-toggle="tooltip" title="Detalhes do registro"><span
-                                             class="glyphicon glyphicon-info-sign"></span></a>
-
 
                                 <!-- Edita -->
-                                 <a href="{% url 'ctb:historico-update' historico.id %}"
+                                 <a href="{% url 'ctb:historico-edit' historico.id %}"
                                         class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
                                         title="Altera o registro">
                                         <span class="glyphicon glyphicon-edit"></span></a>
@@ -97,9 +92,9 @@
 
                                 <!-- Deleta -->
                                     <form action="{% url 'ctb:historico-delete' historico.id %}"
-                                          method="post" style="display: inline;">
+                                           style="display: inline;">
                                         {% csrf_token %}
-                                        <input type="hidden" name="historico_id" value="{{ historico.id }}" />
+                                        <input type="hidden"   />
                                             <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                     title="Exclui o registro">
                                                 <span class="glyphicon glyphicon-trash"></span>
@@ -108,6 +103,26 @@
                                 </td>
                             </tr>
                         {% endfor %}
+
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if object_list.has_previous %}
+                                    <a href="?page={{ object_list.previous_page_number }}">
+                                        <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
+                                </span>
+
+                                {% if object_list.has_next %}
+                                    <a href="?page={{ object_list.next_page_number }}">
+                                        <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                                {% endif %}
+                            </span>
+                        </div>
+
+
                     </tbody>
 
                     <script>
@@ -116,33 +131,8 @@
                           });
                     </script>
 
-
-
                 </table>
 
-                    <div class="panel panel-default">
-                        {% if is_paginated %}
-                           <ul class="pager">
-                              {% if page_obj.has_previous %}
-                                 <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-                              {% else %}
-                                 <li class="disabled"><span>&laquo;</span></li>
-                              {% endif %}
-                              {% for i in paginator.page_range %}
-                                 {% if page_obj.number == i %}
-                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                                 {% else %}
-                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                                 {% endif %}
-                              {% endfor %}
-                              {% if page_obj.has_next %}
-                                 <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                              {% else %}
-                                <li class="disabled"><span>&raquo;</span></li>
-                              {% endif %}
-                           </ul>
-                        {% endif %}
-                    </div>
 
         {% else %}
             <h1>Não existem Históricos Cadastrados</h1>

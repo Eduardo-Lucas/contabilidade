@@ -1,0 +1,26 @@
+{% extends 'ctb/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Histórico Padrão Info -->
+    <h1>{{ historico.codigo_historico }} - {{ historico.descricao }}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{% url 'ctb:historico-list' %}">
+                   <span class="glyphicon glyphicon-arrow-left"></span>  Voltar
+                </a>
+            </div>
+
+            <h3>Ativo: {{ historico.ativo }}</h3>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+
