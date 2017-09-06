@@ -1,13 +1,20 @@
-from django import forms
+from django.forms import ModelForm
 
-from .models import Conta
+from ctb.models import Conta
 
 
-class ContaForm(forms.ModelForm):
-    class Meta:
-        model = Conta
-        fields = [
-                  'codigo_conta', 'descricao', 'tipo_conta', 'conta_ativa', 'grau_conta', 'conta_superior',
-                  'conta_saldo_balanco', 'origem', 'natureza', 'conta_referencial_bacen', 'conta_referencial_dinamica',
-                  'conta_referencial_susep'
+# Forms
+class ContaForm(ModelForm):
+        class Meta:
+            model = Conta
+            fields = '__all__'
+            """
+            fields = [
+                  'codigo_conta', 'descricao', 'conta_saldo_balanco', 'origem', 'natureza', 'conta_referencial_bacen',
+                  'conta_referencial_dinamica', 'conta_referencial_susep'
                  ]
+            
+            exclude = [
+                'tipo_conta', 'conta_superior', 'conta_ativa', 'grau_conta'
+            ]
+            """

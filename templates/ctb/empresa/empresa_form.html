@@ -1,6 +1,6 @@
 {% extends 'ctb/base.html' %}
-{% block title %}Novo Plano de Conta{% endblock %}
-{% block planodecontas_active %}active{% endblock %}
+{% block title %}Nova Empresa{% endblock %}
+{% block empresas_active %}active{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -8,18 +8,16 @@
         <div class="col-sm-12 col-md-7">
             <div class="panel panel-default">
                 <div class="panel-body">
-                     <h1>Cadastro de Conta Contábil</h1>
-                    <hr>
+
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'ctb/form-template.html' %}
-                        <hr>
+                         <hr>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-4 btn-group">
                                 <button type="submit" class="btn btn-success">Gravar</button>
-                                <a href="{% url 'ctb:conta-list' %}" class="btn btn-primary">Voltar</a>
+                                <a href="{% url 'ctb:empresa-list' %}" class="btn btn-primary">Voltar</a>
                             </div>
-
                         </div>
                     </form>
 

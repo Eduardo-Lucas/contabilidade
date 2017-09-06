@@ -1,0 +1,50 @@
+{% extends 'ctb/base.html' %}
+{% block title %}Detalhes da Empresa{% endblock %}
+{% block empresa_active %}active{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Empresa Info -->
+    <h1>{{ empresa.codigo }} - {{ empresa.razao_social }}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{% url 'ctb:empresa-list' %}">
+                   <span class="glyphicon glyphicon-arrow-left"></span>  Voltar
+                </a>
+                <hr>
+                <h3>Nome Fantasia:{{ empresa.nome_fantasia }}</h3>
+                <p>Endereço: {{empresa.endereco}}</p>
+                <p>Complemento: {{empresa.complemento}}</p>
+                <p>Número: {{empresa.numero}}</p>
+                <p>Bairro: {{empresa.bairro}}</p>
+                <p>CEP: {{empresa.cep}}</p>
+                <p>Município: {{empresa.municipio}}</p>
+                <p>Estado: {{empresa.estado}}</p>
+                <p>Telefone 1: {{empresa.telefone1}}</p>
+                <p>Telefone 2: {{empresa.telefone2}}</p>
+                <p>Data de Processamento: {{empresa.data_processamento}}</p>
+                <p>Data de Competência: {{empresa.data_competencia}}</p>
+                <p>Natureza Jurídica: {{empresa.natureza_juridica}}</p>
+                <p>Site da Empresa: {{empresa.site_empresa}}</p>
+                <p>E-mail da Empresa: {{empresa.email_empresa}}</p>
+                <p>CNPJ: {{empresa.cnpj}}</p>
+                <p>Inscrição Estadual: {{empresa.inscricao_estadual}}</p>
+                <p>Inscrição Municipal: {{empresa.inscricao_municipal}}</p>
+                <p>Código CNAE: {{empresa.codigo_cnae}}</p>
+                <p>Tipo Empresa: {{empresa.tipo_empresa}}</p>
+                <p>Gerente Empresa: {{empresa.gerente_empresa}}</p>
+                <p>Diretor Empresa: {{empresa.diretor_empresa}}</p>
+                <p>Contador: {{empresa.contador_empresa}}</p>
+                <p>Agrupa Itens do Pedido? {{empresa.agrupa_itens_pedido}}</p>
+                <p>Bloqueia Clientes em atraso? {{empresa.bloqueia_clientes_em_atraso}}</p>
+                <p>Grau da Conta: {{empresa.grau_conta}}</p>
+                <p>Máscara da Conta:{{empresa.mascara_conta}}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

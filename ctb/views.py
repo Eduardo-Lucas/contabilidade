@@ -8,8 +8,8 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from ctb.models import Conta, Historico
-
+from ctb.forms import ContaForm
+from ctb.models import Conta, Historico, Empresa
 
 """
     PÁGINA PRINCIPAL DA CONTABILIDADE 
@@ -71,7 +71,7 @@ class ContaDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
 
 class ContaCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Conta
-    fields = '__all__'
+    form_class = ContaForm
     success_message = '%(descricao)s criado com sucesso!'
     template_name = "ctb/conta/conta_form.html"
 
@@ -193,3 +193,85 @@ def historico_delete(request, id=None):
 
     return render(request, 'ctb/confirm_delete.html', context)
 
+"""
+       EMPRESA
+"""
+
+
+class EmpresaList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    model = Empresa
+    template_name = "ctb/empresa/empresa-list.html"
+
+    def get_queryset(self):
+        razao_social = self.request.GET.get('q')
+        if razao_social:
+            object_list = self.model.objects.filter(razao_social__icontains=razao_social)
+        else:
+            object_list = self.model.objects.all()
+
+        paginator = Paginator(object_list, 9)  # Show 10 contas per page
+
+        page = self.request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+
+        # return object_list
+        return queryset
+
+
+class EmpresaDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = Empresa
+    success_message = 'Detalhe registro apresentado com sucesso!'
+    template_name = "ctb/empresa/empresa_detail.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.razao_social,
+        )
+
+
+class EmpresaCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Empresa
+    fields = '__all__'
+    success_message = '%(razao_social)s criado com sucesso!'
+    template_name = "ctb/empresa/empresa_form.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.razao_social,
+        )
+
+
+class EmpresaUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Empresa
+    fields = '__all__'
+    success_message = '%(razao_social)s alterado com sucesso!'
+    template_name = "ctb/empresa/empresa_form.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.razao_social,
+        )
+
+
+def empresa_delete(request, id=None):
+    obj = get_object_or_404(Empresa, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, 'Registro apagado com sucesso!')
+        return redirect('ctb:empresa-list')
+
+    context = {
+        'object': obj
+    }
+
+    return render(request, 'ctb/confirm_delete.html', context)

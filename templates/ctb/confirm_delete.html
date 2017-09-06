@@ -6,7 +6,7 @@
         <form method="POST" action="">{% csrf_token %}
             <p>Tem certeza que quer apagar: "{{ object }}" ?</p>
             <input type="submit" value="Confirma" class="btn btn-warning"/>
-            <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Cancela</a>
+            <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Voltar</a>
         </form>
 </div>
 {% endblock %}

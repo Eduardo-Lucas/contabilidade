@@ -2,7 +2,8 @@ from django.conf.urls import url
 
 from ctb import views
 from ctb.views import HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, \
-    ContaList, ContaDetalhe, ContaCreate, ContaUpdate, conta_delete
+    ContaList, ContaDetalhe, ContaCreate, ContaUpdate, conta_delete, EmpresaList, EmpresaDetalhe, EmpresaCreate, \
+    EmpresaUpdate, empresa_delete
 
 app_name = 'ctb'
 
@@ -22,6 +23,13 @@ urlpatterns = [
     url(r'^historico-add/$', HistoricoCreate.as_view(), name='historico-add'),
     url(r'^historico/(?P<pk>[0-9]+)/edit/$', HistoricoUpdate.as_view(), name='historico-edit'),
     url(r'^historico/(?P<id>[0-9]+)/delete/$', historico_delete, name='historico-delete'),
+
+    # Empresas
+    url(r'^empresa-list/$', EmpresaList.as_view(), name='empresa-list'),
+    url(r'^empresa-list/(?P<pk>[0-9]+)/$', EmpresaDetalhe.as_view(), name="empresa-detail"),
+    url(r'^empresa-add/$', EmpresaCreate.as_view(), name='empresa-add'),
+    url(r'^empresa/(?P<pk>[0-9]+)/edit/$', EmpresaUpdate.as_view(), name='empresa-edit'),
+    url(r'^empresa/(?P<id>[0-9]+)/delete/$', empresa_delete, name='empresa-delete'),
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),

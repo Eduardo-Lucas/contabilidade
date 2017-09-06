@@ -1,16 +1,16 @@
 {% extends 'ctb/base.html' %}
-{% block conta_active %}active{% endblock %}
+{% block empresa_active %}active{% endblock %}
 
 {% block body %}
-<div class="userprofile-container container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="empresa-container container-fluid" xmlns="http://www.w3.org/1999/html">
 
-    <!-- contas -->
+    <!-- empresas -->
     <div class="container">
         <div class="panel panel-default">
-            <div class="container">
+            <div class="row">
 
                 <div class="col-md-2">
-                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Usuários</strong></h4>
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Empresa</strong></h4>
                 </div>
 
                 <!-- Pesquisa -->
@@ -18,16 +18,15 @@
                     <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                         {% csrf_token %}
                         <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
-                            placeholder="Pesquisa Contas..."/>
+                            placeholder="Pesquisa...">
                     </form>
                 </div>
 
+
                 <div class="btn-group">
                     <!-- Botão Cria Registro -->
-                    <!-- ESSE REGISTRO É CRIADO AUTOMATICAMENTE TODA VEZ QUE UM USUARIO DO SISTEMA É CRIADO VIA
-                         Admin -->
-                    <a href="#">
-                        <button type="button" disabled class="btn btn-success"  data-toggle="tooltip" title="Cria um novo registro"
+                    <a href="{% url 'ctb:empresa-add' %}">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                         </button>
@@ -48,8 +47,8 @@
                             <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
                         </button>
                     </a>
-
                 </div>
+
             </div>
 
         </div>
@@ -58,37 +57,39 @@
                    style="margin-bottom: 0px;">
                     <tbody>
                         <tr>
-                            <th>Nome de Usuário</th>
-                            <th>Nome</th>
-                            <th>Apelido</th>
+                            <th>Código</th>
+                            <th>Razão Social</th>
+                            <th>Nome Fantasia</th>
+
                         </tr>
                         <tfoot>
                             <tr>
-                                <th>Nome de Usuário</th>
-                                <th>Nome</th>
-                                <th>Apelido</th>
+                            <th>Código</th>
+                            <th>Razão Social</th>
+                            <th>Nome Fantasia</th>
+
                             </tr>
                         </tfoot>
-                        {% for userprofile in object_list %}
+                        {% for empresa in object_list %}
                             <tr>
 
-                                <td> <a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.usuario }}</a></td>
-                                <td><a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.nome }}</a></td>
-                                <td><a href="{% url 'accounts:userprofile-detail' userprofile.id %}">{{ userprofile.apelido }}</a></td>
+                                <td> <a href="{% url 'ctb:empresa-detail' empresa.id %}">{{ empresa.codigo  }}</a></td>
+                                <td><a href="{% url 'ctb:empresa-detail' empresa.id %}">{{ empresa.razao_social  }}</a></td>
+                                <td><a href="{% url 'ctb:empresa-detail' empresa.id %}">{{ empresa.nome_fantasia  }}</a></td>
 
                                 <!-- Edita -->
                                 <td>
-                                 <a href="{% url 'accounts:userprofile-edit' userprofile.id %}"
+                                 <a href="{% url 'ctb:empresa-edit' empresa.id %}"
                                         class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
                                         title="Altera o registro">
                                         <span class="glyphicon glyphicon-edit"></span></a>
-
+                                    
                                 <!-- Deleta -->
-                                    <form action="{% url 'accounts:userprofile-delete' userprofile.id %}"
+                                    <form action="{% url 'ctb:empresa-delete' empresa.id %}"
                                            style="display: inline;">
                                         {% csrf_token %}
-                                        <input type="hidden" name="conta_id" value="{{ conta.id }}" />
-                                            <button type="submit" disabled class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                        <input type="hidden" name="empresa_id" value="{{ empresa.id }}" />
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                     title="Exclui o registro">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
@@ -96,6 +97,8 @@
                                 </td>
                             </tr>
                         {% endfor %}
+
+
 
 
                     </tbody>
@@ -106,38 +109,35 @@
                           });
                     </script>
 
+
+
                 </table>
 
                 <div class="container" align="right">
-                    <div class="pagination">
-                        <span class="step-links">
-                            {% if object_list.has_previous %}
-                                <a href="?page={{ object_list.previous_page_number }}">
-                                    <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
-                            {% endif %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if object_list.has_previous %}
+                            <a href="?page={{ object_list.previous_page_number }}">
+                                <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                        {% endif %}
 
-                            <span class="current">
-                                Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
-                            </span>
-
-                            {% if object_list.has_next %}
-                                <a href="?page={{ object_list.next_page_number }}">
-                                    <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
-                            {% endif %}
+                        <span class="current">
+                            Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
                         </span>
-                    </div>
+
+                        {% if object_list.has_next %}
+                            <a href="?page={{ object_list.next_page_number }}">
+                                <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                        {% endif %}
+                    </span>
+                </div>
                 </div>
 
-
         {% else %}
-            <h1>Não existem Perfis de Usuários Cadastrados</h1>
+            <h1>Não existe Empresa Cadastrada</h1>
         {% endif %}
     </div>
 
 
 </div>
 {% endblock %}
-
-
-
-

@@ -45,7 +45,7 @@ class UserprofileList(ListView):
         else:
             object_list = self.model.objects.all()
 
-        paginator = Paginator(object_list, 9)  # Show 10 contas per page
+        paginator = Paginator(object_list, 9)  # Show 9 contas per page
 
         page = self.request.GET.get('page')
         try:

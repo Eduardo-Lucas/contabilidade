@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -16,6 +16,8 @@ def validate_maior_que_zero(value):
             'O código da Conta tem que ser MAIOR QUE ZERO',
             params={'value': value},
         )
+
+valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 até 9, são permitidos.')
 
 
 # Create your models here.
@@ -34,7 +36,7 @@ class Empresa(models.Model):
     numero = models.CharField('Número', max_length=10)
     bairro = models.CharField(max_length=30, null=False)
     cep = models.PositiveIntegerField("CEP", null=False, validators=[MaxValueValidator(99999999)])
-    municipio = models.ForeignKey(GlobalMunicipio)
+    municipio = models.ForeignKey(GlobalMunicipio, default=2927408)
     estado = models.ForeignKey(GlobalCodigoEstado)
     telefone1 = models.CharField("Telefone #1", max_length=15, default=0)
     telefone2 = models.CharField("Telefone #2", max_length=15, default=0)
@@ -46,8 +48,14 @@ class Empresa(models.Model):
 
     site_empresa = models.CharField("Site da Empresa", max_length=100, blank=True, null=True)
     email_empresa = models.EmailField("Email da Empresa", max_length=100, blank=True, null=True)
-    cnpj = models.PositiveSmallIntegerField("CNPJ", unique=True, null=False,
-                                            validators=[MaxValueValidator(99999999999999)])
+
+    # -----------------------------------------------------------------------------------------------------------------
+    # A regra básica para seleção do tipo quando eles podem ser confundidos é para que vai usá - los.Números representam
+    # quantidades.CPF ou CNPJ são quantidades? Não, são identificadores que podem até mesmo mudar, que podem um dia ter
+    # letras.A semântica correta para este dado é o varchar.
+    # -----------------------------------------------------------------------------------------------------------------
+    cnpj = models.CharField("CNPJ", unique=True, null=False, max_length=14)
+
     inscricao_estadual = models.CharField('Inscrição Estadual', max_length=15)
     inscricao_municipal = models.CharField('Inscrição Municipal', max_length=15, blank=True, null=True)
     codigo_cnae = models.ForeignKey(GlobalCodigoCnae)
@@ -69,6 +77,9 @@ class Empresa(models.Model):
     grau_conta = models.PositiveIntegerField("Grau da Conta Contábil", null=False, validators=[MaxValueValidator(9)],
                                              default=5)
     mascara_conta = models.CharField(max_length=15, default="9.9.99.99.999")
+
+    def get_absolute_url(self):
+        return reverse('ctb:empresa-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.codigo + " - " + self.razao_social
@@ -105,8 +116,8 @@ class Historico(models.Model):
 # (usesoft=KCGI03)
 # **********************************************************************************************
 class Conta(models.Model):
-    codigo_conta = models.PositiveIntegerField("Código da Conta", unique=True, null=False,
-                                               validators=[validate_maior_que_zero])
+    codigo_conta = models.CharField("Código da Conta", max_length=9, unique=True, null=False,
+                                    validators=[valor_numerico])
     descricao = models.CharField("Descrição da Conta", max_length=80, null=False)
     # [A] Analitica [S] Sintetica [G] Grupo
     tipo_conta = models.CharField("Tipo da Conta", max_length=1, choices=TIPO_CONTA_CHOICES)
@@ -143,6 +154,7 @@ class Conta(models.Model):
 
     def __str__(self):
         return str(self.codigo_conta) + " " + str(self.descricao)
+
 
     class Meta:
         ordering = ['codigo_conta']

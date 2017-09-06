@@ -8,13 +8,16 @@
         <div class="col-sm-12 col-md-7">
             <div class="panel panel-default">
                 <div class="panel-body">
-                     <h1>{{ title }}</h1>
+                     <h1>Cadastro de Usuário</h1>
+                     <hr>
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'ctb/form-template.html' %}
+                        <hr>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-2">
+                            <div class="col-sm-offset-2 col-sm-4 btn-group">
                                 <button type="submit" class="btn btn-success">Gravar</button>
+                                <a href="{% url 'accounts:userprofile-list' %}" class="btn btn-primary">Voltar</a>
                             </div>
                         </div>
                     </form>

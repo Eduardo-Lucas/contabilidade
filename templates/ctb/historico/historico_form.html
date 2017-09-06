@@ -12,9 +12,11 @@
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'ctb/form-template.html' %}
+                        <hr>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-2">
+                            <div class="col-sm-offset-2 col-sm-4 btn-group">
                                 <button type="submit" class="btn btn-success">Gravar</button>
+                                <a href="{% url 'ctb:historico-list' %}" class="btn btn-primary">Voltar</a>
                             </div>
                         </div>
                     </form>
