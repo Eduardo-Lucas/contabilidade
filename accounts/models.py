@@ -57,7 +57,7 @@ class UserProfile(models.Model):
     banco_numero = models.IntegerField(null=True, default=0)
     banco_agencia = models.IntegerField(null=True, default=0)
     banco_digito_verficador = models.IntegerField(null=True, default=0)
-    data_nascimento = models.DateField(null=True, blank=True, default='31/12/2009')
+    data_nascimento = models.DateField(null=True, blank=True, default='2009-12-31')
     regiao_venda = models.CharField("Região de Venda", max_length=13, default='', blank=True, null=True)
     departamento = models.CharField(max_length=15, default='', blank=True, null=True)
     matricula = models.CharField(max_length=20, default='', blank=True, null=True)

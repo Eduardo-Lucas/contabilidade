@@ -1,9 +1,10 @@
 from django.conf.urls import url
 
 from ctb import views
-from ctb.views import HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, \
-    ContaList, ContaDetalhe, ContaCreate, ContaUpdate, conta_delete, EmpresaList, EmpresaDetalhe, EmpresaCreate, \
-    EmpresaUpdate, empresa_delete
+from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, CompetenciaUpdate, competencia_delete, \
+                      ContaList,       ContaDetalhe,       ContaCreate,       ContaUpdate,       conta_delete, \
+                      EmpresaList,     EmpresaDetalhe,     EmpresaCreate,     EmpresaUpdate,     empresa_delete, \
+                      HistoricoList,   HistoricoDetalhe,   HistoricoCreate,   HistoricoUpdate,   historico_delete
 
 app_name = 'ctb'
 
@@ -30,6 +31,13 @@ urlpatterns = [
     url(r'^empresa-add/$', EmpresaCreate.as_view(), name='empresa-add'),
     url(r'^empresa/(?P<pk>[0-9]+)/edit/$', EmpresaUpdate.as_view(), name='empresa-edit'),
     url(r'^empresa/(?P<id>[0-9]+)/delete/$', empresa_delete, name='empresa-delete'),
+
+    # Competências
+    url(r'^competencia-list/$', CompetenciaList.as_view(), name='competencia-list'),
+    url(r'^competencia-list/(?P<pk>[0-9]+)/$', CompetenciaDetalhe.as_view(), name='competencia-detail'),
+    url(r'^competencia-add/$', CompetenciaCreate.as_view(), name='competencia-add'),
+    url(r'^competencia/(?P<pk>[0-9]+)/edit/$', CompetenciaUpdate.as_view(), name='competencia-edit'),
+    url(r'^competencia/(?P<id>[0-9]+)/delete/$', competencia_delete, name='competencia-delete'),
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),

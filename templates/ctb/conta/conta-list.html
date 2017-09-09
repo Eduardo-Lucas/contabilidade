@@ -1,12 +1,11 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block conta_active %}active{% endblock %}
 
 {% block body %}
-<div class="contas-container container-fluid" xmlns="http://www.w3.org/1999/html">
 
     <!-- contas -->
-
-    <div class="container">
+<div class="container">
+    <div class="col-md-offset-2">
 
 
         <div class="panel panel-default">
@@ -17,7 +16,7 @@
                 </div>
 
                  <!-- Pesquisa -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                             {% csrf_token %}
                             <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
@@ -26,13 +25,7 @@
                     </div>
 
                 <div class="btn-group">
-                        <!-- Botão Cria Registro -->
-                        <a href="{% url 'ctb:conta-add' %}">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
-                                    style="margin-top: 4px;">
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
-                            </button>
-                        </a>
+
 
                         <!-- PDF -->
                         <a href="#">
@@ -47,6 +40,14 @@
                             <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
                                     style="margin-top: 4px;">
                                 <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                            </button>
+                        </a>
+
+                     <!-- Botão Cria Registro -->
+                        <a href="{% url 'ctb:conta-add' %}">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                                    style="margin-top: 4px;">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                             </button>
                         </a>
                 </div>
@@ -78,7 +79,7 @@
                         </tfoot>
                         {% for conta in object_list %}
                             {% if conta.conta_ativa %}
-                            <tr class="active">
+                            <tr>
 
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
@@ -154,7 +155,7 @@
 
 
                 </table>
-                        <div class="container" align="right">
+                        <div class="col-md-offset-2" align="right">
                         <div class="pagination">
                             <span class="step-links">
                                 {% if object_list.has_previous %}
@@ -179,7 +180,7 @@
             <h1>Não existem Contas Contábeis Cadastradas</h1>
         {% endif %}
     </div>
-
-
 </div>
+
+
 {% endblock %}

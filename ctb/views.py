@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from ctb.forms import ContaForm
-from ctb.models import Conta, Historico, Empresa
+from ctb.models import Conta, Historico, Empresa, Competencia
 
 """
     PÁGINA PRINCIPAL DA CONTABILIDADE 
@@ -41,7 +41,7 @@ class ContaList(SuccessMessageMixin, LoginRequiredMixin, ListView):
         else:
             object_list = self.model.objects.all()
 
-        paginator = Paginator(object_list, 9)  # Show 10 contas per page
+        paginator = Paginator(object_list, 10)  # Show 10 contas per page
 
         page = self.request.GET.get('page')
         try:
@@ -275,3 +275,81 @@ def empresa_delete(request, id=None):
     }
 
     return render(request, 'ctb/confirm_delete.html', context)
+
+
+"""
+    Competencia - GENERIC VIEWS
+"""
+
+
+class CompetenciaList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    model = Competencia
+    template_name = 'ctb/competencia/competencia-list.html'
+
+    def get_queryset(self):
+        data_competencia = self.request.GET.get('q')
+        if data_competencia:
+            object_list = self.model.objects.filter(data_competencia__icontains=data_competencia)
+        else:
+            object_list = self.model.objects.all()
+
+        paginator = Paginator(object_list, 10)  # Show 10 contas per page
+
+        page = self.request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+
+        # return object_list
+        return queryset
+
+
+class CompetenciaDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = Competencia
+    template_name = 'ctb/competencia/competencia_detail.html'
+
+
+class CompetenciaCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Competencia
+    fields = '__all__'
+    success_message = '%(data_competencia)s criado com sucesso!'
+    template_name = "ctb/competencia/competencia_form.html"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.data_competencia,
+        )
+
+
+class CompetenciaUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Competencia
+    fields = '__all__'
+    success_message = '%(data_competencia)s alterado com sucesso!'
+    template_name = 'ctb/competencia/competencia_form.html'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.data_competencia,
+        )
+
+
+def competencia_delete(request, id=None):
+    obj = get_object_or_404(Competencia, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, 'Registro apagado com sucesso!')
+        return redirect('ctb:competencia-list')
+
+    context = {
+        'object': obj
+    }
+
+    return render(request, 'ctb/confirm_delete.html', context)
+

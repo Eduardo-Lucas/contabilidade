@@ -1,0 +1,171 @@
+{% extends 'ctb/base_sidebar.html' %}
+{% block competencia_active %}active{% endblock %}
+
+{% block body %}
+
+    <!-- historicos -->
+<div class="container">
+    <div class="col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="row">
+
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Lista de Competências</strong></h4>
+                </div>
+
+
+                <!-- Pesquisa -->
+                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                    <form method="GET" action="" id="searchform" style="margin-top: 0px;">
+                        {% csrf_token %}
+                        <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
+                            placeholder="Pesquisa...">
+                    </form>
+                </div>
+
+                <div class="btn-group">
+                    <!-- PDF -->
+                    <a href="#">
+                        <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera PDF"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
+                        </button>
+                    </a>
+
+                    <!-- EXCEL -->
+                    <a href="#">
+                        <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+                    <!-- Botão Cria Registro -->
+                    <a href="{% url 'ctb:competencia-add' %}">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+        {% if object_list %}
+                <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
+                   style="margin-bottom: 0px;">
+                    <tbody>
+                        <tr>
+                            <th>Competência</th>
+                            <th>Status</th>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <th>Competência</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                        {% for competencia in object_list %}
+                            {% if competencia.status == 'A' %}
+                                <tr>
+
+                                <td>{{ competencia.data_competencia  }}</td>
+                                <td>{{ competencia.status}}</td>
+
+                                <!-- Detalhes -->
+                                <td>
+                                    <div class="btn-group">
+                                            <!-- Edita -->
+                                             <a href="{% url 'ctb:competencia-edit' competencia.id %}"
+                                                    class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                                                    title="Altera o registro">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                             </a>
+
+                                            <!-- Deleta -->
+                                            <form action="{% url 'ctb:competencia-delete' competencia.id %}"
+                                                   style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden"   />
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                            title="Exclui o registro">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
+                                            </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                                <tr class="danger">
+
+                                <td>{{ competencia.data_competencia  }}</td>
+                                <td>{{ competencia.status}}</td>
+
+                                <!-- Detalhes -->
+                                <td>
+                                    <div class="btn-group">
+                                        <!-- Edita -->
+                                            <a href="{% url 'ctb:competencia-edit' competencia.id %}"
+                                                class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                                                title="Altera o registro">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </a>
+
+                                            <!-- Deleta -->
+                                            <form action="{% url 'ctb:competencia-delete' competencia.id %}"
+                                                   style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden"   />
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                            title="Exclui o registro">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
+                                            </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+
+
+                        {% endfor %}
+
+
+
+
+                    </tbody>
+
+                    <script>
+                         $(document).ready(function(){
+                         $('[data-toggle="tooltip"]').tooltip();
+                          });
+                    </script>
+
+                </table>
+
+                <div class="col-md-offset-2" align="right">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if object_list.has_previous %}
+                            <a href="?page={{ object_list.previous_page_number }}">
+                                <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                        {% endif %}
+
+                        <span class="current">
+                            Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
+                        </span>
+
+                        {% if object_list.has_next %}
+                            <a href="?page={{ object_list.next_page_number }}">
+                                <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                        {% endif %}
+                    </span>
+                </div>
+                </div>
+
+        {% else %}
+            <h1>Não existem Competências Cadastradas</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

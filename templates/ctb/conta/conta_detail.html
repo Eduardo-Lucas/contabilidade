@@ -1,9 +1,9 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block title %}Detalhes do Plano de Contas{% endblock %}
 {% block contas_active %}active{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="col-md-offset-2">
 
     <!-- Left Plano de Contas Info -->
     <h1>{{ conta.codigo_conta }} - {{ conta.descricao }}</h1>

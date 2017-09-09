@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Contabilidade{% endblock %}</title>
+    {% load static %}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/base.css" />
+
+    <link rel="shortcut icon" type="image/png" href='/static/images/favicon.ico' />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+<body>
+
+        <div class="nav-side-menu">
+            <div class="brand"><a href="{% url 'home' %}">Usesoft</a></div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+                <div class="menu-list">
+
+                    <ul id="menu-content" class="menu-content collapse out">
+                        <li>
+                          <a href="#">
+                          <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                          </a>
+                        </li>
+
+                        <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                          <a href="#"><i class="fa fa-gift fa-lg"></i> Cadastros <span class="arrow"></span></a>
+                        </li>
+                        <ul class="sub-menu collapse" id="products">
+                            <li class="active"><a href="#">Cadastros</a></li>
+                            <li><a href="{% url 'ctb:conta-list' %}">Plano de Contas</a></li>
+                            <li><a href="{% url 'ctb:historico-list' %}">Históricos Padrões</a></li>
+                            <li><a href="{% url 'ctb:empresa-list' %}">Empresa</a></li>
+                            <li><a href="{% url 'ctb:competencia-list' %}">Competências</a></li>
+                            <li><a href="{% url 'ctb:wip' %}">Lançamento Contábil</a></li>
+                            <li><a href="#">Vago #1</a></li>
+                            <li><a href="#">Vago #2</a></li>
+                            <li><a href="#">Vago #3</a></li>
+                            <li><a href="#">Vago #4</a></li>
+                        </ul>
+
+
+                        <li data-toggle="collapse" data-target="#relatorios" class="collapsed">
+                          <a href="#"><i class="fa fa-globe fa-lg"></i> Relatórios <span class="arrow"></span></a>
+                        </li>
+                        <ul class="sub-menu collapse" id="relatorios">
+                          <li><a href="{% url 'ctb:wip' %}">Relatório 1</a></li>
+                          <li><a href="{% url 'ctb:wip' %}">Relatório 2</a></li>
+                          <li><a href="{% url 'ctb:wip' %}">Relatório 3</a></li>
+                        </ul>
+
+
+                        <li data-toggle="collapse" data-target="#new" class="collapsed">
+                          <a href="#"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
+                        </li>
+                        <ul class="sub-menu collapse" id="new">
+                          <li>New New 1</li>
+                          <li>New New 2</li>
+                          <li>New New 3</li>
+                        </ul>
+
+
+                         <li>
+                             <a href="{% url 'accounts:userprofile-detail' user.id %}">
+                                <i class="fa fa-user fa-lg"></i> Perfil
+                             </a>
+                          </li>
+
+                         <li>
+                          <a href="{% url 'accounts:userprofile-list' %}">
+                          <i class="fa fa-users fa-lg"></i> Usuários
+                          </a>
+                        </li>
+
+                         <li>
+                          <a href="{% url 'accounts:logout' %}">
+                          <i class="fa fa-sign-out fa-lg"></i> Sair
+                          </a>
+                        </li>
+
+                    </ul>
+             </div>
+        </div>
+
+        {% if messages %}
+            <div class="container">
+                <div class="col-md-offset-2">
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% block body %}
+        {% endblock %}
+
+</body>
+</html>

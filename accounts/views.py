@@ -5,6 +5,8 @@ from django.contrib.auth import (
     login,
     logout,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -34,7 +36,7 @@ def login_view(request):
     return render(request, "accounts/form.html", context)
 
 
-class UserprofileList(ListView):
+class UserprofileList(SuccessMessageMixin, LoginRequiredMixin, ListView):
     model = UserProfile
     template_name = 'accounts/userprofile/userprofile-list.html'
 
@@ -61,12 +63,12 @@ class UserprofileList(ListView):
         return queryset
 
 
-class UserprofileDetalhe(DetailView):
+class UserprofileDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
     model = UserProfile
     template_name = 'accounts/userprofile/userprofile_detail.html'
 
 
-class UserprofileUpdate(UpdateView):
+class UserprofileUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = UserProfile
     template_name = 'accounts/userprofile/userprofile_form.html'
     fields = '__all__'

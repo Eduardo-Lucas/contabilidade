@@ -1,14 +1,15 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block title %}Nova Empresa{% endblock %}
 {% block empresas_active %}active{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="col-md-offset-2">
     <div class="row">
         <div class="col-sm-12 col-md-7">
             <div class="panel panel-default">
                 <div class="panel-body">
-
+                     <h1>Cadastro de Empresa</h1>
+                    <hr>
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'ctb/form-template.html' %}

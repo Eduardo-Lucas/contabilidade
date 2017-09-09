@@ -1,20 +1,19 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block empresa_active %}active{% endblock %}
 
 {% block body %}
-<div class="empresa-container container-fluid" xmlns="http://www.w3.org/1999/html">
-
+<div class="container">
+<div class="col-md-offset-2">
     <!-- empresas -->
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="row">
+    <div class="panel panel-default">
+            <div class="container" >
 
                 <div class="col-md-2">
                     <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Empresa</strong></h4>
                 </div>
 
                 <!-- Pesquisa -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                         {% csrf_token %}
                         <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
@@ -24,13 +23,6 @@
 
 
                 <div class="btn-group">
-                    <!-- Botão Cria Registro -->
-                    <a href="{% url 'ctb:empresa-add' %}">
-                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
-                                style="margin-top: 4px;">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
-                        </button>
-                    </a>
 
                     <!-- PDF -->
                     <a href="#">
@@ -47,11 +39,21 @@
                             <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
                         </button>
                     </a>
+
+                     <!-- Botão Cria Registro -->
+                    <a href="{% url 'ctb:empresa-add' %}">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                        </button>
+                    </a>
                 </div>
 
+                </div>
             </div>
 
-        </div>
+
+
         {% if object_list %}
                 <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
                    style="margin-bottom: 0px;">
@@ -113,7 +115,7 @@
 
                 </table>
 
-                <div class="container" align="right">
+                <div class="col-md-offset-2" align="right">
                 <div class="pagination">
                     <span class="step-links">
                         {% if object_list.has_previous %}
@@ -138,6 +140,7 @@
         {% endif %}
     </div>
 
-
 </div>
+</div>
+
 {% endblock %}

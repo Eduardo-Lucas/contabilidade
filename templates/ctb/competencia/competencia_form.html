@@ -1,14 +1,13 @@
 {% extends 'ctb/base_sidebar.html' %}
-{% block title %}Novo Histórico{% endblock %}
 {% block historicos_active %}active{% endblock %}
 
 {% block body %}
-<div class="col-md-offset-2">
+<div class="col-md-offset-3">
     <div class="row">
         <div class="col-sm-12 col-md-7">
             <div class="panel panel-default">
                 <div class="panel-body">
-                     <h1>Cadastro de Histórico Padrão</h1>
+                     <h1>Cadastro de Competências</h1>
                     <hr>
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -17,7 +16,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-4 btn-group">
                                 <button type="submit" class="btn btn-success">Gravar</button>
-                                <a href="{% url 'ctb:historico-list' %}" class="btn btn-primary">Voltar</a>
+                                <a href="{% url 'ctb:competencia-list' %}" class="btn btn-primary">Voltar</a>
                             </div>
                         </div>
                     </form>

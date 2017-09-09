@@ -1,21 +1,21 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block historico_active %}active{% endblock %}
 
 {% block body %}
-<div class="historicos-container container-fluid">
+<div class="container">
 
     <!-- historicos -->
-    <div class="container">
+    <div class="col-md-offset-2">
         <div class="panel panel-default">
             <div class="row">
 
                 <div class="col-xs-3 .col-sm-3 .col-md-3">
-                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Lista de Históricos Padrões</strong></h4>
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Históricos Padrões</strong></h4>
                 </div>
 
 
                 <!-- Pesquisa -->
-                <div class="col-xs-3 .col-sm-3 .col-md-3">
+                <div class="col-xs-4 .col-sm-4 .col-md-4">
                     <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                         {% csrf_token %}
                         <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
@@ -24,13 +24,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <!-- Botão Cria Registro -->
-                    <a href="{% url 'ctb:historico-add' %}">
-                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
-                                style="margin-top: 4px;">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
-                        </button>
-                    </a>
+
 
                     <!-- PDF -->
                     <a href="#">
@@ -45,6 +39,14 @@
                         <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+                    <!-- Botão Cria Registro -->
+                    <a href="{% url 'ctb:historico-add' %}">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                         </button>
                     </a>
 
@@ -114,7 +116,7 @@
 
                 </table>
 
-                <div class="container" align="right">
+                <div class="col-md-offset-2" align="right">
                 <div class="pagination">
                     <span class="step-links">
                         {% if object_list.has_previous %}

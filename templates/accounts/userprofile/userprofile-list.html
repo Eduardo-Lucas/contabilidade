@@ -1,11 +1,10 @@
-{% extends 'ctb/base.html' %}
+{% extends 'ctb/base_sidebar.html' %}
 {% block conta_active %}active{% endblock %}
 
 {% block body %}
-<div class="userprofile-container container-fluid" xmlns="http://www.w3.org/1999/html">
 
     <!-- contas -->
-    <div class="container">
+    <div class="col-md-offset-3">
         <div class="panel panel-default">
             <div class="container">
 
@@ -23,15 +22,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <!-- Botão Cria Registro -->
-                    <!-- ESSE REGISTRO É CRIADO AUTOMATICAMENTE TODA VEZ QUE UM USUARIO DO SISTEMA É CRIADO VIA
-                         Admin -->
-                    <a href="#">
-                        <button type="button" disabled class="btn btn-success"  data-toggle="tooltip" title="Cria um novo registro"
-                                style="margin-top: 4px;">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
-                        </button>
-                    </a>
+
 
                     <!-- PDF -->
                     <a href="#">
@@ -46,6 +37,16 @@
                         <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+                    <!-- Botão Cria Registro -->
+                    <!-- ESSE REGISTRO É CRIADO AUTOMATICAMENTE TODA VEZ QUE UM USUARIO DO SISTEMA É CRIADO VIA
+                         Admin -->
+                    <a href="#">
+                        <button type="button" disabled class="btn btn-success"  data-toggle="tooltip" title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                         </button>
                     </a>
 
@@ -108,7 +109,7 @@
 
                 </table>
 
-                <div class="container" align="right">
+                <div class="col-md-offset-3" align="right">
                     <div class="pagination">
                         <span class="step-links">
                             {% if object_list.has_previous %}
@@ -135,7 +136,7 @@
     </div>
 
 
-</div>
+
 {% endblock %}
 
 

@@ -4,7 +4,8 @@ from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES
+from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES, \
+    STATUS_CHOICES
 from glb.models import GlobContaReferencialDinamica, GlobContaReferencialSusep, \
     GlobalContaReferencialBacen, GlobalMunicipio, GlobalCodigoEstado, GlobalCodigoCnae, GlobalNaturezaJuridica
 
@@ -17,6 +18,7 @@ def validate_maior_que_zero(value):
             params={'value': value},
         )
 
+
 valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 até 9, são permitidos.')
 
 
@@ -28,7 +30,7 @@ valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 at
 # Tabela base default = usesoftR3\TabelasGlobais\glob_naturezas_de_custos.txt
 # **********************************************************************************************
 class Empresa(models.Model):
-    codigo = models.CharField("Código", max_length=15, null=False, default="MATRIZ")
+    codigo = models.CharField("Código", max_length=15, null=False, default="MATRIZ", unique=True)
     razao_social = models.CharField("Razão Social", max_length=60, null=False)
     nome_fantasia = models.CharField("Nome Fantasia", max_length=60, null=False)
     endereco = models.CharField('Endereço', max_length=60, null=False)
@@ -155,9 +157,30 @@ class Conta(models.Model):
     def __str__(self):
         return str(self.codigo_conta) + " " + str(self.descricao)
 
-
     class Meta:
         ordering = ['codigo_conta']
         unique_together = ('codigo_conta', 'descricao')
         verbose_name = 'Plano de Conta'
         verbose_name_plural = 'Plano de Contas'
+
+
+# **********************************************************************************************
+# DATAS DE FECHAMENTO DAS COMPETÊNCIAS
+# **********************************************************************************************
+class Competencia(models.Model):
+    # neste campo data o dia será sempre o último dia do mes
+    data_competencia = models.DateField(unique=True, help_text='Digite no formato: dd/mm/aaaa')
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="A")
+
+    def get_absolute_url(self):
+        return reverse('ctb:competencia-detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return str(self.data_competencia) + ' - ' + self.status
+
+    class Meta:
+        ordering = ['-data_competencia']
+        verbose_name = 'Competência'
+        verbose_name_plural = 'Competências'
+
+
