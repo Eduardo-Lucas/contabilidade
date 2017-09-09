@@ -2,53 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/styles.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/competencia/competencia-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/competencia/competencia_detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/competencia/competencia_form.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/apps.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/contabilidade.dot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/0002_auto_20170627_2009.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/0003_auto_20170627_2013.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/0004_auto_20170628_1459.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/0005_auto_20170630_1144.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../contabilidade/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ctb/migrations/0002_auto_20170708_0823.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ctb/migrations/0003_auto_20170710_1537.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/historico_confirm_delete.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/historico_form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/index_old.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/search_form.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/contabilidade.iml" afterPath="$PROJECT_DIR$/.idea/contabilidade.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/models.py" afterPath="$PROJECT_DIR$/accounts/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/views.py" afterPath="$PROJECT_DIR$/accounts/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/forms.py" afterPath="$PROJECT_DIR$/accounts/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/urls.py" afterPath="$PROJECT_DIR$/accounts/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/settings.py" afterPath="$PROJECT_DIR$/contabilidade/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/urls.py" afterPath="$PROJECT_DIR$/contabilidade/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/admin.py" afterPath="$PROJECT_DIR$/ctb/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/ctb/migrations/0001_initial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile-list.html" afterPath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_detail.html" afterPath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_form.html" afterPath="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/confirm_delete.html" afterPath="$PROJECT_DIR$/templates/ctb/confirm_delete.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/conta/conta-list.html" afterPath="$PROJECT_DIR$/templates/ctb/conta/conta-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/conta/conta_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/conta/conta_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/conta/conta_form.html" afterPath="$PROJECT_DIR$/templates/ctb/conta/conta_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/empresa/empresa-list.html" afterPath="$PROJECT_DIR$/templates/ctb/empresa/empresa-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/empresa/empresa_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/empresa/empresa_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/empresa/empresa_form.html" afterPath="$PROJECT_DIR$/templates/ctb/empresa/empresa_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/historico/historico-list.html" afterPath="$PROJECT_DIR$/templates/ctb/historico/historico-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/historico/historico_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/historico/historico_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/historico/historico_form.html" afterPath="$PROJECT_DIR$/templates/ctb/historico/historico_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/wip.html" afterPath="$PROJECT_DIR$/templates/wip.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../homologacao/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../homologacao/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/accounts/form.html" afterPath="$PROJECT_DIR$/templates/accounts/form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base.html" afterPath="$PROJECT_DIR$/templates/ctb/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base_login.html" afterPath="$PROJECT_DIR$/templates/ctb/base_login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/form-template.html" afterPath="$PROJECT_DIR$/templates/ctb/form-template.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -534,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504101339341</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Side bar Menu">
+      <created>1504995478101</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1504995478101</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -663,7 +651,8 @@
     <MESSAGE value="4th commit" />
     <MESSAGE value="5th commit" />
     <MESSAGE value="Novo padrao de tela" />
-    <option name="LAST_COMMIT_MESSAGE" value="Novo padrao de tela" />
+    <MESSAGE value="Side bar Menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Side bar Menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -765,6 +754,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -842,6 +834,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="696">
           <caret line="70" column="65" lean-forward="false" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
