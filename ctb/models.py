@@ -184,3 +184,29 @@ class Competencia(models.Model):
         verbose_name_plural = 'Competências'
 
 
+# MOVIMENTOS CONTABEIS HEADER
+class MovimentoContabilHeader(models.Model):
+    origem = models.CharField(max_length=3, default='CTB')
+    usuario = models.ForeignKey(User)
+    data_lancamento = models.DateField(auto_now_add=True)
+    data_competencia = models.ForeignKey(Competencia)
+    total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
+    total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
+
+    def get_absolute_url(self):
+        return reverse('ctb:movimento-detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return str(self.data_competencia)
+
+    class Meta:
+        ordering = ['-data_competencia']
+        verbose_name = 'Movimento Contábil'
+        verbose_name_plural = 'Movimentos Contábeis'
+
+
+# MOVIMENTOS CONTABEIS
+# class MovimentoContabil(models.Model):
+#    header = models.ForeignKey(MovimentoContabilHeader)
+
+

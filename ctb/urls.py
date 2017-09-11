@@ -2,9 +2,10 @@ from django.conf.urls import url
 
 from ctb import views
 from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, CompetenciaUpdate, competencia_delete, \
-                      ContaList,       ContaDetalhe,       ContaCreate,       ContaUpdate,       conta_delete, \
-                      EmpresaList,     EmpresaDetalhe,     EmpresaCreate,     EmpresaUpdate,     empresa_delete, \
-                      HistoricoList,   HistoricoDetalhe,   HistoricoCreate,   HistoricoUpdate,   historico_delete
+    ContaList, ContaDetalhe, ContaCreate, ContaUpdate, conta_delete, \
+    EmpresaList, EmpresaDetalhe, EmpresaCreate, EmpresaUpdate, empresa_delete, \
+    HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, MovimentoContabilHeaderList, \
+    MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete
 
 app_name = 'ctb'
 
@@ -38,6 +39,13 @@ urlpatterns = [
     url(r'^competencia-add/$', CompetenciaCreate.as_view(), name='competencia-add'),
     url(r'^competencia/(?P<pk>[0-9]+)/edit/$', CompetenciaUpdate.as_view(), name='competencia-edit'),
     url(r'^competencia/(?P<id>[0-9]+)/delete/$', competencia_delete, name='competencia-delete'),
+
+    # Movimentos
+    url(r'^movimento-list/$', MovimentoContabilHeaderList.as_view(), name='movimento-list'),
+    url(r'^movimento-list/(?P<pk>[0-9]+)/$', CompetenciaDetalhe.as_view(), name='movimento-detail'),
+    url(r'^movimento-add/$', MovimentoContabilHeaderCreate.as_view(), name='movimento-add'),
+    url(r'^movimento/(?P<pk>[0-9]+)/edit/$', MovimentoContabilHeaderUpdate.as_view(), name='movimento-edit'),
+    url(r'^movimento/(?P<id>[0-9]+)/delete/$', movimento_contabil_header_delete, name='movimento-delete'),
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),

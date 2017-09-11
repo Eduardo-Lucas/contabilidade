@@ -1,0 +1,27 @@
+{% extends 'ctb/base_sidebar.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="col-md-offset-2">
+
+    <!-- Movimento Contábil Info -->
+    <h1>{{ movimento.data_competencia }} - {{ movimento.usuario}}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{% url 'ctb:movimento-list' %}">
+                   <span class="glyphicon glyphicon-arrow-left"></span>  Voltar
+                </a>
+            </div>
+
+            <h3>Data da Competência: {{ movimento.data_competencia}}</h3>
+            <h3>Data do Lançamento: {{ movimento.data_lancamento}}</h3>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+
