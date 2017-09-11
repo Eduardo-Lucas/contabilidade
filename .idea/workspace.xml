@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header_detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabilheader_form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" afterPath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -328,7 +318,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -688,7 +678,8 @@
     <MESSAGE value="5th commit" />
     <MESSAGE value="Novo padrao de tela" />
     <MESSAGE value="Side bar Menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Side bar Menu" />
+    <MESSAGE value="Movimento Contabil Header added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Movimento Contabil Header added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
