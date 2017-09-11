@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -536,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504995478101</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Movimento Contabil Header added">
+      <created>1505141308815</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1505141308815</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
