@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="Movimento Contabil (Lancamento) added">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ctb/migrations/0010_auto_20170912_1018.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabil_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header_detail.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header-list.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabilheader_form.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html" />
+    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/forms.py" afterPath="$PROJECT_DIR$/ctb/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -856,6 +844,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -863,6 +852,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="69" lean-forward="false" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -884,6 +874,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -899,6 +890,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -930,9 +922,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="46" column="99" lean-forward="false" selection-start-line="46" selection-start-column="99" selection-end-line="46" selection-end-column="99" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -956,9 +946,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="72" column="34" lean-forward="false" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
