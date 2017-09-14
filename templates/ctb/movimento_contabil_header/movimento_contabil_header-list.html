@@ -18,8 +18,8 @@
                 <div class="col-xs-4 .col-sm-4 .col-md-4">
                     <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                         {% csrf_token %}
-                        <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
-                            placeholder="Pesquisa...">
+                        <input class="input-lg input-search" id="searchbox" name="q" value="{{ request.GET.q }}"
+                               placeholder="Pesquisa...">
                     </form>
                 </div>
 
@@ -85,8 +85,8 @@
 
                                 <!-- Edita -->
                                  <a href="{% url 'ctb:movimento-edit' movimento.id %}"
-                                        class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
-                                        title="Altera o registro">
+                                    class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                    title="Altera o registro">
                                         <span class="glyphicon glyphicon-edit"></span></a>
 
 
@@ -95,18 +95,14 @@
                                            style="display: inline;">
                                         {% csrf_token %}
                                         <input type="hidden"   />
-                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                                    title="Exclui o registro">
+                                        <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                title="Exclui o registro">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                     </form>
                                 </td>
                             </tr>
                         {% endfor %}
-
-
-
-
                     </tbody>
 
                     <script>
@@ -122,7 +118,8 @@
                     <span class="step-links">
                         {% if object_list.has_previous %}
                             <a href="?page={{ object_list.previous_page_number }}">
-                                <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                                <span data-toggle="tooltip" title="Página anterior"
+                                      class="glyphicon glyphicon-triangle-left"></span></a>
                         {% endif %}
 
                         <span class="current">
@@ -131,7 +128,8 @@
 
                         {% if object_list.has_next %}
                             <a href="?page={{ object_list.next_page_number }}">
-                                <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                                <span data-toggle="tooltip" title="Página seguinte"
+                                      class="glyphicon glyphicon-triangle-right"></span></a>
                         {% endif %}
                     </span>
                 </div>

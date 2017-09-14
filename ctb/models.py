@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
-from django.core.urlresolvers import reverse
 
 from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES, \
     STATUS_CHOICES
@@ -188,7 +188,7 @@ class Competencia(models.Model):
 class MovimentoContabilHeader(models.Model):
     origem = models.CharField(max_length=3, default='CTB')
     usuario = models.ForeignKey(User)
-    data_lancamento = models.DateField(auto_now_add=True)
+    data_lancamento = models.DateField(auto_now=True)
     data_competencia = models.ForeignKey(Competencia)
     total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
     total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
@@ -200,13 +200,22 @@ class MovimentoContabilHeader(models.Model):
         return str(self.data_competencia)
 
     class Meta:
-        ordering = ['-data_competencia']
+        ordering = ['-id']
         verbose_name = 'Movimento Contábil'
         verbose_name_plural = 'Movimentos Contábeis'
 
 
 # MOVIMENTOS CONTABEIS
-# class MovimentoContabil(models.Model):
-#    header = models.ForeignKey(MovimentoContabilHeader)
+class MovimentoContabil(models.Model):
+    header = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE)
+    conta = models.ForeignKey(Conta)
+    valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
+    d_c = models.CharField(max_length=1, choices=DEBITO_CREDITO_CHOICES)
+    codigo_historico = models.ForeignKey(Historico)
+    historico = models.TextField(max_length=200)
 
+    def get_absolute_url(self):
+        return reverse('ctb:lancamento-detail', kwargs={'pk': self.pk})
 
+    def __str__(self):
+        return "Conta: " + str(self.conta) + " Valor: " + str(self.valor) + self.d_c

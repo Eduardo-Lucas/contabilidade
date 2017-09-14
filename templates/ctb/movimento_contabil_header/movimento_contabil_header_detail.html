@@ -1,0 +1,68 @@
+{% extends 'ctb/base_sidebar.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container">
+    <div class="col-md-offset-2">
+
+        <!-- Movimento Contábil Info -->
+        <h2>Movimento Contábil</h2>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'ctb:movimento-list' %}">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+                    </a>
+                </div>
+                <div class="container">
+                    <div class="col-sm-6 col-md-4">
+                        <strong>Data da Competência:</strong> {{ movimento.data_competencia }}
+                    </div>
+                    <div class="col-sm-5 col-md-4">
+                        <strong>Origem:</strong> {{ movimento.origem }}
+                    </div>
+                    <div class="col-sm-5 col-md-4">
+                        <strong>Sequencial:</strong> {{ movimento.id }}
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <strong>Usuário:</strong> {{ movimento.usuario}}
+                    </div>
+                    <div class="col-sm-5 col-md-4">
+                        <strong>Data do Lançamento:</strong> {{ movimento.data_lancamento}}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <h4>Lançamentos</h4>
+            <!-- Botão Cria Registro -->
+            <a href="{% url 'ctb:lancamento-add' %}">
+                <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                        style="margin-top: 4px;">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                </button>
+            </a>
+            <hr>
+
+            <ul>
+
+                {% for lancamento in movimento.movimentocontabil_set.all %}
+                {% if lancamento %}
+                <li>
+                    {{ lancamento.conta}} - {{ lancamento.valor}} - {{ lancamento.d_c}}
+                </li>
+                {% else %}
+                <h3>Sem Lançamentos!</h3>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+

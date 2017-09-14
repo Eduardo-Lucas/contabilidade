@@ -5,7 +5,9 @@ from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, Co
     ContaList, ContaDetalhe, ContaCreate, ContaUpdate, conta_delete, \
     EmpresaList, EmpresaDetalhe, EmpresaCreate, EmpresaUpdate, empresa_delete, \
     HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, MovimentoContabilHeaderList, \
-    MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete
+    MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete, \
+    MovimentoContabilHeaderDetalhe, MovimentoContabilCreate, MovimentoContabilDetalhe, MovimentoContabilList, \
+    MovimentoContabilUpdate, movimento_contabil_delete
 
 app_name = 'ctb'
 
@@ -40,12 +42,19 @@ urlpatterns = [
     url(r'^competencia/(?P<pk>[0-9]+)/edit/$', CompetenciaUpdate.as_view(), name='competencia-edit'),
     url(r'^competencia/(?P<id>[0-9]+)/delete/$', competencia_delete, name='competencia-delete'),
 
-    # Movimentos
+    # Movimentos Header
     url(r'^movimento-list/$', MovimentoContabilHeaderList.as_view(), name='movimento-list'),
-    url(r'^movimento-list/(?P<pk>[0-9]+)/$', CompetenciaDetalhe.as_view(), name='movimento-detail'),
+    url(r'^movimento-list/(?P<pk>[0-9]+)/$', MovimentoContabilHeaderDetalhe.as_view(), name='movimento-detail'),
     url(r'^movimento-add/$', MovimentoContabilHeaderCreate.as_view(), name='movimento-add'),
     url(r'^movimento/(?P<pk>[0-9]+)/edit/$', MovimentoContabilHeaderUpdate.as_view(), name='movimento-edit'),
     url(r'^movimento/(?P<id>[0-9]+)/delete/$', movimento_contabil_header_delete, name='movimento-delete'),
+
+    # Movimentos Lançamentos
+    url(r'^lancamento-list/$', MovimentoContabilList.as_view(), name='lancamento-list'),
+    url(r'^lancamento-list/(?P<pk>[0-9]+)/$', MovimentoContabilDetalhe.as_view(), name='lancamento-detail'),
+    url(r'^lancamento-add/$', MovimentoContabilCreate.as_view(), name='lancamento-add'),
+    url(r'^lancamento/(?P<pk>[0-9]+)/edit/$', MovimentoContabilUpdate.as_view(), name='lancamento-edit'),
+    url(r'^lancamento/(?P<id>[0-9]+)/delete/$', movimento_contabil_delete, name='lancamento-delete'),
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),

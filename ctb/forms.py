@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from ctb.models import Conta
+from ctb.models import Conta, MovimentoContabilHeader
 
 
 # Forms
@@ -18,3 +18,8 @@ class ContaForm(ModelForm):
                 'tipo_conta', 'conta_superior', 'conta_ativa', 'grau_conta'
             ]
             """
+
+
+class MovimentoContabilHeaderForm(ModelForm):
+    model = MovimentoContabilHeader
+    fields = '__all__'

@@ -1,15 +1,13 @@
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from django.contrib.messages.views import SuccessMessageMixin
-from django.http import request, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from ctb.forms import ContaForm
-from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader
+from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, MovimentoContabil
 
 """
     PÁGINA PRINCIPAL DA CONTABILIDADE 
@@ -361,7 +359,7 @@ def competencia_delete(request, id=None):
 
 class MovimentoContabilHeaderList(SuccessMessageMixin, LoginRequiredMixin, ListView):
     model = MovimentoContabilHeader
-    template_name = 'ctb/movimento_contabil/movimento_contabil_header-list.html'
+    template_name = 'ctb/movimento_contabil_header/movimento_contabil_header-list.html'
 
     def get_queryset(self):
         data_competencia = self.request.GET.get('q')
@@ -389,26 +387,20 @@ class MovimentoContabilHeaderList(SuccessMessageMixin, LoginRequiredMixin, ListV
 class MovimentoContabilHeaderCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = MovimentoContabilHeader
     fields = '__all__'
-    success_message = '%(data_lancamento)s criado com sucesso!'
-    template_name = "ctb/movimento_contabil/movimentocontabilheader_form.html"
-
-    def get_success_message(self, cleaned_data):
-        return self.success_message % dict(
-            cleaned_data,
-            calculated_field=self.object.data_lancamento,
-        )
+    template_name = "ctb/movimento_contabil_header/movimentocontabilheader_form.html"
 
 
 class MovimentoContabilHeaderDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
     model = MovimentoContabilHeader
-    template_name = 'ctb/movimento_contabil/movimento_contabil_header_detail.html'
+    context_object_name = 'movimento'
+    template_name = 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html'
 
 
 class MovimentoContabilHeaderUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = MovimentoContabilHeader
     fields = '__all__'
     success_message = '%(data_competencia)s alterado com sucesso!'
-    template_name = 'ctb/movimento_contabil/movimentocontabilheader_form.html'
+    template_name = 'ctb/movimento_contabil_header/movimentocontabilheader_form.html'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(
@@ -427,6 +419,74 @@ def movimento_contabil_header_delete(request, id=None):
     context = {
         'object': obj
     }
-
     return render(request, 'ctb/confirm_delete.html', context)
 
+
+"""
+    Movimentos Contabeis  - LANCAMENTOS
+"""
+
+
+class MovimentoContabilList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    model = MovimentoContabil
+    template_name = 'ctb/movimento_contabil/movimento_contabil-list.html'
+
+    def get_queryset(self):
+        conta = self.request.GET.get('q')
+        if conta:
+            object_list = self.model.objects.filter(conta__icontains=conta)
+        else:
+            object_list = self.model.objects.all()
+
+        paginator = Paginator(object_list, 10)  # Show 10 contas per page
+
+        page = self.request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+
+        # return object_list
+        return queryset
+
+
+class MovimentoContabilCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = MovimentoContabil
+    fields = '__all__'
+    template_name = "ctb/movimento_contabil/movimentocontabil_form.html"
+
+
+class MovimentoContabilDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = MovimentoContabil
+    context_object_name = 'lancamento'
+    template_name = 'ctb/movimento_contabil/movimento_contabil_detail.html'
+
+
+class MovimentoContabilUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = MovimentoContabil
+    fields = '__all__'
+    success_message = '%(data_competencia)s alterado com sucesso!'
+    template_name = 'ctb/movimento_contabil/movimentocontabil_form.html'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.conta,
+        )
+
+
+def movimento_contabil_delete(request, id=None):
+    obj = get_object_or_404(MovimentoContabil, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, 'Registro apagado com sucesso!')
+        return redirect('ctb:lancamento-list')
+
+    context = {
+        'object': obj
+    }
+    return render(request, 'ctb/confirm_delete.html', context)
