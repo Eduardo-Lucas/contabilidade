@@ -202,11 +202,11 @@ class MovimentoContabilHeader(models.Model):
     class Meta:
         ordering = ['-id']
         verbose_name = 'Movimento Contábil'
-        verbose_name_plural = 'Movimentos Contábeis'
+        verbose_name_plural = 'Movimentos Contábeis (Header)'
 
 
-# MOVIMENTOS CONTABEIS
-class MovimentoContabil(models.Model):
+# LANCAMENTOS CONTABEIS
+class LancamentoContabil(models.Model):
     header = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE)
     conta = models.ForeignKey(Conta)
     valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
@@ -219,3 +219,8 @@ class MovimentoContabil(models.Model):
 
     def __str__(self):
         return "Conta: " + str(self.conta) + " Valor: " + str(self.valor) + self.d_c
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Lançamento Contábil'
+        verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'

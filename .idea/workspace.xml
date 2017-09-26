@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
+    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="Movimento Contabil (Lancamento) added">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/ctb/images/if_administrator_43693.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ctb/migrations/0011_auto_20170914_1141.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/create_lancamentocontabil.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil_detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamentocontabil_form.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabil_form.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil-list.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/urls.py" afterPath="$PROJECT_DIR$/contabilidade/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/admin.py" afterPath="$PROJECT_DIR$/ctb/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/forms.py" afterPath="$PROJECT_DIR$/ctb/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" afterPath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/wip.html" afterPath="$PROJECT_DIR$/templates/wip.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,12 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Empresa</find>
-      <find>31/12/2009</find>
-      <find>GlobalCodigoEstado</find>
-      <find>Cliente</find>
-      <find>/acc/</find>
-      <find>/reg/</find>
       <find>userprofile</find>
       <find>}}</find>
       <find>DATE_FORMAT</find>
@@ -57,6 +70,12 @@
       <find>col-md-offset-3</find>
       <find>body</find>
       <find>tbody</find>
+      <find>href</find>
+      <find>movimento</find>
+      <find>LancamentoContabilCreate</find>
+      <find>LancamentoContabilUpdate</find>
+      <find>Update</find>
+      <find>lancamento-detail</find>
     </findStrings>
     <replaceStrings>
       <replace>Historico</replace>
@@ -92,29 +111,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/accounts/form-template.html" />
-        <option value="$PROJECT_DIR$/templates/accounts/userprofile_form.html" />
-        <option value="$PROJECT_DIR$/templates/accounts/profile-detail.html" />
-        <option value="$PROJECT_DIR$/templates/ctb/conta_detail.html" />
-        <option value="$PROJECT_DIR$/templates/ctb/conta_confirm_delete.html" />
-        <option value="$PROJECT_DIR$/templates/ctb/historico-index.html" />
         <option value="$PROJECT_DIR$/templates/ctb/conta.html" />
         <option value="$PROJECT_DIR$/templates/ctb/historico-list.html" />
         <option value="$PROJECT_DIR$/templates/ctb/historico-detail.html" />
         <option value="$PROJECT_DIR$/templates/accounts/userprofile/profile-list.html" />
-        <option value="$PROJECT_DIR$/contabilidade/urls.py" />
         <option value="$PROJECT_DIR$/templates/ctb/form-template.html" />
         <option value="$PROJECT_DIR$/templates/ctb/base.html" />
         <option value="$PROJECT_DIR$/contabilidade/views.py" />
         <option value="$PROJECT_DIR$/accounts/models.py" />
-        <option value="$PROJECT_DIR$/ctb/admin.py" />
         <option value="$PROJECT_DIR$/contabilidade/settings.py" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/templates/ctb/confirm_delete.html" />
         <option value="$PROJECT_DIR$/templates/ctb/historico/historico_form.html" />
         <option value="$PROJECT_DIR$/templates/ctb/competencia/competencia_detail.html" />
         <option value="$PROJECT_DIR$/templates/ctb/competencia/competencia_form.html" />
-        <option value="$PROJECT_DIR$/templates/wip.html" />
         <option value="$PROJECT_DIR$/templates/accounts/userprofile/userprofile-list.html" />
         <option value="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_detail.html" />
         <option value="$PROJECT_DIR$/templates/accounts/userprofile/userprofile_form.html" />
@@ -133,23 +143,32 @@
         <option value="$PROJECT_DIR$/templates/ctb/competencia/competencia-list.html" />
         <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabilheader_form.html" />
         <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header-list.html" />
-        <option value="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
-        <option value="$PROJECT_DIR$/ctb/forms.py" />
         <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabil_form.html" />
         <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_header_detail.html" />
-        <option value="$PROJECT_DIR$/ctb/urls.py" />
-        <option value="$PROJECT_DIR$/ctb/models.py" />
-        <option value="$PROJECT_DIR$/ctb/views.py" />
-        <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html" />
-        <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
         <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html" />
+        <option value="$PROJECT_DIR$/contabilidade/urls.py" />
+        <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html" />
+        <option value="$PROJECT_DIR$/ctb/admin.py" />
+        <option value="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil-list.html" />
+        <option value="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamentocontabil_form.html" />
+        <option value="$PROJECT_DIR$/templates/wip.html" />
+        <option value="$PROJECT_DIR$/ctb/forms.py" />
+        <option value="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil_detail.html" />
+        <option value="$PROJECT_DIR$/templates/ctb/lancamento_contabil/exemplo.html" />
+        <option value="$PROJECT_DIR$/ctb/models.py" />
+        <option value="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
+        <option value="$PROJECT_DIR$/ctb/urls.py" />
+        <option value="$PROJECT_DIR$/ctb/views.py" />
+        <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
+        <option value="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" />
+        <option value="$PROJECT_DIR$/templates/ctb/lancamento_contabil/create_lancamentocontabil.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="566" />
-    <option name="y" value="90" />
-    <option name="width" value="672" />
+    <option name="x" value="700" />
+    <option name="y" value="5" />
+    <option name="width" value="640" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -189,39 +208,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="contabilidade" type="b2602c69:ProjectViewProjectNode" />
               <item name="contabilidade" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="contabilidade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="contabilidade" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="contabilidade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="contabilidade" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ctb" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="contabilidade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="contabilidade" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ctb" type="462c0819:PsiDirectoryNode" />
-              <item name="movimento_contabil" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="contabilidade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="contabilidade" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ctb" type="462c0819:PsiDirectoryNode" />
-              <item name="movimento_contabil_header" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -230,25 +224,25 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Viberr" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\lancamento_contabil" />
+      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\movimento_contabil" />
+      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\competencia" />
+      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\empresa" />
+      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\movmento_contabl_header" />
       <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\accounts\userprofile" />
       <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\historico" />
       <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\conta" />
       <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\accounts" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\movimento_contabil" />
-      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\competencia" />
-      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb\empresa" />
-      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\ctb" />
-      <recent name="C:\Users\eduar\DjangoProjects\Dev\contabilidade\templates\accounts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -477,16 +471,16 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28668684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26096824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.705401" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47532895" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54769737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47532895" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37006578" sideWeight="0.49394855" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38322368" sideWeight="0.49394855" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -500,15 +494,16 @@
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.705401" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.705401" sideWeight="0.5060514" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54769737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54769737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47532895" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37664473" sideWeight="0.49394855" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23373677" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3848684" sideWeight="0.49394855" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27987897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54605263" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -608,55 +603,13 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/accounts/userprofile/profile.html" />
-    <entry file="file://$PROJECT_DIR$/templates/ctb/base_login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contabilidade/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/glb/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="101" column="15" lean-forward="true" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/form-template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contabilidade/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ctb/migrations/0007_auto_20170906_1636.py" />
     <entry file="file://$PROJECT_DIR$/ctb/migrations/0007_auto_20170907_0926.py" />
-    <entry file="file://$PROJECT_DIR$/ctb/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/ctb/images/Iconleak-Or-Sand-glass.ico">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -693,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/wip.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/accounts/userprofile/userprofile_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -732,13 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-408">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contabilidade/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="29" column="63" lean-forward="false" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -798,13 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/historico/historico-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1567">
-          <caret line="113" column="29" lean-forward="true" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -840,22 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ctb/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabil_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="69" lean-forward="false" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/choices/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -863,74 +779,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/conta/conta-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="129" column="127" lean-forward="false" selection-start-line="129" selection-start-column="127" selection-end-line="129" selection-end-column="127" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/base_sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="25" lean-forward="false" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="133" column="81" lean-forward="false" selection-start-line="133" selection-start-column="81" selection-end-line="133" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="40" lean-forward="false" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ctb/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="46" column="99" lean-forward="false" selection-start-line="46" selection-start-column="99" selection-end-line="46" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clientes/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="40" column="7" lean-forward="true" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -938,23 +790,176 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contabilidade/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contabilidade/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctb/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="76" column="47" lean-forward="true" selection-start-line="76" selection-start-column="47" selection-end-line="76" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/wip.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/conta/conta-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="83" column="69" lean-forward="false" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamentocontabil_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctb/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/form-template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/base_login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contabilidade/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="139" column="0" lean-forward="true" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctb/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/base_sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1580">
+          <caret line="79" column="107" lean-forward="false" selection-start-line="79" selection-start-column="107" selection-end-line="79" selection-end-column="107" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctb/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="72" column="34" lean-forward="false" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="140">
+          <caret line="361" column="50" lean-forward="false" selection-start-line="361" selection-start-column="27" selection-end-line="361" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ctb/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="183" column="44" lean-forward="false" selection-start-line="183" selection-start-column="44" selection-end-line="183" selection-end-column="44" />
+        <state relative-caret-position="380">
+          <caret line="213" column="20" lean-forward="false" selection-start-line="213" selection-start-column="4" selection-end-line="213" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/lancamento_contabil/exemplo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/historico/historico-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/lancamento_contabil/create_lancamentocontabil.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="55" lean-forward="false" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

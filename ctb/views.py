@@ -6,8 +6,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
-from ctb.forms import ContaForm
-from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, MovimentoContabil
+from ctb.forms import ContaForm, LancamentoContabilForm
+from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, LancamentoContabil
 
 """
     PÁGINA PRINCIPAL DA CONTABILIDADE 
@@ -359,6 +359,7 @@ def competencia_delete(request, id=None):
 
 class MovimentoContabilHeaderList(SuccessMessageMixin, LoginRequiredMixin, ListView):
     model = MovimentoContabilHeader
+    context_object_name = 'movimentocontabilheader'
     template_name = 'ctb/movimento_contabil_header/movimento_contabil_header-list.html'
 
     def get_queryset(self):
@@ -386,18 +387,20 @@ class MovimentoContabilHeaderList(SuccessMessageMixin, LoginRequiredMixin, ListV
 
 class MovimentoContabilHeaderCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = MovimentoContabilHeader
+    context_object_name = 'movimentocontabilheader'
     fields = '__all__'
     template_name = "ctb/movimento_contabil_header/movimentocontabilheader_form.html"
 
 
 class MovimentoContabilHeaderDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
     model = MovimentoContabilHeader
-    context_object_name = 'movimento'
+    context_object_name = 'movimentocontabilheader'
     template_name = 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html'
 
 
 class MovimentoContabilHeaderUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = MovimentoContabilHeader
+    context_object_name = 'movimentocontabilheader'
     fields = '__all__'
     success_message = '%(data_competencia)s alterado com sucesso!'
     template_name = 'ctb/movimento_contabil_header/movimentocontabilheader_form.html'
@@ -423,54 +426,88 @@ def movimento_contabil_header_delete(request, id=None):
 
 
 """
-    Movimentos Contabeis  - LANCAMENTOS
+    LANCAMENTOS
 """
 
 
-class MovimentoContabilList(SuccessMessageMixin, LoginRequiredMixin, ListView):
-    model = MovimentoContabil
-    template_name = 'ctb/movimento_contabil/movimento_contabil-list.html'
+# class LancamentoContabilList(SuccessMessageMixin, LoginRequiredMixin, ListView):
+#     model = LancamentoContabil
+#     template_name = 'ctb/lancamento_contabil/lancamento_contabil-list.html'
+#
+#     def get_queryset(self):
+#         conta = self.request.GET.get('q')
+#         if conta:
+#             object_list = self.model.objects.filter(conta__icontains=conta)
+#         else:
+#             object_list = self.model.objects.all()
+#
+#         paginator = Paginator(object_list, 10)  # Show 10 contas per page
+#
+#         page = self.request.GET.get('page')
+#         try:
+#             queryset = paginator.page(page)
+#         except PageNotAnInteger:
+#             # If page is not an integer, deliver first page.
+#             queryset = paginator.page(1)
+#         except EmptyPage:
+#             # If page is out of range (e.g. 9999), deliver last page of results.
+#             queryset = paginator.page(paginator.num_pages)
+#
+#         # return object_list
+#         return queryset
+#
 
-    def get_queryset(self):
-        conta = self.request.GET.get('q')
-        if conta:
-            object_list = self.model.objects.filter(conta__icontains=conta)
-        else:
-            object_list = self.model.objects.all()
-
-        paginator = Paginator(object_list, 10)  # Show 10 contas per page
-
-        page = self.request.GET.get('page')
-        try:
-            queryset = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            queryset = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            queryset = paginator.page(paginator.num_pages)
-
-        # return object_list
-        return queryset
-
-
-class MovimentoContabilCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    model = MovimentoContabil
-    fields = '__all__'
-    template_name = "ctb/movimento_contabil/movimentocontabil_form.html"
+def create_lancamento(request, movimentocontabilheader_id):
+    form = LancamentoContabilForm(request.POST or None, request.FILES or None)
+    movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
+    if form.is_valid():
+        header_lancamentos = movimentocontabilheader.lancamentocontabil_set.all()
+        for l in header_lancamentos:
+            if l.conta == form.cleaned_data.get("conta"):
+                context = {
+                    'movimentocontabilheader': movimentocontabilheader,
+                    'form': form,
+                    'error_message': 'Você já utilizou esse código de Conta',
+                }
+                return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', context)
+        lancamentocontabil = form.save(commit=False)
+        lancamentocontabil.header = movimentocontabilheader
+        lancamentocontabil.save()
+        return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
+                      {'movimentocontabilheader': movimentocontabilheader})
+    context = {
+        'movimentocontabilheader': movimentocontabilheader,
+        'form': form,
+    }
+    return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', context)
 
 
-class MovimentoContabilDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
-    model = MovimentoContabil
+# def detail_lancamento(request, movimentocontabilheader_id):
+#         user = request.user
+#         movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
+#         return render(request, 'ctb/lancamento_contabil/lancamento_contabil_detail.html',
+#                       {'movimentocontabilheader': movimentocontabilheader, 'user': user})
+
+
+def delete_lancamento(request, movimentocontabilheader_id, lancamentocontabil_id):
+    movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
+    lancamento = LancamentoContabil.objects.get(pk=lancamentocontabil_id)
+    lancamento.delete()
+    return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
+                  {'movimentocontabilheader': movimentocontabilheader})
+
+
+class LancamentoContabilDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
+    model = LancamentoContabil
     context_object_name = 'lancamento'
-    template_name = 'ctb/movimento_contabil/movimento_contabil_detail.html'
+    template_name = 'ctb/lancamento_contabil/lancamento_contabil_detail.html'
 
 
-class MovimentoContabilUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    model = MovimentoContabil
+class LancamentoContabilUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = LancamentoContabil
     fields = '__all__'
-    success_message = '%(data_competencia)s alterado com sucesso!'
-    template_name = 'ctb/movimento_contabil/movimentocontabil_form.html'
+    success_message = '%(conta)s alterado com sucesso!'
+    template_name = 'ctb/lancamento_contabil/lancamentocontabil_form.html'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(
@@ -479,8 +516,8 @@ class MovimentoContabilUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateVie
         )
 
 
-def movimento_contabil_delete(request, id=None):
-    obj = get_object_or_404(MovimentoContabil, id=id)
+def lancamento_contabil_delete(request, id=None):
+    obj = get_object_or_404(LancamentoContabil, id=id)
     if request.method == 'POST':
         obj.delete()
         messages.success(request, 'Registro apagado com sucesso!')

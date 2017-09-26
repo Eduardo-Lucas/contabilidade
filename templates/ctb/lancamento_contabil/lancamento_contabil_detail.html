@@ -3,31 +3,32 @@
 
 {% block body %}
 
-<div class="container lancamentos-container">
+<div class="container-fluid songs-container">
 
-    <div class="container">
+    <div class="row">
 
-        <!-- Left HEADER Info -->
-        <div class="col-md-offset-2 col-sm-8 col-md-7">
+        <!-- Left Header Info -->
+        <div class="col-sm-4 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>Competência: {{ movimentocontabilheader.data_competencia }}
-                        <small>Usuário: {{ movimentocontabilheader.usuario }}</small>
-                    </h2>
-                    <h3>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }}</h3>
-                    <h3>Origem do Lançamento: {{ movimentocontabilheader.origem }} Sequencial: {{
-                        movimentocontabilheader.id }}</h3>
+                    <a href="{% url 'ctb:movimento-detail' movimentocontabilheader.id %}">
+                        {{movimentocontabilheader.id }}
+                    </a>
+                    <h1>{{ movimentocontabilheader.data_competencia }}
+                        <small>{{ movimentocontabilheader.usuario }}</small>
+                    </h1>
+                    <h2>{{ movimentocontabilheader.origem }}</h2>
                 </div>
             </div>
         </div>
 
-        <!-- Right LANCAMENTO Info -->
-        <div class="col-md-offset-2 col-sm-6 col-md-7">
+        <!-- Right Lancamento Info -->
+        <div class="col-sm-8 col-md-9">
 
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
                 <li role="presentation" class="active"><a
-                        href="{% url 'ctb:movimento-detail' movimentocontabilheader.id %}">Todos os Lançamentos</a></li>
-                <li role="presentation"><a href="{% url 'ctb:lancamento-add' movimentocontabilheader.id %}">Adiciona um
+                        href="{% url 'ctb:lancamento-detail' movimentocontabilheader.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url 'ctb:create_lancamento' movimentocontabilheader.id %}">Insere
                     Novo Lançamento</a></li>
             </ul>
 
@@ -44,9 +45,9 @@
                         <thead>
                         <tr>
                             <th>Conta</th>
-                            <th>Valor</th>
-                            <th>D - C</th>
-                            <th>Histórico</th>
+                            <th>valor</th>
+                            <th>D/C</th>
+                            <th>Código Histórico</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -1,0 +1,54 @@
+{% extends 'ctb/base_sidebar.html' %}
+{% block title %}Add a New Song{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-offset-2 col-sm-8 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Competência: {{ movimentocontabilheader.data_competencia }}
+                        <small>Usuário: {{ movimentocontabilheader.usuario }}</small>
+                    </h2>
+                    <h3>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }}</h3>
+                    <h3>Origem do Lançamento: {{ movimentocontabilheader.origem }} Sequencial: {{
+                        movimentocontabilheader.id }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Lancamento Info -->
+        <div class="col-md-offset-2 col-sm-6 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                        <li role="presentation"><a href="{% url 'ctb:movimento-detail' movimentocontabilheader.id %}">Todos
+                            os Lançamentos</a></li>
+                        <li role="presentation" class="active"><a
+                                href="{% url 'ctb:lancamento-add' movimentocontabilheader.id %}">Adiciona um Novo
+                            Lançamento</a></li>
+                    </ul>
+                    {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="album" value="{{ album }}">
+                        {% include 'ctb/form-template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Gravar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

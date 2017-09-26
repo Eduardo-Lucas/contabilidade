@@ -42,7 +42,7 @@
                         </button>
                     </a>
 
-                    <!-- Botão Cria Registro -->
+                    <!-- Botão Cria Registro em Lancamento Contabil-->
                     <a href="{% url 'ctb:movimento-add' %}">
                         <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
                                 style="margin-top: 4px;">
@@ -59,6 +59,7 @@
                    style="margin-bottom: 0px;">
                     <tbody>
                         <tr>
+                            <th>Seq</th>
                             <th>Data da Competência</th>
                             <th>Origem</th>
                             <th>Usuário</th>
@@ -66,15 +67,17 @@
                         </tr>
                         <tfoot>
                             <tr>
+                                <th>Seq</th>
                                 <th>Data da Competência</th>
                                 <th>Origem</th>
                                 <th>Usuário</th>
                                 <th>Data do Lançamento</th>
                             </tr>
                         </tfoot>
-                        {% for movimento in object_list %}
+                    {% for movimento in movimentocontabilheader %}
                             <tr>
 
+                                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia  }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.origem  }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario  }}</a></td>

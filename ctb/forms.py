@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from ctb.models import Conta, MovimentoContabilHeader
+from ctb.models import Conta, LancamentoContabil
 
 
 # Forms
@@ -20,6 +20,7 @@ class ContaForm(ModelForm):
             """
 
 
-class MovimentoContabilHeaderForm(ModelForm):
-    model = MovimentoContabilHeader
-    fields = '__all__'
+class LancamentoContabilForm(ModelForm):
+    class Meta:
+        model = LancamentoContabil
+        fields = '__all__'
