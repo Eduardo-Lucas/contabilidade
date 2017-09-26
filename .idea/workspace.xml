@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="Movimento Contabil (Lancamento) added">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/ctb/images/if_administrator_43693.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ctb/migrations/0011_auto_20170914_1141.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/create_lancamentocontabil.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil_detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamentocontabil_form.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil_detail.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimentocontabil_form.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil/movimento_contabil-list.html" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil-list.html" />
+    <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Viberr" afterPath="$PROJECT_DIR$/../Viberr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../django-tenant-schemas" afterPath="$PROJECT_DIR$/../django-tenant-schemas" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../usesoft-R3" afterPath="$PROJECT_DIR$/../usesoft-R3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/urls.py" afterPath="$PROJECT_DIR$/contabilidade/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/admin.py" afterPath="$PROJECT_DIR$/ctb/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/forms.py" afterPath="$PROJECT_DIR$/ctb/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" afterPath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/wip.html" afterPath="$PROJECT_DIR$/templates/wip.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -589,7 +570,8 @@
     <MESSAGE value="Side bar Menu" />
     <MESSAGE value="Movimento Contabil Header added" />
     <MESSAGE value="Movimento Contabil (Lancamento) added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Movimento Contabil (Lancamento) added" />
+    <MESSAGE value="Lancamento realizado." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lancamento realizado." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -867,6 +849,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -888,9 +871,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -898,6 +879,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-80">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -913,9 +895,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="361" column="50" lean-forward="false" selection-start-line="361" selection-start-column="27" selection-end-line="361" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
