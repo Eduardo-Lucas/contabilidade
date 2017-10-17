@@ -6,7 +6,7 @@ from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, Co
     EmpresaList, EmpresaDetalhe, EmpresaCreate, EmpresaUpdate, empresa_delete, \
     HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, MovimentoContabilHeaderList, \
     MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete, \
-    MovimentoContabilHeaderDetalhe
+    MovimentoContabilHeaderDetalhe, SaldoContaContabilList, SaldoDetalhe
 
 app_name = 'ctb'
 
@@ -51,8 +51,12 @@ urlpatterns = [
     # Lançamentos
     url(r'^(?P<movimentocontabilheader_id>[0-9]+)/create_lancamento/$', views.create_lancamento,
         name='lancamento-add'),
-    url(r'^(?P<movimentocontabilheader_id>[0-9]+)/delete_lancamento/(?P<movimentocontabil_id>[0-9]+)/$',
+    url(r'^(?P<movimentocontabilheader_id>[0-9]+)/delete_lancamento/(?P<lancamentocontabil_id>[0-9]+)/$',
         views.delete_lancamento, name='lancamento-delete'),
+
+    # saldo
+    url(r'^saldo-lista/$', SaldoContaContabilList.as_view(), name='saldo-list'),
+    url(r'^saldo-detalhe/(?P<pk>[0-9]+)/$', SaldoDetalhe.as_view(), name='saldo-detail'),
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),

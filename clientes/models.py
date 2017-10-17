@@ -37,11 +37,16 @@ from tenant_schemas.models import TenantMixin
 # Multi-Tenant Data Architecture.
 # *********************************************************************************************************************
 class Cliente(TenantMixin):
-    nome = models.CharField(max_length=100)
+    domain_url = models.CharField(max_length=50)
+    schema_name = models.CharField(max_length=100)
+    nome = models.CharField(max_length=50)
     pago_ate = models.DateField()
     em_teste = models.BooleanField(default=False)
     criado_em = models.DateField(auto_now_add=True)
-
     # default True, o schema será automaticamente criado e sincronizado quando for salvo.
     auto_create_schema = True
 
+    def __str__(self):
+        return 'DOMAIN_URL: ' + self.domain_url + ' SCHEMA_NAME: ' + self.schema_name
+
+# TODO Criar uma tela para incluir um novo registro, apenas para o Administrador

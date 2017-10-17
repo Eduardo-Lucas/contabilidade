@@ -1,16 +1,20 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Sum, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from ctb.forms import ContaForm, LancamentoContabilForm
-from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, LancamentoContabil
+from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, LancamentoContabil, \
+    SaldoContaContabil
 
 """
-    PÁGINA PRINCIPAL DA CONTABILIDADE 
+    PÁGINA PRINCIPAL DA CONTABILIDADE
 """
 
 
@@ -131,7 +135,7 @@ class HistoricoList(SuccessMessageMixin, LoginRequiredMixin, ListView):
         else:
             object_list = self.model.objects.all()
 
-        paginator = Paginator(object_list, 9)  # Show 10 contas per page
+        paginator = Paginator(object_list, 9)  # Show 9 contas per page
 
         page = self.request.GET.get('page')
         try:
@@ -363,9 +367,17 @@ class MovimentoContabilHeaderList(SuccessMessageMixin, LoginRequiredMixin, ListV
     template_name = 'ctb/movimento_contabil_header/movimento_contabil_header-list.html'
 
     def get_queryset(self):
-        data_competencia = self.request.GET.get('q')
-        if data_competencia:
-            object_list = self.model.objects.filter(data_competencia__icontains=data_competencia)
+        valor = self.request.GET.get('q')
+        print(valor)
+        if valor:
+            object_list = self.model.objects.filter(
+                Q(total_debito__icontains=valor) |
+                Q(total_credito__icontains=valor) |
+                Q(origem__icontains=valor) |
+                Q(data_lancamento__icontains=valor) |
+                Q(usuario__username__icontains=valor) |
+                Q(id__icontains=valor)
+            )
         else:
             object_list = self.model.objects.all()
 
@@ -456,6 +468,22 @@ def movimento_contabil_header_delete(request, id=None):
 #         # return object_list
 #         return queryset
 #
+def totaliza_lancamentos(movimentocontabilheader_id):
+    movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
+    header_lancamentos = movimentocontabilheader.lancamentocontabil_set.all()
+
+    total_debito = header_lancamentos.filter(d_c='D').aggregate(Sum('valor'))
+    total_credito = header_lancamentos.filter(d_c='C').aggregate(Sum('valor'))
+
+    # total_debito = total_debito.values()
+    print(total_debito)
+    # total_credito = total_credito.values()
+    print(total_credito)
+
+    # movimentocontabilheader.total_debito = total_debito
+    # movimentocontabilheader.total_credito = total_credito
+    # movimentocontabilheader.save()
+
 
 def create_lancamento(request, movimentocontabilheader_id):
     form = LancamentoContabilForm(request.POST or None, request.FILES or None)
@@ -470,9 +498,19 @@ def create_lancamento(request, movimentocontabilheader_id):
                     'error_message': 'Você já utilizou esse código de Conta',
                 }
                 return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', context)
+
         lancamentocontabil = form.save(commit=False)
         lancamentocontabil.header = movimentocontabilheader
+        lancamentocontabil.data_competencia = datetime.strptime(movimentocontabilheader.data_competencia, '%Y-%m-%d')
         lancamentocontabil.save()
+
+        if lancamentocontabil.d_c == 'D':
+            movimentocontabilheader.total_debito += lancamentocontabil.valor
+        else:
+            movimentocontabilheader.total_credito += lancamentocontabil.valor
+
+        movimentocontabilheader.save()
+
         return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
                       {'movimentocontabilheader': movimentocontabilheader})
     context = {
@@ -492,7 +530,18 @@ def create_lancamento(request, movimentocontabilheader_id):
 def delete_lancamento(request, movimentocontabilheader_id, lancamentocontabil_id):
     movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
     lancamento = LancamentoContabil.objects.get(pk=lancamentocontabil_id)
+
+    if lancamento.d_c == 'D':
+        movimentocontabilheader.total_debito -= lancamento.valor
+    else:
+        movimentocontabilheader.total_credito -= lancamento.valor
+
+    movimentocontabilheader.save()
+
     lancamento.delete()
+
+    totaliza_lancamentos(movimentocontabilheader_id)
+
     return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
                   {'movimentocontabilheader': movimentocontabilheader})
 
@@ -527,3 +576,41 @@ def lancamento_contabil_delete(request, id=None):
         'object': obj
     }
     return render(request, 'ctb/confirm_delete.html', context)
+
+
+"""
+    SALDOS CONTÁBEIS
+"""
+
+
+class SaldoContaContabilList(ListView):
+    model = SaldoContaContabil
+    context_object_name = 'saldo'
+    template_name = 'ctb/saldo/saldo-list.html'
+
+    def get_queryset(self):
+        conta = self.request.GET.get('q')
+        if conta:
+            object_list = self.model.objects.filter(conta__icontains=conta)
+        else:
+            object_list = self.model.objects.all()
+
+        paginator = Paginator(object_list, 10)  # Show 9 contas per page
+
+        page = self.request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+
+        # return object_list
+        return queryset
+
+
+class SaldoDetalhe(DetailView):
+    model = SaldoContaContabil
+    template_name = "ctb/saldo/saldo_detalhe.html"

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import contabilidade
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +27,7 @@ SECRET_KEY = '(jyrb1zr5e3&bh&fbj0jf%4u57r7p@aoy^)ti-o#q+^7cis_ff'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['comercialtoes-saas.com', 'oleobahia-saas.com', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'usesoft-saas.com', 'comercialtoes-saas.com', 'oleobahia-saas.com']
 
 
 # Application definition
@@ -39,6 +39,12 @@ SHARED_APPS = (
     'clientes',
 
     # everything below here is optional
+    'glb',
+    'accounts',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
@@ -193,12 +199,16 @@ USE_L10N = False
 
 USE_TZ = True
 
-DATE_INPUT_FORMATS = [
-    '%d/%m/%Y'
-    ]
+# DATE_INPUT_FORMATS = [
+#     '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+#     '%b %d %Y', '%b %d, %Y',            # 'Oct 25 2006', 'Oct 25, 2006'
+#     '%d %b %Y', '%d %b, %Y',            # '25 Oct 2006', '25 Oct, 2006'
+#     '%B %d %Y', '%B %d, %Y',            # 'October 25 2006', 'October 25, 2006'
+#     '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
+# ]
 
-DATE_FORMAT = 'd/m/Y'
-
+# DATE_FORMAT = 'd/m/Y'
+# SHORT_DATE_FORMAT = 'd/m/Y'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

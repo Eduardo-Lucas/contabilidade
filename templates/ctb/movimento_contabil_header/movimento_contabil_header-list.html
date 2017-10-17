@@ -59,36 +59,95 @@
                    style="margin-bottom: 0px;">
                     <tbody>
                         <tr>
+                            <th>Status</th>
                             <th>Seq</th>
                             <th>Data da Competência</th>
                             <th>Origem</th>
                             <th>Usuário</th>
                             <th>Data do Lançamento</th>
+                            <th style="text-align:right">Total de Débitos</th>
+                            <th style="text-align:right">Total de Créditos</th>
                         </tr>
                         <tfoot>
                             <tr>
+                                <th>Status</th>
                                 <th>Seq</th>
                                 <th>Data da Competência</th>
                                 <th>Origem</th>
                                 <th>Usuário</th>
                                 <th>Data do Lançamento</th>
+                                <th style="text-align:right">Total de Débitos</th>
+                                <th style="text-align:right">Total de Créditos</th>
                             </tr>
                         </tfoot>
                     {% for movimento in movimentocontabilheader %}
-                            <tr>
+                    {% if movimento.total_debito != movimento.total_credito %}
 
+                    <a>
+                        <a href="{% url 'ctb:movimento-detail' movimento.id %}"><p class="bg-danger">Seq.:
+                            {{movimento.id}} - Diferença: Débitos = {{movimento.total_debito}} Créditos =
+                            {{movimento.total_credito}}</p></a>
+    </div>
+
+    <tr class="danger">
+        <td style="text-align:center"><a href="{% url 'ctb:movimento-detail' movimento.id %}"><span
+                class="glyphicon glyphicon-thumbs-down" data-toggle="tooltip" title="Diferença entre Débitos e Créditos"
+                aria-hidden="true"></span></a></td>
+        <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
+        <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia }}</a></td>
+        <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.origem }}</a></td>
+        <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
+        <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
+        <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.total_debito
+            }}</a></td>
+        <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.total_credito
+            }}</a></td>
+
+        <!-- Detalhes -->
+        <td>
+
+            <!-- Edita -->
+            <a href="{% url 'ctb:movimento-edit' movimento.id %}"
+               class="btn btn-primary disabled btn-sm" data-toggle="tooltip"
+               title="Altera o registro">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+
+
+            <!-- Deleta -->
+            <form action="{% url 'ctb:movimento-delete' movimento.id %}"
+                  style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden"/>
+                <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                        title="Exclui o registro">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% else %}
+                            <tr>
+                                <td style="text-align:center"><a
+                                        href="{% url 'ctb:movimento-detail' movimento.id %}"><span
+                                        class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
+                                        title="Lançamento ok!" aria-hidden="true"></span></a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia  }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.origem  }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario  }}</a></td>
                                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento  }}</a></td>
+                                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
+                                    movimento.total_debito }}</a></td>
+                                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
+                                    movimento.total_credito }}</a></td>
 
                                 <!-- Detalhes -->
                                 <td>
 
                                 <!-- Edita -->
                                  <a href="{% url 'ctb:movimento-edit' movimento.id %}"
-                                    class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                    class="btn btn-primary disabled btn-sm" data-toggle="tooltip"
                                     title="Altera o registro">
                                         <span class="glyphicon glyphicon-edit"></span></a>
 
@@ -105,7 +164,8 @@
                                     </form>
                                 </td>
                             </tr>
-                        {% endfor %}
+    {% endif %}
+    {% endfor %}
                     </tbody>
 
                     <script>

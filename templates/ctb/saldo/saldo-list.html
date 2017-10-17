@@ -1,0 +1,152 @@
+{% extends 'ctb/base_sidebar.html' %}
+{% block conta_active %}active{% endblock %}
+
+{% block body %}
+
+<!-- contas -->
+<div class="container">
+    <div class="col-md-offset-2">
+
+
+        <div class="panel panel-default">
+            <div class="container">
+
+                <div class="col-md-3">
+                    <h4 style="margin-left: 10px; margin-top: 10px;"><strong>Saldos de Contas Contábeis</strong></h4>
+                </div>
+
+                <!-- Pesquisa -->
+                <div class="col-md-3">
+                    <form method="GET" action="" id="searchform" style="margin-top: 0px;">
+                        {% csrf_token %}
+                        <input class="input-lg input-search" id="searchbox" name="q" type="text"
+                               value="{{ request.GET.q }}"
+                               placeholder="Pesquisa Contas..."/>
+                    </form>
+                </div>
+
+                <div class="btn-group">
+
+
+                    <!-- PDF -->
+                    <a href="#">
+                        <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera PDF"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
+                        </button>
+                    </a>
+
+                    <!-- EXCEL -->
+                    <a href="#">
+                        <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
+                        </button>
+                    </a>
+
+                    <!-- Botão Cria Registro -->
+                    <a href="#">
+                        <button type="button" class="btn disabled btn-success" data-toggle="tooltip"
+                                title="Cria um novo registro"
+                                style="margin-top: 4px;">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% if object_list %}
+        <table class="table table-responsive table-condensed table-bordered table-hover table-striped"
+               style="margin-bottom: 0px;">
+            <tbody>
+            <tr>
+                <th>Conta</th>
+                <th>Saldo Inicial</th>
+                <th>Débitos</th>
+                <th>Créditos</th>
+                <th>Saldo Final</th>
+            </tr>
+            <tfoot>
+            <tr>
+                <th>Conta</th>
+                <th>Saldo Inicial</th>
+                <th>Débitos</th>
+                <th>Créditos</th>
+                <th>Saldo Final</th>
+            </tr>
+            </tfoot>
+            {% for saldo in object_list %}
+            <tr>
+
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.conta }}</a></td>
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.saldo_inicial }}</a></td>
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.debitos }}</a></td>
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.creditos }}</a></td>
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.saldo_final }}</a></td>
+
+                <!-- Edita -->
+                <!--<td>
+                    <div class="btn-group">
+                     <a href="{% url 'ctb:saldo-edit' saldo.id %}"
+                            class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                            title="Altera o registro">
+                            <span class="glyphicon glyphicon-edit"></span></a>
+
+                        &lt;!&ndash; Deleta &ndash;&gt;
+                        <form action="#"
+                               style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="saldo_id" value="{{ saldo.id }}" />
+                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                        title="Exclui o registro">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                        </form>
+                    </div>
+                </td>-->
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+            <script>
+                         $(document).ready(function(){
+                         $('[data-toggle="tooltip"]').tooltip();
+                          });
+
+            </script>
+
+        </table>
+        <div class="col-md-offset-2" align="right">
+            <div class="pagination">
+                            <span class="step-links">
+                                {% if object_list.has_previous %}
+                                    <a href="?page={{ object_list.previous_page_number }}">
+                                        <span data-toggle="tooltip" title="Página anterior"
+                                              class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Página {{ object_list.number }} de {{ object_list.paginator.num_pages }}
+                                </span>
+
+                                {% if object_list.has_next %}
+                                    <a href="?page={{ object_list.next_page_number }}">
+                                        <span data-toggle="tooltip" title="Página seguinte"
+                                              class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                                {% endif %}
+                            </span>
+            </div>
+        </div>
+
+
+        {% else %}
+        <h1>Não existem Saldos Contas Contábeis Cadastradas</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

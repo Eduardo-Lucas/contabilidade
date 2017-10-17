@@ -3,21 +3,34 @@
 
 {% block body %}
 
-<div class="container lancamentos-container">
+<div class="container-fluid">
 
-    <div class="container">
+    <div class="row">
 
         <!-- Left HEADER Info -->
         <div class="col-md-offset-2 col-sm-8 col-md-7">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>Competência: {{ movimentocontabilheader.data_competencia }}
+                    <h4>Sequencial: {{ movimentocontabilheader.id }}</h4>
+                    <h4>Competência: {{ movimentocontabilheader.data_competencia }}
                         <small>Usuário: {{ movimentocontabilheader.usuario }}</small>
-                    </h2>
-                    <h3>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }}</h3>
-                    <h3>Origem do Lançamento: {{ movimentocontabilheader.origem }} Sequencial: {{
-                        movimentocontabilheader.id }}</h3>
+                    </h4>
+                    <h4>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }} Origem do Lançamento: {{
+                        movimentocontabilheader.origem }}</h4>
+                    {% if movimentocontabilheader.total_debito != movimentocontabilheader.total_credito %}
+                    <h4 class="text-danger">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
+                    <h4 class="text-danger">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
+                    {% else %}
+                    <h4 class="text-success">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
+                    <h4 class="text-success">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
+                    {% endif %}
                 </div>
+                <div align="center">
+                    <a href="{% url 'ctb:movimento-list' %}">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+                    </a>
+                </div>
+
             </div>
         </div>
 
@@ -30,39 +43,62 @@
                 <li role="presentation"><a href="{% url 'ctb:lancamento-add' movimentocontabilheader.id %}">Adiciona um
                     Novo Lançamento</a></li>
             </ul>
-
+            {% if movimentocontabilheader.lancamentocontabil_set.all %}
             <div class="panel panel-default">
                 <div class="panel-body">
-
-                    <h3>Todos os Lançamentos</h3>
 
                     {% if error_message %}
                     <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
 
-                    <table class="table">
+                    <table class="responsive table table-responsive table-condensed table-bordered table-hover table-striped">
                         <thead>
                         <tr>
                             <th>Conta</th>
-                            <th>Valor</th>
-                            <th>D - C</th>
+                            <th style="text-align:right">Valor</th>
+                            <th style="text-align:center">D ou C</th>
+                            <th>Código</th>
                             <th>Histórico</th>
                         </tr>
                         </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Conta</th>
+                            <th style="text-align:right">Valor</th>
+                            <th style="text-align:center">D ou C</th>
+                            <th>Código</th>
+                            <th>Histórico</th>
+                        </tr>
+                        </tfoot>
                         <tbody>
                         {% for lancamento in movimentocontabilheader.lancamentocontabil_set.all %}
                         <tr>
                             <td>{{ lancamento.conta }}</td>
-                            <td>{{ lancamento.valor }}</td>
-                            <td>{{ lancamento.d_c }}</td>
+                            <td align="right">{{ lancamento.valor }}</td>
+                            <td align="center">{{ lancamento.d_c }}</td>
                             <td>{{ lancamento.codigo_historico }}</td>
+                            <td>{{ lancamento.historico }}</td>
+                            <td>
+                                <form action="{% url 'ctb:lancamento-delete' movimentocontabilheader.id lancamento.id %}"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden"/>
+                                    <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                            title="Exclui o registro">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
+
                 </div>
             </div>
+            {% endif %}
+
 
         </div>
 

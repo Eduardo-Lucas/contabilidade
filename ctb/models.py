@@ -19,6 +19,14 @@ def validate_maior_que_zero(value):
         )
 
 
+def validate_valor_minimo(value):
+    if value <= 0:
+        raise ValidationError(
+            'O valor do lançamento NÃO PODE SER ZERO ou MENOR QUE ZERO. O valor mínimo permitido: R$ 0,01',
+            params={'value': value},
+        )
+
+
 valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 até 9, são permitidos.')
 
 
@@ -43,8 +51,8 @@ class Empresa(models.Model):
     telefone1 = models.CharField("Telefone #1", max_length=15, default=0)
     telefone2 = models.CharField("Telefone #2", max_length=15, default=0)
 
-    data_processamento = models.DateField(max_length=8)
-    data_competencia = models.DateField('Data de Competência', max_length=8)
+    data_processamento = models.DateField(null=True, blank=True, auto_now_add=True)
+    data_competencia = models.DateField('Data de Competência', null=True, blank=True)
 
     natureza_juridica = models.ForeignKey(GlobalNaturezaJuridica)
 
@@ -143,7 +151,7 @@ class Conta(models.Model):
     origem = models.CharField("Origem da Conta", max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
     natureza = models.CharField("Natureza da Conta", max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
 
-    data_inclusao = models.DateField("Data de Inclusão", null=False, auto_now_add=True)
+    data_inclusao = models.DateField("Data de Inclusão", null=False, blank=True, auto_now_add=True)
     conta_referencial_bacen = models.ForeignKey(GlobalContaReferencialBacen, related_name='Referencial_BACEN',
                                                 blank=True, null=True)
     conta_referencial_dinamica = models.ForeignKey(GlobContaReferencialDinamica, related_name='Referencial_Dinamica',
@@ -176,7 +184,7 @@ class Competencia(models.Model):
         return reverse('ctb:competencia-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return str(self.data_competencia) + ' - ' + self.status
+        return str(self.data_competencia)
 
     class Meta:
         ordering = ['-data_competencia']
@@ -188,7 +196,7 @@ class Competencia(models.Model):
 class MovimentoContabilHeader(models.Model):
     origem = models.CharField(max_length=3, default='CTB')
     usuario = models.ForeignKey(User)
-    data_lancamento = models.DateField(auto_now=True)
+    data_lancamento = models.DateField(null=False, blank=False, auto_now_add=True)
     data_competencia = models.ForeignKey(Competencia)
     total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
     total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
@@ -200,7 +208,7 @@ class MovimentoContabilHeader(models.Model):
         return str(self.data_competencia)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['data_competencia']
         verbose_name = 'Movimento Contábil'
         verbose_name_plural = 'Movimentos Contábeis (Header)'
 
@@ -208,19 +216,106 @@ class MovimentoContabilHeader(models.Model):
 # LANCAMENTOS CONTABEIS
 class LancamentoContabil(models.Model):
     header = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE)
+    data_competencia = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE, related_name='periodos',
+                                         default='', null=True, blank=True)
     conta = models.ForeignKey(Conta)
-    valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
-    d_c = models.CharField(max_length=1, choices=DEBITO_CREDITO_CHOICES)
+    valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00,
+                                validators=[validate_valor_minimo])
+    d_c = models.CharField(max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
     codigo_historico = models.ForeignKey(Historico)
     historico = models.TextField(max_length=200)
+    codigo_participante = models.CharField(max_length=3, blank=True, null=True, default='')
+    tipo_documento = models.CharField(max_length=3, blank=True, null=True, default='')
+    numero_documento = models.CharField(max_length=10, blank=True, null=True, default='')
+    data_documento = models.DateField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('ctb:lancamento-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return "Conta: " + str(self.conta) + " Valor: " + str(self.valor) + self.d_c
+        return "Conta: " + str(self.conta) + " Valor: " + str(self.valor) + "D_C: " + self.d_c
 
     class Meta:
         ordering = ['id']
         verbose_name = 'Lançamento Contábil'
         verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'
+
+
+class SaldoContaContabil(models.Model):
+    data_competencia = models.ForeignKey(Competencia)
+    conta = models.ForeignKey(Conta)
+    natureza = models.CharField(max_length=1, default='D')
+    saldo_inicial = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+    debitos = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+    creditos = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+
+    def __str__(self):
+        return "Conta Contábil: " + str(self.conta) + " Saldo Inicial: " + str(self.saldo_inicial) + \
+               " - Total de Débitos: " + str(self.debitos) + " - Total de Créditos:" + str(self.creditos) + \
+               " Saldo Final: " + str(self.saldo_inicial + self.debitos - self.creditos)
+
+    def saldo_final(self):
+        if self.natureza == 'D':
+            return self.saldo_inicial + self.debitos - self.creditos
+        else:
+            return self.saldo_inicial + self.creditos - self.debitos
+
+    class Meta:
+        ordering = ['conta']
+        unique_together = ['data_competencia', 'conta']
+        verbose_name = 'Saldo da Conta Contábil'
+        verbose_name_plural = 'Saldos das Contas Contábeis'
+
+
+    # def aumenta_saldo(sender, **kwargs):
+    # print(kwargs)
+    # if kwargs['instance'].d_c == 'D':
+    #     saldo, created = SaldoContaContabil.objects.get_or_create(
+    #         conta=kwargs['instance'].conta,
+    #         defaults={'debitos': kwargs['instance'].valor})
+    # else:
+    #     saldo, created = SaldoContaContabil.objects.get_or_create(
+    #         conta=kwargs['instance'].conta,
+    #         defaults={'creditos': kwargs['instance'].valor})
+    #
+    # if not created:
+    #     with transaction.atomic():
+    #         saldo = (
+    #             SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
+    #     if kwargs['instance'].d_c == 'D':
+    #         saldo.debitos += kwargs['instance'].valor
+    #     else:
+    #         saldo.creditos += kwargs['instance'].valor
+    #     saldo.save()
+
+# def diminui_saldo(sender, **kwargs):
+#     with transaction.atomic():
+#         saldo = (SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
+#     if saldo:
+#         if kwargs['instance'].d_c == 'D':
+#             saldo.debitos -= kwargs['instance'].valor
+#         else:
+#             saldo.creditos -= kwargs['instance'].valor
+#         saldo.save()
+
+# post_save.connect(aumenta_saldo, sender=LancamentoContabil)
+
+# pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
+
+
+# TODO Contas Redutoras do Ativo:
+# TODO Também chamadas de retificadoras, as contas redutoras são contas que, embora apareçam num determinado
+# TODO grupo patrimonial (Ativo ou Passivo), TÊM SALDO CONTRÁRIO EM RELAÇÃO ÀS DEMAIS CONTAS DESSE GRUPO.
+# TODO Desse modo, uma conta redutora do Ativo terá natureza credora, bem como uma conta redutora do Passivo terá
+# TODO natureza devedora.
+# TODO As contas retificadoras reduzem o saldo total do grupo em que aparecem. A seguir, veremos algumas contas
+# TODO retificadoras do grupo Ativo:
+
+# TODO Consolidar a estrutura da class LancamentoContabil
+# TODO Criar uma class chamada SaldoContabil para acumular o valor dos LancamentoContabil
+# TODO Cada vez que uma Conta for criada, a class SaldoContaContabil deve ser atualizada com os registros
+# TODO Criar um Signal para atualizar SaldoContabil a cada transação na class LancamentoContabil
+# TODO Prever as seguintes transações na class LancamentoContabil: create, update and delete
+# TODO A tela de LancamentoContabil deve usar formset
+# TODO Criar uma class UserSession para controlar quantas sessões ativas um Usuário pode ter
+# TODO Criar rotinas para inserir nas tabelas a partir de arquivos

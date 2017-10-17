@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Detalhe Saldo de Conta Contábil{% endblock %}
+{% block movimento_active %}active{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Left Movimento Conta Contábil Info -->
+    <h1>Conta: {{ saldo.conta }}</h1>
+    <div class="col-sm-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{% url 'conta_corrente:saldo-lista' %}">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+                </a>
+                <h3>Conta Contábil: {{ saldo.contacorrente }}</h3>
+                <h3>Saldo Inicial: {{ saldo.saldo_inicial }}</h3>
+                <h3>Débitos: {{ saldo.debitos }} </h3>
+                <h3>Créditos: {{ saldo.creditos }} </h3>
+                <h3>Saldo Final: {{ saldo.saldo_final }} </h3>
+            </div>
+        </div>
+
+    </div>
+
+</div>{% endblock %}

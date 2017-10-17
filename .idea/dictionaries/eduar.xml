@@ -2,12 +2,18 @@
   <dictionary name="eduar">
     <words>
       <w>acessos</w>
+      <w>administrador</w>
       <w>agência</w>
+      <w>algumas</w>
       <w>altera</w>
       <w>alterado</w>
       <w>apagado</w>
       <w>apagar</w>
+      <w>aparecem</w>
+      <w>apareçam</w>
       <w>apresentado</w>
+      <w>ativas</w>
+      <w>atualizar</w>
       <w>bancárias</w>
       <w>bodyright</w>
       <w>bootstrapcdn</w>
@@ -28,6 +34,7 @@
       <w>cancelar</w>
       <w>categoria</w>
       <w>certeza</w>
+      <w>chamada</w>
       <w>comercialtoes</w>
       <w>comissão</w>
       <w>comissões</w>
@@ -36,18 +43,26 @@
       <w>confirme</w>
       <w>confundidos</w>
       <w>contatos</w>
+      <w>controlar</w>
+      <w>contrário</w>
       <w>correta</w>
       <w>credenciais</w>
       <w>cria</w>
+      <w>criada</w>
+      <w>criar</w>
       <w>criação</w>
+      <w>demais</w>
       <w>despreza</w>
       <w>desse</w>
       <w>detalhes</w>
+      <w>determinado</w>
       <w>devem</w>
+      <w>diferença</w>
       <w>digite</w>
       <w>dígito</w>
       <w>editar</w>
       <w>eles</w>
+      <w>embora</w>
       <w>encerrada</w>
       <w>endereço</w>
       <w>escolha</w>
@@ -67,6 +82,7 @@
       <w>googleapis</w>
       <w>identificadores</w>
       <w>iguais</w>
+      <w>importar</w>
       <w>inativo</w>
       <w>incorreta</w>
       <w>informações</w>
@@ -76,11 +92,16 @@
       <w>maneira</w>
       <w>matrícula</w>
       <w>maxcdn</w>
+      <w>menor</w>
       <w>menos</w>
       <w>mesmo</w>
+      <w>minimo</w>
+      <w>modelo</w>
+      <w>modo</w>
       <w>mostrar</w>
       <w>multitenancy</w>
       <w>máscara</w>
+      <w>mínimo</w>
       <w>navbar</w>
       <w>nenhum</w>
       <w>numerico</w>
@@ -92,20 +113,29 @@
       <w>outra</w>
       <w>pago</w>
       <w>painel</w>
+      <w>pendentes</w>
       <w>perfil</w>
       <w>perfis</w>
+      <w>periodos</w>
+      <w>permitido</w>
       <w>permitidos</w>
       <w>pesquisa</w>
       <w>pesquisar</w>
       <w>pessoais</w>
       <w>peça</w>
+      <w>pode</w>
       <w>postgre</w>
+      <w>prever</w>
       <w>primeira</w>
       <w>providenciar</w>
       <w>próxima</w>
       <w>próximo</w>
+      <w>quantas</w>
       <w>quantidades</w>
       <w>quer</w>
+      <w>redutora</w>
+      <w>redutoras</w>
+      <w>reduzem</w>
       <w>registrado</w>
       <w>registros</w>
       <w>região</w>
@@ -113,29 +143,39 @@
       <w>relatorios</w>
       <w>relatório</w>
       <w>relatórios</w>
+      <w>relação</w>
       <w>representam</w>
       <w>residência</w>
       <w>responsável</w>
+      <w>retificadoras</w>
       <w>saas</w>
       <w>searchbox</w>
       <w>searchfield</w>
       <w>searchform</w>
       <w>seguinte</w>
+      <w>seguintes</w>
+      <w>seguir</w>
       <w>seleção</w>
       <w>semântica</w>
       <w>sessão</w>
+      <w>sessões</w>
       <w>sucesso</w>
       <w>sábado</w>
       <w>templated</w>
+      <w>terá</w>
       <w>terça</w>
       <w>testando</w>
       <w>teste</w>
       <w>texto</w>
+      <w>totaliza</w>
+      <w>transação</w>
+      <w>transações</w>
       <w>trocar</w>
       <w>userprofile</w>
       <w>usuários</w>
       <w>utilizou</w>
       <w>vago</w>
+      <w>veremos</w>
       <w>verifica</w>
       <w>verificador</w>
       <w>verificar</w>
