@@ -1,25 +1,29 @@
 {% for field in form %}
     <div class="fieldWrapper">
-        <div class="container">
-            <span class="text-danger small">{{ field.errors }}</span>
-        </div>
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-               <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
+        {{ field.errors }}
+        <label for="{{ field.label }}">{{ field.label_tag }}
+            {% if field.field.required %}<span class="special_class">*</span>{% endif %}</label>
+
+        {{ field }}
+
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
     </div>
 {% endfor %}
 
 
+<!--{% for field in form %}-->
+<!--<div class="fieldWrapper">-->
+<!--{{ field.errors }}-->
+<!--{{ field.label_tag }} {{ field }}-->
+<!--{% if field.help_text %}-->
+<!--<p class="help">{{ field.help_text|safe }}</p>-->
+<!--{% endif %}-->
+<!--</div>-->
+<!--{% endfor %}-->
 
 
-<!--
-{% for field in form %}
-    <div class="fieldWrapper">
-        <div class="container">
-            <span class="text-danger small">{{ field.errors }}</span>
-        </div>
-        <label>{{ field.label_tag }}</label>
-        {{ field }}
-    </div>
-{% endfor %}-->
+
+
+

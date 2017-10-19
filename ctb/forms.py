@@ -29,4 +29,5 @@ class MovimentoContabilHeaderForm(ModelForm):
 class LancamentoContabilForm(ModelForm):
     class Meta:
         model = LancamentoContabil
-        fields = ['conta', 'valor', 'd_c', 'codigo_historico', 'historico']
+        fields = ['conta', 'valor', 'd_c', 'codigo_historico', 'historico', 'codigo_participante', 'tipo_documento', \
+                  'numero_documento', 'data_documento']

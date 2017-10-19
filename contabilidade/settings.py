@@ -194,10 +194,37 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
-# USE_L10N = True
-USE_L10N = False
+USE_L10N = True
 
 USE_TZ = True
+
+USE_THOUSAND_SEPARATOR = True
+THOUSAND_SEPARATOR = ','
+
+# DATE_INPUT_FORMATS = [
+#     '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y',  # '17-10-2017', '17/10/2017', '17/10/17'
+#     '%d %b %Y', '%d de %b de %Y',        # '25 Oct  2006', '25 de Oct de 2006'
+#     '%d %b %Y', '%d %b, %Y',             # '25 Oct 2006', '25 Oct, 2006'
+#     '%d de %B de %Y',                    # '17 de October de 2006',
+# ]
+
+# DATETIME_INPUT_FORMATS	= [
+#     '%d-%m-%Y %H:%M:%S',
+#     '%d-%m-%Y %H:%M:%S.%f',
+#     '%d-%m-%Y %H:%M',
+#     '%d-%m-%Y',
+#     '%d/%m/%Y %H:%M:%S',
+#     '%d/%m/%Y %H:%M:%S.%f',
+#     '%d/%m/%Y %H:%M',
+#     '%d/%m/%Y',
+#     '%d/%m/%y %H:%M:%S',
+#     '%d/%m/%y %H:%M:%S.%f',
+#     '%d/%m/%y %H:%M',
+#     '%d/%m/%y']
+
+# DATE_FORMAT = 'd/m/Y'
+# SHORT_DATE_FORMAT = 'd/m/Y'
+
 
 # DATE_INPUT_FORMATS = [
 #     '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
@@ -207,8 +234,6 @@ USE_TZ = True
 #     '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
 # ]
 
-# DATE_FORMAT = 'd/m/Y'
-# SHORT_DATE_FORMAT = 'd/m/Y'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

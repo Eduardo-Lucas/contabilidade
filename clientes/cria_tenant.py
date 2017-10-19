@@ -1,6 +1,5 @@
+#   TODO 0: python manage.py shell
 #   TODO 1: import django
-
-
 #   TODO 2: django.setup()
 
 # TODO 3. Importar o modelo que vai ser criado

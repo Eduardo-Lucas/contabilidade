@@ -22,7 +22,7 @@ def validate_maior_que_zero(value):
 def validate_valor_minimo(value):
     if value <= 0:
         raise ValidationError(
-            'O valor do lançamento NÃO PODE SER ZERO ou MENOR QUE ZERO. O valor mínimo permitido: R$ 0,01',
+            'O valor do lançamento NÃO PODE SER ZERO ou MENOR QUE ZERO. O valor mínimo permitido é: R$ 0,01',
             params={'value': value},
         )
 
@@ -92,7 +92,7 @@ class Empresa(models.Model):
         return reverse('ctb:empresa-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.codigo + " - " + self.razao_social
+        return str(self.codigo) + " - " + str(self.razao_social)
 
     class Meta:
         ordering = ('codigo',)
@@ -104,7 +104,7 @@ class Empresa(models.Model):
 # HISTORICO PADRAO
 # **********************************************************************************************
 class Historico(models.Model):
-    codigo_historico = models.PositiveSmallIntegerField(validators=[MaxValueValidator(999)])
+    codigo_historico = models.PositiveSmallIntegerField('Código do Histórico', validators=[MaxValueValidator(999)])
     descricao = models.CharField(max_length=60)
     ativo = models.CharField(max_length=1, choices=SIM_NAO_CHOICES, default="S")
 
@@ -192,14 +192,67 @@ class Competencia(models.Model):
         verbose_name_plural = 'Competências'
 
 
+class Modulo(models.Model):
+    descricao = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.descricao)
+
+    class Meta:
+        ordering = ['descricao']
+        verbose_name = 'Módulo'
+        verbose_name_plural = 'Módulos'
+
+
+class Participante(models.Model):
+    descricao = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.descricao)
+
+    class Meta:
+        ordering = ['descricao']
+        verbose_name = 'Participante'
+        verbose_name_plural = 'Participantes'
+
+
+class TipoMovimento(models.Model):
+    descricao = models.CharField(max_length=50)
+    status = models.BooleanField(default=True)
+    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.descricao) + " - " + str(self.modulo)
+
+    class Meta:
+        ordering = ['descricao']
+        verbose_name = 'Tipo de Movimento'
+        verbose_name_plural = 'Tipos de Movimentos'
+
+
+class TipoDocumento(models.Model):
+    sigla = models.CharField(max_length=3, unique=True, default='CHQ')
+    descricao = models.CharField(max_length=50, unique=True)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.sigla) + " - " + str(self.descricao)
+
+    class Meta:
+        unique_together = ['sigla', 'descricao']
+        ordering = ['descricao']
+        verbose_name = 'Tipo de Documento'
+        verbose_name_plural = 'Tipos de Documentos'
+
+
 # MOVIMENTOS CONTABEIS HEADER
 class MovimentoContabilHeader(models.Model):
-    origem = models.CharField(max_length=3, default='CTB')
+    tipo_movimento = models.ForeignKey(TipoMovimento, on_delete=models.CASCADE, null=True, blank=True)
     usuario = models.ForeignKey(User)
     data_lancamento = models.DateField(null=False, blank=False, auto_now_add=True)
     data_competencia = models.ForeignKey(Competencia)
-    total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
-    total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0)
+    total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
+    total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
 
     def get_absolute_url(self):
         return reverse('ctb:movimento-detail', kwargs={'pk': self.pk})
@@ -216,24 +269,24 @@ class MovimentoContabilHeader(models.Model):
 # LANCAMENTOS CONTABEIS
 class LancamentoContabil(models.Model):
     header = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE)
-    data_competencia = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE, related_name='periodos',
-                                         default='', null=True, blank=True)
     conta = models.ForeignKey(Conta)
+    saldo_anterior = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00,
-                                validators=[validate_valor_minimo])
+                                validators=[validate_valor_minimo], help_text='Informe valor positivo.')
     d_c = models.CharField(max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
+    saldo_final = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     codigo_historico = models.ForeignKey(Historico)
-    historico = models.TextField(max_length=200)
-    codigo_participante = models.CharField(max_length=3, blank=True, null=True, default='')
-    tipo_documento = models.CharField(max_length=3, blank=True, null=True, default='')
-    numero_documento = models.CharField(max_length=10, blank=True, null=True, default='')
-    data_documento = models.DateField(blank=True, null=True)
+    historico = models.TextField('Histórico', max_length=200)
+    codigo_participante = models.ForeignKey(Participante, blank=True, null=True, default='')
+    tipo_documento = models.ForeignKey(TipoDocumento, max_length=3, blank=True, null=True, on_delete=models.CASCADE)
+    numero_documento = models.CharField('Número do Documento', max_length=10, blank=True, null=True, default='')
+    data_documento = models.DateField('Data do Documento', blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('ctb:lancamento-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return "Conta: " + str(self.conta) + " Valor: " + str(self.valor) + "D_C: " + self.d_c
+        return " Conta: " + str(self.conta) + " Valor: " + str(self.valor) + " D_C: " + str(self.d_c)
 
     class Meta:
         ordering = ['id']
@@ -266,27 +319,25 @@ class SaldoContaContabil(models.Model):
         verbose_name = 'Saldo da Conta Contábil'
         verbose_name_plural = 'Saldos das Contas Contábeis'
 
-
-    # def aumenta_saldo(sender, **kwargs):
-    # print(kwargs)
-    # if kwargs['instance'].d_c == 'D':
-    #     saldo, created = SaldoContaContabil.objects.get_or_create(
-    #         conta=kwargs['instance'].conta,
-    #         defaults={'debitos': kwargs['instance'].valor})
-    # else:
-    #     saldo, created = SaldoContaContabil.objects.get_or_create(
-    #         conta=kwargs['instance'].conta,
-    #         defaults={'creditos': kwargs['instance'].valor})
-    #
-    # if not created:
-    #     with transaction.atomic():
-    #         saldo = (
-    #             SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
-    #     if kwargs['instance'].d_c == 'D':
-    #         saldo.debitos += kwargs['instance'].valor
-    #     else:
-    #         saldo.creditos += kwargs['instance'].valor
-    #     saldo.save()
+# def aumenta_saldo(sender, **kwargs):
+#     if kwargs['instance'].d_c == 'D':
+#         saldo, created = SaldoContaContabil.objects.get_or_create(
+#             conta=kwargs['instance'].conta,
+#             defaults={'debitos': kwargs['instance'].valor})
+#     else:
+#         saldo, created = SaldoContaContabil.objects.get_or_create(
+#             conta=kwargs['instance'].conta,
+#             defaults={'creditos': kwargs['instance'].valor})
+#
+#     if not created:
+#         with transaction.atomic():
+#             saldo = (
+#                 SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
+#         if kwargs['instance'].d_c == 'D':
+#             saldo.debitos += kwargs['instance'].valor
+#         else:
+#             saldo.creditos += kwargs['instance'].valor
+#         saldo.save()
 
 # def diminui_saldo(sender, **kwargs):
 #     with transaction.atomic():

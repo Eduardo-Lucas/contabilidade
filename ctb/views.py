@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -501,7 +499,6 @@ def create_lancamento(request, movimentocontabilheader_id):
 
         lancamentocontabil = form.save(commit=False)
         lancamentocontabil.header = movimentocontabilheader
-        lancamentocontabil.data_competencia = datetime.strptime(movimentocontabilheader.data_competencia, '%Y-%m-%d')
         lancamentocontabil.save()
 
         if lancamentocontabil.d_c == 'D':

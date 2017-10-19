@@ -12,11 +12,10 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4>Sequencial: {{ movimentocontabilheader.id }}</h4>
-                    <h4>Competência: {{ movimentocontabilheader.data_competencia }}
-                        <small>Usuário: {{ movimentocontabilheader.usuario }}</small>
-                    </h4>
-                    <h4>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }} Origem do Lançamento: {{
-                        movimentocontabilheader.origem }}</h4>
+                    <h4>Competência: {{ movimentocontabilheader.data_competencia }}</h4>
+                    <h4><strong>Usuário: {{ movimentocontabilheader.usuario }}</strong></h4>
+                    <h4>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }} </h4>
+                    <h4>Origem do Lançamento: {{movimentocontabilheader.origem }}</h4>
                     {% if movimentocontabilheader.total_debito != movimentocontabilheader.total_credito %}
                     <h4 class="text-danger">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
                     <h4 class="text-danger">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
