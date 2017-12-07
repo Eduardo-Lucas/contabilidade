@@ -1,0 +1,131 @@
+﻿Conta	, Título, Tipo,	Ativa, Grau, Conta Superior, Origem, Natureza
+1	, ATIVO	,A	,	True	,	1	,		,	D	,	D
+10	,ATIVO CIRCULANTE	,A	,	True	,	1	,		,	D	,	D
+100	,DISPONIBILIDADES	,	A	,	True	,	1	,		,	D	,	D
+1000010	,Caixa Fornecedores de mercadorias	,	A	,	True	,	1	,		,	D	,	D
+1000020	,Bancos Conta movimento Fornecedores de imobilizados	,	A	,	True	,	1	,		,	D	,	D
+1000030	,Aplicações de Liquidez Imediata	,	A	,	True	,	1	,		,	D	,	D
+101	,CLIENTES	,	A	,	True	,	1	,		,	D	,	D
+1010010	,Duplicatas a receber Empréstimos bancários	,	A	,	True	,	1	,		,	D	,	D
+1010020	,(-) Duplicatas descontadas Financiamentos bancários	,	A	,	True	,	1	,		,	D	,	C
+10100130,(-) Créditos de liquidação duvidosa	,	A	,	True	,	1	,		,	D	,	C
+102	,CRÉDITOS DIVERSOS	,	A	,	True	,	1	,		,	D	,	D
+1020010	,Títulos a Receber Pis a recolher	,	A	,	True	,	1	,		,	D	,	D
+1020020	,Empréstimos a receber Cofins a recolher	,	A	,	True	,	1	,		,	D	,	D
+1020030	,Promissórias a receber	,	A	,	True	,	1	,		,	D	,	D
+103	,ADIANTAMENTOS	,	A	,	True	,	1	,		,	D	,	D
+1030010	,Adiantamento a funcionários ISSQN a recolher	,	A	,	True	,	1	,		,	D	,	D
+1030020	,Adiantamento a fornecedores	,	A	,	True	,	1	,		,	D	,	D
+104	,VALORES A RECUPERAR	,	A	,	True	,	1	,		,	D	,	D
+1040010	,ICMS a recuperar 	,	A	,	True	,	1	,		,	D	,	D
+1040020	,IRRF a recuperar	,	A	,	True	,	1	,		,	D	,	D
+105	,APLICAÇÕES FINANCEIRAS	,	A	,	True	,	1	,		,	D	,	D
+1050010	,Depósito a prazo fixo INSS a recolher	,	A	,	True	,	1	,		,	D	,	D
+1050020	,Mercado de ações FGTS a depositar	,	A	,	True	,	1	,		,	D	,	D
+1050030	,Aplicações em ouro	,	A	,	True	,	1	,		,	D	,	D
+106	,ESTOQUES	,	A	,	True	,	1	,		,	D	,	D
+1060010	,Estoque de mercadorias Pro-labore a pagar	,	A	,	True	,	1	,		,	D	,	D
+1060020	,Estoque de material de consumo 	,	A	,	True	,	1	,		,	D	,	D
+1060030	,Estoque de material de expediente	,	A	,	True	,	1	,		,	D	,	D
+107	,DESPESAS ANTECIPADAS	,	A	,	True	,	1	,		,	D	,	D
+1070010	,Prêmios de seguros a apropriar Água e esgoto a pagar	,	A	,	True	,	1	,		,	D	,	D
+1070020	,Assinaturas de periódicos a apropriar Impostos e taxas	,	A	,	True	,	1	,		,	D	,	D
+1070030	,Encargos financeiros a apropriar	,	A	,	True	,	1	,		,	D	,	D
+11	,ATIVO REALIZÁVEL A LONGO PRAZO	,	A	,	True	,	1	,		,	D	,	D
+110	,CRÉDITOS DIVERSOS	,	A	,	True	,	1	,		,	D	,	D
+1100010	,Créditos com acionistas e quotistas 	,	A	,	True	,	1	,		,	D	,	D
+11000120,Créditos com empresas ligadas 	,	A	,	True	,	1	,		,	D	,	D
+11000130,Duplicatas a receber 	,	A	,	True	,	1	,		,	D	,	D
+11000140,Promissórias a receber Fornecedores / Duplicatas a pagar	,	A	,	True	,	1	,		,	D	,	D
+11000150,Depósitos a prazo fixo	,	A	,	True	,	1	,		,	D	,	D
+12	,ATIVO PERMANENTE	,	A	,	True	,	1	,		,	D	,	D
+120	,INVESTIMENTOS	,	A	,	True	,	1	,		,	D	,	D
+1200010	,Participação em coligadas 	,	A	,	True	,	1	,		,	D	,	D
+1200020	,Participação em controladas 	,	A	,	True	,	1	,		,	D	,	D
+1200030	,Imóveis de renda 	,	A	,	True	,	1	,		,	D	,	D
+121	,IMOBILIZADO	,	A	,	True	,	1	,		,	D	,	D
+1210010	,Computadores e periféricos	,	A	,	True	,	1	,		,	D	,	D
+1210020	,Biblioteca	,	A	,	True	,	1	,		,	D	,	D
+1210030	,Consórcios	,	A	,	True	,	1	,		,	D	,	D
+1210040	,Veículos	,	A	,	True	,	1	,		,	D	,	D
+1210050	,Móveis e Utensílios	,	A	,	True	,	1	,		,	D	,	D
+1210060	,Imóveis	,	A	,	True	,	1	,		,	D	,	D
+1210070	,Instalações	,	A	,	True	,	1	,		,	D	,	D
+1210080	,Fundo de Comércio	,	A	,	True	,	1	,		,	D	,	D
+1210090	,Benfeitorias em imóveis de terceiros	,	A	,	True	,	1	,		,	D	,	D
+1210100	,Marcas e patentes	,	A	,	True	,	1	,		,	D	,	D
+122	,DEPRECIAÇÃO	,	A	,	True	,	1	,		,	D	,	C
+1220010	,(Computadores e periféricos)	,	A	,	True	,	1	,		,	D	,	C
+1220020	,(Biblioteca)	,	A	,	True	,	1	,		,	D	,	C
+1220030	,(Consórcios)	,	A	,	True	,	1	,		,	D	,	C
+1220040	,(Veículos)	,	A	,	True	,	1	,		,	D	,	C
+1220050	,(Móveis e Utensílios)	,	A	,	True	,	1	,		,	D	,	C
+1220060	,(Imóveis)	,	A	,	True	,	1	,		,	D	,	C
+1220070	,(Instalações)	,	A	,	True	,	1	,		,	D	,	C
+123	,AMORTIZAÇÃO	,	A	,	True	,	1	,		,	D	,	C
+1230010	,(Fundo de Comércio)	,	A	,	True	,	1	,		,	D	,	C
+1230020	,(Benfeitorias em imóveis de terceiros)	,	A	,	True	,	1	,		,	D	,	C
+1230030	,(Marcas e patentes)	,	A	,	True	,	1	,		,	D	,	C
+124	,DIFERIDO	,	A	,	True	,	1	,		,	D	,	D
+1240010	,Despesas de organização 	,	A	,	True	,	1	,		,	D	,	D
+1240020	,Custos com novos projetos	,	A	,	True	,	1	,		,	D	,	D
+1240030	,(-) Amortização acumulada	,	A	,	True	,	1	,		,	D	,	D
+2	,PASSIVO	,	A	,	True	,	1	,		,	C	,	C
+20	,PASSIVO CIRCULANTE	,	A	,	True	,	1	,		,	C	,	C
+201	,OBRIGAÇÕES A FORNECEDORES	,	A	,	True	,	1	,		,	C	,	C
+2010010	,Fornecedores de mercadorias	,	A	,	True	,	1	,		,	C	,	C
+2010020	,Fornecedores de imobilizados	,	A	,	True	,	1	,		,	C	,	C
+2010030	,Duplicatas a pagar	,	A	,	True	,	1	,		,	C	,	C
+202	,OBRIGAÇÕES FINANCEIRAS	,	A	,	True	,	1	,		,	C	,	C
+2020010	,Empréstimos bancários	,	A	,	True	,	1	,		,	C	,	C
+2020020	,Financiamentos bancários	,	A	,	True	,	1	,		,	C	,	C
+2020030	,Promissórias a pagar	,	A	,	True	,	1	,		,	C	,	C
+203	,OBRIGAÇÕES FISCAIS	,	A	,	True	,	1	,		,	C	,	C
+2030010	,Pis a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030020	,Cofins a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030030	,Contribuição social a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030040	,ICMS a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030050	,ISSQN a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030060	,IRRF a recolher	,	A	,	True	,	1	,		,	C	,	C
+2030070	,Imposto de renda a recolher	,	A	,	True	,	1	,		,	C	,	C
+204	,OBRIGAÇÕES TRABALHISTAS	,	A	,	True	,	1	,		,	C	,	C
+2040010	,Salários a pagar	,	A	,	True	,	1	,		,	C	,	C
+2040020	,Contrib. Sindical Empregados a Pagar	,	A	,	True	,	1	,		,	C	,	C
+2040030	,INSS a recolher	,	A	,	True	,	1	,		,	C	,	C
+2040040	,Mercado de ações FGTS a depositar	,	A	,	True	,	1	,		,	C	,	C
+2040050	,Férias a pagar	,	A	,	True	,	1	,		,	C	,	C
+2040060	,13º Salário a pagar	,	A	,	True	,	1	,		,	C	,	C
+20400170,Pro-labore a pagar	,	A	,	True	,	1	,		,	C	,	C
+205	,OUTRAS OBRIGAÇÕES	,	A	,	True	,	1	,		,	C	,	C
+2050010	,Contrib. Sindical patronal a recolher	,	A	,	True	,	1	,		,	C	,	C
+2050020	,Energia elétrica a pagar	,	A	,	True	,	1	,		,	C	,	C
+2050030	,Água e esgoto a pagar	,	A	,	True	,	1	,		,	C	,	C
+2050040	,Impostos e taxas	,	A	,	True	,	1	,		,	C	,	C
+2050050	,Dividendos a pagar	,	A	,	True	,	1	,		,	C	,	C
+2050060	,Alugueis a pagar	,	A	,	True	,	1	,		,	C	,	C
+2050070	,Honorários a pagar	,	A	,	True	,	1	,		,	C	,	C
+2050080	,Consórcios a pagar	,	A	,	True	,	1	,		,	C	,	C
+21	,PASSIVO EXIGÍVEL A LONGO PRAZO	,	A	,	True	,	1	,		,	C	,	C
+210	,OBRIGAÇÕES A LONGO PRAZO	,	A	,	True	,	1	,		,	C	,	C
+2100010	,Fornecedores / Duplicatas a pagar	,	A	,	True	,	1	,		,	C	,	C
+2100020	,Empréstimos Bancários	,	A	,	True	,	1	,		,	C	,	C
+2100030	,Financiamentos Bancários	,	A	,	True	,	1	,		,	C	,	C
+2100040	,Promissórias a pagar	,	A	,	True	,	1	,		,	C	,	C
+2100050	,Consórcios a pagar	,	A	,	True	,	1	,		,	C	,	C
+22	,RESULTADOS DE EXERCÍCIOS FUTUROS	,	A	,	True	,	1	,		,	C	,	C
+220	,DESPESAS/RECEITAS DE EX. FUTUROS	,	A	,	True	,	1	,		,	C	,	C
+2200010	,Receitas de exercícios futuros	,	A	,	True	,	1	,		,	C	,	C
+2200020	,(-) Despesas de exercícios futuros	,	A	,	True	,	1	,		,	C	,	C
+23	,PATRIMÔNIO LÍQUIDO	,	A	,	True	,	1	,		,	C	,	C
+230	,CAPITAL SOCIAL	,	A	,	True	,	1	,		,	C	,	C
+2300010	,Capital Subscrito	,	A	,	True	,	1	,		,	C	,	C
+2300020	,(-) Capital a integralizar	,	A	,	True	,	1	,		,	C	,	C
+231	,RESERVAS	,	A	,	True	,	1	,		,	C	,	C
+2310010	,Reserva Legal	,	A	,	True	,	1	,		,	C	,	C
+2310020	,Reserva Estatutária	,	A	,	True	,	1	,		,	C	,	C
+2310030	,Reserva para contingência	,	A	,	True	,	1	,		,	C	,	C
+2310040	,Reserva de Lucros a realizar	,	A	,	True	,	1	,		,	C	,	C
+2310050	,Reserva de reavaliação	,	A	,	True	,	1	,		,	C	,	C
+232	,LUCROS OU PREJUÍZOS ACUMULADOS	,	A	,	True	,	1	,		,	C	,	C
+2320010	,Lucros acumulados	,	A	,	True	,	1	,		,	C	,	C
+2320020	,(-) Prejuizos acumulados	,	A	,	True	,	1	,		,	C	,	C

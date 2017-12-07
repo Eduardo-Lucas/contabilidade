@@ -29,6 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'usesoft-saas.com', 'comercialtoes-saas.com', 'oleobahia-saas.com']
 
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_URL = 'login'
+
 
 # Application definition
 SHARED_APPS = (
@@ -69,13 +74,7 @@ TENANT_APPS = (
 
 INSTALLED_APPS = (
     'tenant_schemas',
-    'accounts',
-    'choices',
-    'clientes',
-    'ctb',
-    'glb',
-    'templated_docs',
-    'crispy_forms',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,15 +83,23 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'django.contrib.humanize',
 
+    'crispy_forms',
+    'widget_tweaks',
+
+    'accounts',
+    'choices',
+    'clientes',
+    'ctb',
+    'glb',
 )
 
 # During development only
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 TENANT_MODEL = 'clientes.Cliente'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'tenant_schemas.middleware.TenantMiddleware',
@@ -201,29 +208,32 @@ USE_TZ = True
 USE_THOUSAND_SEPARATOR = True
 THOUSAND_SEPARATOR = ','
 
-# DATE_INPUT_FORMATS = [
-#     '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y',  # '17-10-2017', '17/10/2017', '17/10/17'
-#     '%d %b %Y', '%d de %b de %Y',        # '25 Oct  2006', '25 de Oct de 2006'
-#     '%d %b %Y', '%d %b, %Y',             # '25 Oct 2006', '25 Oct, 2006'
-#     '%d de %B de %Y',                    # '17 de October de 2006',
-# ]
+DATE_INPUT_FORMATS = [
+    '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y',  # '17-10-2017', '17/10/2017', '17/10/17'
+    '%d%m%Y', '%d%m%y',  # '23102017', '231017'
+    '%Y-%m-%d', '%Y%m%d',  # '2017-10-23', '20171023'
+    '%d %b %Y', '%d de %b de %Y',  # '25 Oct  2006', '25 de Oct de 2006'
+    '%d %b %Y', '%d %b, %Y',  # '25 Oct 2006', '25 Oct, 2006'
+    '%d de %B de %Y',  # '17 de October de 2006',
+]
 
-# DATETIME_INPUT_FORMATS	= [
-#     '%d-%m-%Y %H:%M:%S',
-#     '%d-%m-%Y %H:%M:%S.%f',
-#     '%d-%m-%Y %H:%M',
-#     '%d-%m-%Y',
-#     '%d/%m/%Y %H:%M:%S',
-#     '%d/%m/%Y %H:%M:%S.%f',
-#     '%d/%m/%Y %H:%M',
-#     '%d/%m/%Y',
-#     '%d/%m/%y %H:%M:%S',
-#     '%d/%m/%y %H:%M:%S.%f',
-#     '%d/%m/%y %H:%M',
-#     '%d/%m/%y']
+DATETIME_INPUT_FORMATS = [
+    '%d-%m-%Y %H:%M:%S',
+    '%d-%m-%Y %H:%M:%S.%f',
+    '%d-%m-%Y %H:%M',
+    '%Y-%m-%d', '%Y%m%d',  # '2017-10-23', '20171023'
+    '%d-%m-%Y',
+    '%d/%m/%Y %H:%M:%S',
+    '%d/%m/%Y %H:%M:%S.%f',
+    '%d/%m/%Y %H:%M',
+    '%d/%m/%Y',
+    '%d/%m/%y %H:%M:%S',
+    '%d/%m/%y %H:%M:%S.%f',
+    '%d/%m/%y %H:%M',
+    '%d/%m/%y']
 
-# DATE_FORMAT = 'd/m/Y'
-# SHORT_DATE_FORMAT = 'd/m/Y'
+DATE_FORMAT = 'd/m/Y'
+SHORT_DATE_FORMAT = 'd/m/Y'
 
 
 # DATE_INPUT_FORMATS = [

@@ -1,33 +1,25 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 
-from ctb.models import Conta, LancamentoContabil, MovimentoContabilHeader
+from ctb.models import Conta, MovimentoContabilHeader, LancamentoContabil
 
 
-# Forms
 class ContaForm(ModelForm):
     class Meta:
         model = Conta
-        fields = '__all__'
-        """
-        fields = [
-           'codigo_conta', 'descricao', 'conta_saldo_balanco', 'origem', 'natureza', 'conta_referencial_bacen',
-           'conta_referencial_dinamica', 'conta_referencial_susep'
-          ]
-        
-        exclude = [
-         'tipo_conta', 'conta_superior', 'conta_ativa', 'grau_conta'
-        ]
-        """
+        exclude = ['conta_ativa', 'data_inclusao']
 
 
 class MovimentoContabilHeaderForm(ModelForm):
     class Meta:
         model = MovimentoContabilHeader
-        fields = '__all__'
+        exclude = ()
 
 
 class LancamentoContabilForm(ModelForm):
     class Meta:
         model = LancamentoContabil
-        fields = ['conta', 'valor', 'd_c', 'codigo_historico', 'historico', 'codigo_participante', 'tipo_documento', \
-                  'numero_documento', 'data_documento']
+        exclude = ['saldo_anterior', 'saldo_final']
+
+
+LancamentoContabilFormSet = inlineformset_factory(MovimentoContabilHeader, LancamentoContabil,
+                                                  form=LancamentoContabilForm, extra=3, can_delete=True)

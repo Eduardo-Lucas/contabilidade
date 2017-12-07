@@ -1,9 +1,11 @@
 {% extends 'ctb/base_sidebar.html' %}
 {% block historico_active %}active{% endblock %}
+{% load humanize %}
+{% load l10n %}
+
 
 {% block body %}
 <div class="container">
-
     <div class="col-md-offset-2"> <!-- Header -->
         <div class="panel panel-default">
             <div class="row">
@@ -39,7 +41,7 @@
                     </a>
 
                     <!-- Botão Cria Registro em Lancamento Contabil-->
-                    <a href="{% url 'ctb:movimento-add' %}">
+                    <a href="{% url 'ctb:lanc-add' %}">
                         <button type="button" class="btn btn-success" data-toggle="tooltip"
                                 title="Cria um novo registro"
                                 style="margin-top: 4px;">
@@ -53,7 +55,7 @@
     </div> <!-- Fim do Header -->
 
     <! Início da Tabela-->
-        {% if object_list %}
+    {% if object_list %}
     <div class="col-md-offset-2">
         <table class=" responsive table table-responsive table-condensed table-bordered table-hover table-striped"
                style="margin-bottom: 0px;">
@@ -62,7 +64,7 @@
                 <th>Status</th>
                 <th>Seq</th>
                 <th>Data da Competência</th>
-                <th>Origem</th>
+                <th>Tipo Mov.</th>
                 <th>Usuário</th>
                 <th>Data do Lançamento</th>
                 <th style="text-align:right">Total de Débitos</th>
@@ -73,7 +75,7 @@
                 <th>Status</th>
                 <th>Seq</th>
                 <th>Data da Competência</th>
-                <th>Origem</th>
+                <th>Tipo Mov.</th>
                 <th>Usuário</th>
                 <th>Data do Lançamento</th>
                 <th style="text-align:right">Total de Débitos</th>
@@ -81,29 +83,28 @@
             </tr>
             </tfoot>
             {% for movimento in movimentocontabilheader %}
-            {% if movimento.total_debito != movimento.total_credito %}
-
+            <!--Testa se o total de débitos está igual ou diferente do total de créditos-->
+            {% if not movimento.status_header %}
 
             <a href="{% url 'ctb:movimento-detail' movimento.id %}"><p class="bg-danger">Seq.:
                 {{movimento.id}} - Diferença: Débitos = {{movimento.total_debito}} Créditos =
                 {{movimento.total_credito}}</p>
             </a>
 
-
             <tr class="danger">
                 <td style="text-align:center"><a href="{% url 'ctb:movimento-detail' movimento.id %}"><span
                         class="glyphicon glyphicon-thumbs-down" data-toggle="tooltip"
                         title="Diferença entre Débitos e Créditos"
                         aria-hidden="true"></span></a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.movimento.id }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.origem }}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia}}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
-                    movimento.total_debito }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
-                    movimento.total_credito }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debito|intcomma
+                    }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_credito|intcomma
+                    }}</a></td>
 
                 <!-- Detalhes -->
                 <td>
@@ -134,15 +135,15 @@
                         href="{% url 'ctb:movimento-detail' movimento.id %}"><span
                         class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
                         title="Lançamento ok!" aria-hidden="true"></span></a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.movimento.id }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.origem }}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia}}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
-                    movimento.total_debito }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
-                    movimento.total_credito }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debito|intcomma
+                    }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_credito|intcomma
+                    }}</a></td>
 
                 <!-- Detalhes -->
                 <td>
@@ -202,7 +203,7 @@
 
 
     </div>
-        {% else %}
+    {% else %}
     <div class="col-md-offset-2">
         <h1>Não existem Movimentos Contábeis Cadastrados</h1>
     </div>
@@ -211,3 +212,7 @@
 
 </div> <!-- Fim do Container -->
 {% endblock %}
+
+
+
+

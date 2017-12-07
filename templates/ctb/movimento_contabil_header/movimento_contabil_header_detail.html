@@ -16,7 +16,7 @@
                     <h4><strong>Usuário: {{ movimentocontabilheader.usuario }}</strong></h4>
                     <h4>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }} </h4>
                     <h4>Origem do Lançamento: {{movimentocontabilheader.origem }}</h4>
-                    {% if movimentocontabilheader.total_debito != movimentocontabilheader.total_credito %}
+                    {% if not movimentocontabilheader.status_header %}
                     <h4 class="text-danger">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
                     <h4 class="text-danger">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
                     {% else %}

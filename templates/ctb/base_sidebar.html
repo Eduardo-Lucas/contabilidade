@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Contabilidade{% endblock %}</title>
     {% load static %}
+    {% load humanize %}
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 
@@ -86,7 +87,7 @@
 
 
                         <li>
-                          <a href="{% url 'accounts:logout' %}">
+                            <a href="{% url 'logout' %}">
                           <i class="fa fa-sign-out fa-lg"></i> Sair
                           </a>
                         </li>
@@ -106,6 +107,9 @@
                 </div>
             </div>
         {% endif %}
+
+        {% load l10n %}
+
         {% block body %}
         {% endblock %}
 

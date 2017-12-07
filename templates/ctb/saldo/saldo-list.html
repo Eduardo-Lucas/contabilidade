@@ -61,6 +61,7 @@
                style="margin-bottom: 0px;">
             <tbody>
             <tr>
+                <th>Data Competência</th>
                 <th>Conta</th>
                 <th>Saldo Inicial</th>
                 <th>Débitos</th>
@@ -69,6 +70,7 @@
             </tr>
             <tfoot>
             <tr>
+                <th>Data Competência</th>
                 <th>Conta</th>
                 <th>Saldo Inicial</th>
                 <th>Débitos</th>
@@ -78,7 +80,8 @@
             </tfoot>
             {% for saldo in object_list %}
             <tr>
-
+                {% load l10n %}
+                <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.data_competencia|localize }}</a></td>
                 <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.conta }}</a></td>
                 <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.saldo_inicial }}</a></td>
                 <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.debitos }}</a></td>
@@ -86,14 +89,14 @@
                 <td><a href="{% url 'ctb:saldo-detail' saldo.id %}">{{ saldo.saldo_final }}</a></td>
 
                 <!-- Edita -->
-                <!--<td>
+                <td>
                     <div class="btn-group">
-                     <a href="{% url 'ctb:saldo-edit' saldo.id %}"
-                            class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
-                            title="Altera o registro">
-                            <span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="{% url 'ctb:razao_contabil' %}"
+                           class="btn btn-primary btn-sm" role="button" data-toggle="tooltip"
+                           title="Razão Contábil">
+                            <span class="glyphicon glyphicon-list"></span></a>
 
-                        &lt;!&ndash; Deleta &ndash;&gt;
+                        <!--&lt;!&ndash; Deleta &ndash;&gt;
                         <form action="#"
                                style="display: inline;">
                             {% csrf_token %}
@@ -102,9 +105,9 @@
                                         title="Exclui o registro">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
-                        </form>
+                        </form>-->
                     </div>
-                </td>-->
+                </td>
             </tr>
             {% endfor %}
 

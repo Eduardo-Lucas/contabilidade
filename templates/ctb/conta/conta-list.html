@@ -56,33 +56,41 @@
 
         </div>
         {% if object_list %}
-                <table class="table table-responsive table-condensed table-bordered table-hover table-striped"
-                   style="margin-bottom: 0px;">
+        <table class="table table-responsive table-condensed table-bordered table-hover table-striped">
                     <tbody>
                         <tr>
                             <th>Conta</th>
                             <th>Descrição</th>
+                            <th>Conta Superior</th>
+                            <th>Tipo</th>
+                            <th>Data Inclusão</th>
                             <th>Grau</th>
                             <th>Origem</th>
                             <th>Natureza</th>
-
+                            <th>Ações</th>
                         </tr>
                         <tfoot>
                             <tr>
                                 <th>Código</th>
                                 <th>Descrição</th>
+                                <th>Conta Superior</th>
+                                <th>Tipo</th>
+                                <th>Data Inclusão</th>
                                 <th>Grau</th>
                                 <th>Origem</th>
                                 <th>Natureza</th>
-
+                                <th>Ações</th>
                             </tr>
                         </tfoot>
                         {% for conta in object_list %}
-                            {% if conta.conta_ativa %}
+            {% if conta.conta_negrito %}
                             <tr>
 
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
+                                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.conta_superior }}</a></td>
+                                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.tipo_conta }}</a></td>
+                                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.data_inclusao }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.grau_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.origem  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.natureza  }}</a></td>
@@ -109,10 +117,13 @@
                                 </td>
                             </tr>
                             {% else %}
-                            <tr class="danger">
+            <tr class="success">>
 
                                 <td> <a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
+                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.conta_superior }}</a></td>
+                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.tipo_conta }}</a></td>
+                <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.data_inclusao }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.grau_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.origem  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.natureza  }}</a></td>
@@ -140,9 +151,6 @@
                             </tr>
                             {% endif %}
                         {% endfor %}
-
-
-
 
                     </tbody>
 

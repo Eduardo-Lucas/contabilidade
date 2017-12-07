@@ -1,10 +1,11 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
 
 from choices.models import SIM_NAO_CHOICES
 from glb.models import GlobalCodigoEstado
+
 
 # Create your models here.
 
@@ -85,6 +86,11 @@ class UserProfile(models.Model):
         ordering = ('nome',)
         verbose_name = 'Perfil de Usuário'
         verbose_name_plural = 'Perfis de Usuário'
+
+
+"""
+    SIGNALS
+"""
 
 
 def create_profile(sender, **kwargs):

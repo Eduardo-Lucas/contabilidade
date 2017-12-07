@@ -1,31 +1,64 @@
 {% extends 'ctb/base_sidebar.html' %}
-{% block title %}Novo Histórico{% endblock %}
-{% block historicos_active %}active{% endblock %}
-
 
 {% block body %}
-<div class="col-md-offset-2">
-    <div class="row">
-        <div class="col-sm-12 col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                     <h1>Cadastro de Movimento Contábil</h1>
-                    <hr>
-                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% include 'ctb/form-template.html' %}
-                        <hr>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-4 btn-group">
-                                <button class="btn btn-success">Gravar</button>
-                                <a href="{% url 'ctb:movimento-list' %}" class="btn btn-primary">Voltar</a>
-                            </div>
-                        </div>
-                    </form>
 
-                </div>
+<
+<div class="col-md-offset-2"> <!-- Header -->
+    <!-- Left Contato Info -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if header.id %}
+            <h3>Edita o Registro de: {{header.id}}</h3>
+            {% else %}
+            <h3>Cria um Novo Movimento Contábil</h3>
+            {% endif %}
+
+            <div align="right">
+                <a href="{% url 'ctb:movimento-list' %}">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+                </a>
             </div>
         </div>
     </div>
-</div>
+
+    <form action="" method="post">{% csrf_token %}
+
+        <div class="container">
+            {{ form.as_table }}
+            </div>
+
+        <table class="table table-responsive table-condensed table-bordered table-hover table-striped">
+            {{ lancamentos.management_form }}
+
+            {% for form in lancamentos.forms %}
+            {% if forloop.first %}
+            <thead>
+            <tr>
+                {% for field in form.visible_fields %}
+                <th>{{ field.label|capfirst }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            {% endif %}
+            <tr class="{% cycle row1 row2 %} formset_row">
+                {% for field in form.visible_fields %}
+                <td>
+                    {# Include the hidden fields in the form #}
+                    {% if forloop.first %}
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+                    {% endif %}
+                    {{ field.errors.as_ul }}
+                    {{ field }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Gravar"/>
+    </form>
+    </div>
+
+
 {% endblock %}

@@ -43,14 +43,14 @@
                         </button>
                     </a>
 
-                    <!-- Botão Cria Registro -->
-                    <a href="{% url 'ctb:lancamento-add' %}">
+                    <!--&lt;!&ndash; Botão Cria Registro &ndash;&gt;
+                    <a href="#">
                         <button type="button" class="btn btn-success" data-toggle="tooltip"
                                 title="Cria um novo registro"
                                 style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                         </button>
-                    </a>
+                    </a>-->
 
                 </div>
             </div>
@@ -61,39 +61,60 @@
                style="margin-bottom: 0px;">
             <tbody>
             <tr>
+                <th>Header</th>
                 <th>Conta</th>
+                <th>Saldo Anterior</th>
                 <th>Valor</th>
                 <th>D / C</th>
+                <th>Saldo Final</th>
                 <th>Histórico</th>
+                <th>Participante</th>
+                <th>Tipo Doc</th>
+                <th>Núm. Doc</th>
+                <th>Data Doc</th>
             </tr>
             <tfoot>
             <tr>
+                <th>Header</th>
                 <th>Conta</th>
+                <th>Saldo Anterior</th>
                 <th>Valor</th>
                 <th>D / C</th>
+                <th>Saldo Final</th>
                 <th>Histórico</th>
+                <th>Participante</th>
+                <th>Tipo Doc</th>
+                <th>Núm. Doc</th>
+                <th>Data Doc</th>
             </tr>
             </tfoot>
             {% for lancamento in object_list %}
             <tr>
 
-                <td><a href="{% url 'ctb:lancamento-detail' lancamento.id %}">{{ lancamento.conta }}</a></td>
-                <td><a href="{% url 'ctb:lancamento-detail' lancamento.id %}">{{ lancamento.valor }}</a></td>
-                <td><a href="{% url 'ctb:lancamento-detail' lancamento.id %}">{{ lancamento.d_c }}</a></td>
-                <td><a href="{% url 'ctb:lancamento-detail' lancamento.id %}">{{ lancamento.historico }}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' lancamento.header_id %}">{{ lancamento.header }}</a></td>
+                <td><a href="#">{{ lancamento.conta }}</a></td>
+                <td><a href="#">{{ lancamento.saldo_anterior }}</a></td>
+                <td><a href="#">{{ lancamento.valor }}</a></td>
+                <td><a href="#">{{ lancamento.d_c }}</a></td>
+                <td><a href="#">{{ lancamento.saldo_final }}</a></td>
+                <td><a href="#">{{ lancamento.historico }}</a></td>
+                <td><a href="#">{{ lancamento.codigo_participante }}</a></td>
+                <td><a href="#">{{ lancamento.tipo_documento }}</a></td>
+                <td><a href="#">{{ lancamento.numero_documento }}</a></td>
+                <td><a href="#">{{ lancamento.data_documento }}</a></td>
 
                 <!-- Detalhes -->
-                <td>
+                <!--<td>
 
-                    <!-- Edita -->
-                    <a href="{% url 'ctb:lancamento-edit' lancamento.id %}"
+                    &lt;!&ndash; Edita &ndash;&gt;
+                    <a href="#"
                        class="btn btn-primary btn-sm" data-toggle="tooltip"
                        title="Altera o registro">
                         <span class="glyphicon glyphicon-edit"></span></a>
 
 
-                    <!-- Deleta -->
-                    <form action="{% url 'ctb:lancamento-delete' lancamento.id %}"
+                    &lt;!&ndash; Deleta &ndash;&gt;
+                    <form action="#"
                           style="display: inline;">
                         {% csrf_token %}
                         <input type="hidden"/>
@@ -102,7 +123,7 @@
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </form>
-                </td>
+                </td>-->
             </tr>
             {% endfor %}
             </tbody>

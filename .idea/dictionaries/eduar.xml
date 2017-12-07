@@ -1,10 +1,13 @@
 <component name="ProjectDictionaryState">
   <dictionary name="eduar">
     <words>
+      <w>abaixo</w>
+      <w>acaso</w>
       <w>acessos</w>
       <w>administrador</w>
       <w>agência</w>
       <w>algumas</w>
+      <w>alguém</w>
       <w>altera</w>
       <w>alterado</w>
       <w>apagado</w>
@@ -14,7 +17,10 @@
       <w>apresentado</w>
       <w>ativas</w>
       <w>atualizar</w>
+      <w>autenticação</w>
+      <w>ações</w>
       <w>bancárias</w>
+      <w>bloco</w>
       <w>bodyright</w>
       <w>bootstrapcdn</w>
       <w>botão</w>
@@ -32,9 +38,12 @@
       <w>cadastros</w>
       <w>cancela</w>
       <w>cancelar</w>
+      <w>caso</w>
       <w>categoria</w>
       <w>certeza</w>
       <w>chamada</w>
+      <w>chegar</w>
+      <w>clicar</w>
       <w>comercialtoes</w>
       <w>comissão</w>
       <w>comissões</w>
@@ -45,6 +54,7 @@
       <w>contatos</w>
       <w>controlar</w>
       <w>contrário</w>
+      <w>copie</w>
       <w>correta</w>
       <w>credenciais</w>
       <w>cria</w>
@@ -52,6 +62,7 @@
       <w>criar</w>
       <w>criação</w>
       <w>demais</w>
+      <w>descartar</w>
       <w>despreza</w>
       <w>desse</w>
       <w>detalhes</w>
@@ -65,17 +76,28 @@
       <w>embora</w>
       <w>encerrada</w>
       <w>endereço</w>
+      <w>endlocalize</w>
+      <w>engano</w>
+      <w>enquanto</w>
+      <w>entregue</w>
+      <w>equipe</w>
       <w>escolha</w>
       <w>escolhida</w>
+      <w>esqueceu</w>
       <w>esqueci</w>
+      <w>esquecido</w>
       <w>esquemas</w>
       <w>esqueça</w>
       <w>exclui</w>
       <w>existe</w>
+      <w>existente</w>
       <w>existência</w>
+      <w>extenso</w>
       <w>fazer</w>
       <w>ficam</w>
+      <w>finalidade</w>
       <w>formato</w>
+      <w>funcionar</w>
       <w>funcionário</w>
       <w>gera</w>
       <w>glyphicon</w>
@@ -85,8 +107,11 @@
       <w>importar</w>
       <w>inativo</w>
       <w>incorreta</w>
+      <w>indevidamente</w>
       <w>informações</w>
+      <w>iniciou</w>
       <w>institucional</w>
+      <w>lanc</w>
       <w>lancamentocontabil</w>
       <w>maior</w>
       <w>maneira</w>
@@ -94,22 +119,26 @@
       <w>maxcdn</w>
       <w>menor</w>
       <w>menos</w>
+      <w>meses</w>
       <w>mesmo</w>
       <w>minimo</w>
       <w>modelo</w>
       <w>modo</w>
       <w>moldura</w>
       <w>mostrar</w>
+      <w>mudança</w>
       <w>multitenancy</w>
       <w>máscara</w>
       <w>mínimo</w>
       <w>módulo</w>
       <w>módulos</w>
       <w>navbar</w>
+      <w>negrito</w>
       <w>nenhum</w>
       <w>numerico</w>
       <w>numéricos</w>
       <w>números</w>
+      <w>obrigado</w>
       <w>oleobahia</w>
       <w>opções</w>
       <w>ordem</w>
@@ -117,6 +146,7 @@
       <w>pago</w>
       <w>painel</w>
       <w>participantes</w>
+      <w>pega</w>
       <w>pendentes</w>
       <w>perfil</w>
       <w>perfis</w>
@@ -132,12 +162,15 @@
       <w>postgre</w>
       <w>prever</w>
       <w>primeira</w>
+      <w>primeiro</w>
       <w>providenciar</w>
+      <w>provável</w>
       <w>próxima</w>
       <w>próximo</w>
       <w>quantas</w>
       <w>quantidades</w>
       <w>quer</w>
+      <w>questão</w>
       <w>redutora</w>
       <w>redutoras</w>
       <w>reduzem</w>
@@ -164,15 +197,25 @@
       <w>semântica</w>
       <w>sessão</w>
       <w>sessões</w>
+      <w>siga</w>
+      <w>solicitação</w>
+      <w>solicitou</w>
+      <w>subsequentes</w>
       <w>sucesso</w>
       <w>sábado</w>
       <w>templated</w>
+      <w>tenha</w>
+      <w>tentava</w>
+      <w>terceiro</w>
       <w>terá</w>
       <w>terça</w>
+      <w>testa</w>
       <w>testando</w>
       <w>teste</w>
       <w>texto</w>
       <w>totaliza</w>
+      <w>tranquilamente</w>
+      <w>tranqulamente</w>
       <w>transação</w>
       <w>transações</w>
       <w>trocar</w>

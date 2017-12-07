@@ -1,39 +1,25 @@
 from django.contrib import messages
-from django.contrib.auth import (
-    authenticate,
-    get_user_model,
-    login,
-    logout,
-)
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
 from django.shortcuts import render, redirect, get_object_or_404
-
 from django.views.generic import ListView, DetailView, UpdateView
+
 from accounts.models import UserProfile
-from .forms import UserLoginForm
 
 
-# Create your views here.
-
-
-def login_view(request):
-    title = 'Login'
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        return redirect("/ctb")
-
-    context = {
-        'form': form,
-        'title': title
-    }
-    return render(request, "accounts/form.html", context)
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 
 class UserprofileList(SuccessMessageMixin, LoginRequiredMixin, ListView):

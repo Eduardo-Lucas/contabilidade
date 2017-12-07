@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
+from django.db import transaction
+from django.db.models.signals import post_save, pre_delete
 
 from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES, \
     STATUS_CHOICES
@@ -162,6 +164,12 @@ class Conta(models.Model):
     def get_absolute_url(self):
         return reverse('ctb:conta-detail', kwargs={'pk': self.pk})
 
+    def conta_negrito(self):
+        if self.grau_conta == 4:
+            return False
+        else:
+            return True
+
     def __str__(self):
         return str(self.codigo_conta) + " " + str(self.descricao)
 
@@ -184,7 +192,8 @@ class Competencia(models.Model):
         return reverse('ctb:competencia-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return str(self.data_competencia)
+        return str(self.data_competencia.strftime('%Y-%m-%d'))
+        # return str(self.data_competencia.strftime('%d/%m/%Y'))
 
     class Meta:
         ordering = ['-data_competencia']
@@ -258,10 +267,19 @@ class MovimentoContabilHeader(models.Model):
         return reverse('ctb:movimento-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return str(self.data_competencia)
+        return "Comp.: " + str(self.data_competencia) + " - " + "Mov.: " + str(self.tipo_movimento) + \
+               " Seq.: " + str(self.id)
+
+    def status_header(self):
+        if self.total_debito != self.total_credito:
+            return False
+        elif self.total_debito + self.total_credito == 0:
+            return False
+        else:
+            return True
 
     class Meta:
-        ordering = ['data_competencia']
+        ordering = ['-id']
         verbose_name = 'Movimento Contábil'
         verbose_name_plural = 'Movimentos Contábeis (Header)'
 
@@ -273,7 +291,7 @@ class LancamentoContabil(models.Model):
     saldo_anterior = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00,
                                 validators=[validate_valor_minimo], help_text='Informe valor positivo.')
-    d_c = models.CharField(max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
+    d_c = models.CharField('D/C', max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
     saldo_final = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     codigo_historico = models.ForeignKey(Historico)
     historico = models.TextField('Histórico', max_length=200)
@@ -286,25 +304,31 @@ class LancamentoContabil(models.Model):
         return reverse('ctb:lancamento-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return " Conta: " + str(self.conta) + " Valor: " + str(self.valor) + " D_C: " + str(self.d_c)
+        return "Header: " + str(self.header) + " Conta: " + str(self.conta) + " Valor: " + str(
+            self.valor) + " D_C: " + str(self.d_c)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['-id']
         verbose_name = 'Lançamento Contábil'
         verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'
 
 
 class SaldoContaContabil(models.Model):
     data_competencia = models.ForeignKey(Competencia)
-    conta = models.ForeignKey(Conta)
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
     natureza = models.CharField(max_length=1, default='D')
     saldo_inicial = models.DecimalField(max_digits=16, decimal_places=2, default=0)
     debitos = models.DecimalField(max_digits=16, decimal_places=2, default=0)
     creditos = models.DecimalField(max_digits=16, decimal_places=2, default=0)
 
+    def get_absolute_url(self):
+        return reverse('ctb:saldo-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return "Conta Contábil: " + str(self.conta) + " Saldo Inicial: " + str(self.saldo_inicial) + \
-               " - Total de Débitos: " + str(self.debitos) + " - Total de Créditos:" + str(self.creditos) + \
+        return "Competência: " + str(self.data_competencia) + " Conta Contábil: " + str(self.conta) + \
+               " Saldo Inicial: " + str(self.saldo_inicial) + \
+               " - Total de Débitos: " + str(self.debitos) + \
+               " - Total de Créditos:" + str(self.creditos) + \
                " Saldo Final: " + str(self.saldo_inicial + self.debitos - self.creditos)
 
     def saldo_final(self):
@@ -314,44 +338,104 @@ class SaldoContaContabil(models.Model):
             return self.saldo_inicial + self.creditos - self.debitos
 
     class Meta:
-        ordering = ['conta']
+        ordering = ['conta', '-data_competencia', ]
         unique_together = ['data_competencia', 'conta']
         verbose_name = 'Saldo da Conta Contábil'
         verbose_name_plural = 'Saldos das Contas Contábeis'
 
-# def aumenta_saldo(sender, **kwargs):
-#     if kwargs['instance'].d_c == 'D':
-#         saldo, created = SaldoContaContabil.objects.get_or_create(
-#             conta=kwargs['instance'].conta,
-#             defaults={'debitos': kwargs['instance'].valor})
-#     else:
-#         saldo, created = SaldoContaContabil.objects.get_or_create(
-#             conta=kwargs['instance'].conta,
-#             defaults={'creditos': kwargs['instance'].valor})
-#
-#     if not created:
-#         with transaction.atomic():
-#             saldo = (
-#                 SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
-#         if kwargs['instance'].d_c == 'D':
-#             saldo.debitos += kwargs['instance'].valor
-#         else:
-#             saldo.creditos += kwargs['instance'].valor
-#         saldo.save()
 
-# def diminui_saldo(sender, **kwargs):
-#     with transaction.atomic():
-#         saldo = (SaldoContaContabil.objects.select_for_update().get(conta=kwargs['instance'].conta))
-#     if saldo:
-#         if kwargs['instance'].d_c == 'D':
-#             saldo.debitos -= kwargs['instance'].valor
-#         else:
-#             saldo.creditos -= kwargs['instance'].valor
-#         saldo.save()
+"""
+    SIGNALS
+"""
 
-# post_save.connect(aumenta_saldo, sender=LancamentoContabil)
 
-# pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
+def aumenta_saldo(sender, **kwargs):
+    if kwargs['instance'].d_c == 'D':
+        saldo, created = SaldoContaContabil.objects.get_or_create(data_competencia=kwargs['instance'].
+                                                                  header.data_competencia,
+                                                                  conta=kwargs['instance'].conta,
+                                                                  defaults={'debitos': kwargs['instance'].valor})
+    else:
+        saldo, created = SaldoContaContabil.objects.get_or_create(data_competencia=kwargs['instance'].
+                                                                  header.data_competencia,
+                                                                  conta=kwargs['instance'].conta,
+                                                                  defaults={'creditos': kwargs['instance'].valor})
+
+    if not created:
+        with transaction.atomic():
+            saldo = (
+                SaldoContaContabil.objects.select_for_update().get(data_competencia=kwargs['instance'].header.
+                                                                   data_competencia,
+                                                                   conta=kwargs['instance'].conta))
+        if kwargs['instance'].d_c == 'D':
+            saldo.debitos += kwargs['instance'].valor
+        else:
+            saldo.creditos += kwargs['instance'].valor
+        saldo.save()
+
+    atualiza_meses_subsequentes(kwargs['instance'].header.data_competencia, conta=kwargs['instance'].conta)
+
+
+def diminui_saldo(sender, **kwargs):
+    with transaction.atomic():
+        saldo = (SaldoContaContabil.objects.select_for_update().get(data_competencia=kwargs['instance'].
+                                                                    header.data_competencia,
+                                                                    conta=kwargs['instance'].conta))
+    if saldo:
+        if kwargs['instance'].d_c == 'D':
+            saldo.debitos -= kwargs['instance'].valor
+        else:
+            saldo.creditos -= kwargs['instance'].valor
+        saldo.save()
+
+    atualiza_meses_subsequentes(kwargs['instance'].header.data_competencia, conta=kwargs['instance'].conta)
+
+
+def cria_saldo_contabil(sender, **kwargs):
+    """
+    Para cada conta criada, são criados registros na class SaldosContabil, com um registro para cada registro da
+    Competencia, dentro de um ano
+    :param conta:
+    :return:
+    """
+    if kwargs['created']:
+        for m in Competencia.objects.all():
+            # print(type(m.id))
+            # print(m.data_competencia)
+            saldo = SaldoContaContabil(data_competencia=m, conta=kwargs['instance'],
+                                       natureza=kwargs['instance'].natureza)
+            saldo.save()
+
+
+def atualiza_meses_subsequentes(data_competencia, conta):
+    """
+        AUMENTA SALDO DOS MESES SUBSEQUENTES
+    """
+    saldo_final = 0
+    for idx, s in enumerate(SaldoContaContabil.objects.filter(
+            data_competencia__gte=data_competencia, conta=conta
+    )
+    ):
+        if idx == 0:
+            if s.natureza == 'D':
+                saldo_final = s.saldo_inicial + s.debitos - s.creditos
+            else:
+                saldo_final = s.saldo_inicial + s.creditos - s.debitos
+        else:
+            s.saldo_inicial = saldo_final
+            s.save()
+            if s.natureza == 'D':
+                saldo_final = s.saldo_inicial + s.debitos - s.creditos
+            else:
+                saldo_final = s.saldo_inicial + s.creditos - s.debitos
+
+
+"""
+    AQUI SAO LISTADOS OS EVENTOS QUE DISPARAM AS FUNÇÕES
+"""
+post_save.connect(cria_saldo_contabil, sender=Conta)
+post_save.connect(aumenta_saldo, sender=LancamentoContabil)
+pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
 
 
 # TODO Contas Redutoras do Ativo:
