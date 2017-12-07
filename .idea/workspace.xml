@@ -2,62 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b2e062a-4699-418f-bfd8-cd1ee48932a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/csv/Contas_Contabeis.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/ep_naturalblack.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/leather_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/seigaiha.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ctb/templatetags/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ctb/templatetags/form_tags.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/accounts.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/app.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/carousel.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/csv/Contas_Contabeis.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/jquery-3.2.1.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/popper.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base_accounts.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/includes/form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/login.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_change.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_change_done.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_reset.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_reset_done.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_reset_email.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/password_reset_subject.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/signup.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/contabilidade/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/accounts/login.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/INSTITUCIONAL_00.jpg" afterPath="$PROJECT_DIR$/static/img/INSTITUCIONAL_00.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/INSTITUCIONAL_1.jpg" afterPath="$PROJECT_DIR$/static/img/INSTITUCIONAL_1.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/favicon.ico" afterPath="$PROJECT_DIR$/static/img/favicon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/lancamento_contabil-list.html" afterPath="$PROJECT_DIR$/templates/ctb/lancamento_contabil/razao_contabil.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/eduar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/apps.py" afterPath="$PROJECT_DIR$/accounts/apps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/forms.py" afterPath="$PROJECT_DIR$/accounts/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/models.py" afterPath="$PROJECT_DIR$/accounts/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/tests.py" afterPath="$PROJECT_DIR$/accounts/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/urls.py" afterPath="$PROJECT_DIR$/accounts/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounts/views.py" afterPath="$PROJECT_DIR$/accounts/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/settings.py" afterPath="$PROJECT_DIR$/contabilidade/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contabilidade/urls.py" afterPath="$PROJECT_DIR$/contabilidade/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/__init__.py" afterPath="$PROJECT_DIR$/ctb/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/apps.py" afterPath="$PROJECT_DIR$/ctb/apps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/forms.py" afterPath="$PROJECT_DIR$/ctb/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/models.py" afterPath="$PROJECT_DIR$/ctb/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/urls.py" afterPath="$PROJECT_DIR$/ctb/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ctb/views.py" afterPath="$PROJECT_DIR$/ctb/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" afterPath="$PROJECT_DIR$/templates/ctb/base_sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/conta/conta-list.html" afterPath="$PROJECT_DIR$/templates/ctb/conta/conta-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimento_contabil_header_detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html" afterPath="$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/saldo/saldo-list.html" afterPath="$PROJECT_DIR$/templates/ctb/saldo/saldo-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ctb/saldo/saldo_detalhe.html" afterPath="$PROJECT_DIR$/templates/ctb/saldo/saldo_detalhe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,10 +17,8 @@
         <entry file="file://$PROJECT_DIR$/ctb/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="29" column="33" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+              <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -99,7 +42,7 @@
                 <element signature="n#src#0;n#img#0;n#div#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#src#0;n#img#0;n#div#1;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#src#0;n#img#0;n#div#2;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#5322#5328#0" expanded="true" />
+                <element signature="e#5971#5977#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
-              <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+              <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -119,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="400">
-              <caret line="54" column="52" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="52" />
+              <caret line="56" column="48" lean-forward="false" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -129,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-80">
-              <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -149,10 +92,8 @@
         <entry file="file://$PROJECT_DIR$/ctb/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="48" column="23" lean-forward="false" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+              <caret line="47" column="23" lean-forward="false" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -374,7 +315,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../simple-file-upload" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -620,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508420936241</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Utilização do FORMSET">
+      <created>1512667901322</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1512667901322</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -634,7 +582,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25037822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4506579" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -758,7 +705,8 @@
     <MESSAGE value="Lancamento realizado." />
     <MESSAGE value="Criação da class SaldoContaContabil" />
     <MESSAGE value="Criação da class Participante" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criação da class Participante" />
+    <MESSAGE value="Utilização do FORMSET" />
+    <option name="LAST_COMMIT_MESSAGE" value="Utilização do FORMSET" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1053,9 +1001,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,7 +1016,7 @@
     <entry file="file://$PROJECT_DIR$/templates/ctb/movimento_contabil_header/movimentocontabilheader_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-80">
-          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1078,10 +1024,8 @@
     <entry file="file://$PROJECT_DIR$/ctb/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="48" column="23" lean-forward="false" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <caret line="47" column="23" lean-forward="false" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1104,10 +1048,8 @@
     <entry file="file://$PROJECT_DIR$/ctb/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="29" column="33" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,7 +1064,7 @@
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
-          <caret line="54" column="52" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="52" />
+          <caret line="56" column="48" lean-forward="false" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1130,7 +1072,7 @@
     <entry file="file://$PROJECT_DIR$/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -1143,7 +1085,7 @@
             <element signature="n#src#0;n#img#0;n#div#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#src#0;n#img#0;n#div#1;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#src#0;n#img#0;n#div#2;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#5322#5328#0" expanded="true" />
+            <element signature="e#5971#5977#0" expanded="true" />
           </folding>
         </state>
       </provider>
