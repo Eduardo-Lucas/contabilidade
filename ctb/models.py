@@ -41,6 +41,7 @@ valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 at
 # **********************************************************************************************
 class Empresa(models.Model):
     codigo = models.CharField("Código", max_length=15, null=False, default="MATRIZ", unique=True)
+    sigla = models.CharField("Sigla", max_length=15, null=True, blank=True)
     razao_social = models.CharField("Razão Social", max_length=60, null=False)
     nome_fantasia = models.CharField("Nome Fantasia", max_length=60, null=False)
     endereco = models.CharField('Endereço', max_length=60, null=False)
@@ -454,3 +455,6 @@ pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
 # TODO A tela de LancamentoContabil deve usar formset
 # TODO Criar uma class UserSession para controlar quantas sessões ativas um Usuário pode ter
 # TODO Criar rotinas para inserir nas tabelas a partir de arquivos
+# TODO Mudar o static files para servir imagens na produção
+# TODO This method is grossly inefficient and probably insecure, so it is unsuitable for production.
+# TODO See Deploying static files for proper strategies to serve static files in production environments.

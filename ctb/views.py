@@ -18,14 +18,26 @@ from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabil
 """
 
 
-@login_required()
-def ctb_index(request):
+def index(request):
     context = {
                 'title': 'Menu Principal',
                 'current_user': request.user,
     }
 
     return render(request, "index.html", context)
+
+
+@login_required()
+def home(request):
+    context = {
+        'title': 'Home',
+        'current_user': request.user,
+    }
+
+    return render(request, "home.html", context)
+
+
+
 
 """
        PLANO DE CONTAS
@@ -735,3 +747,15 @@ class LancamentoContabilCreate(CreateView):
 """
      FIM USO DO FORMSET
 """
+
+"""
+  404 & 500
+"""
+
+
+def error_404(request):
+    return render(request, '404.html', {})
+
+
+def error_500(request):
+    return render(request, '500.html', {})

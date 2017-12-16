@@ -1,0 +1,3 @@
+SELECT id, data_lancamento, total_debito, total_credito, data_competencia_id, tipo_movimento_id, usuario_id
+	FROM comercial_toes.ctb_movimentocontabilheader
+    where total_debito<>total_credito;

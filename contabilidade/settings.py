@@ -29,8 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'usesoft-saas.com', 'comercialtoes-saas.com', 'oleobahia-saas.com']
 
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_URL = 'login'
 
@@ -61,6 +61,7 @@ TENANT_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django.contrib.sites',
 
     # your tenant specific apps
@@ -132,8 +133,6 @@ TEMPLATES = [
     },
 ]
 
-
-LOGIN_REDIRECT_URL = '/ctb'
 
 WSGI_APPLICATION = 'contabilidade.wsgi.application'
 
@@ -255,5 +254,4 @@ STATICFILES_DIRS = [
     # '/var/www/static/',
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
-
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")

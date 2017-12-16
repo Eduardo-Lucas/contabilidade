@@ -24,7 +24,7 @@
 <body>
 
         <div class="nav-side-menu">
-            <div class="brand"><a href="{% url 'home' %}">Usesoft</a></div>
+            <div class="brand"><a href="{% url 'ctb:index' %}">Usesoft</a></div>
             <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
                 <div class="menu-list">
@@ -74,13 +74,13 @@
 
 
                          <li>
-                             <a href="{% url 'accounts:userprofile-detail' user.id %}">
+                             <a href="{% url 'acc:userprofile-detail' user.id %}">
                                 <i class="fa fa-user fa-lg"></i> Perfil
                              </a>
                           </li>
 
                          <li>
-                          <a href="{% url 'accounts:userprofile-list' %}">
+                             <a href="{% url 'acc:userprofile-list' %}">
                           <i class="fa fa-users fa-lg"></i> Usuários
                           </a>
                          </li>

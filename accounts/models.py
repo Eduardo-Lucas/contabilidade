@@ -77,7 +77,7 @@ class UserProfile(models.Model):
     email = models.EmailField(max_length=50, default='usuario@email.com')
 
     def get_absolute_url(self):
-        return reverse('accounts:userprofile-detail', kwargs={'pk': self.pk})
+        return reverse('acc:userprofile-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.nome

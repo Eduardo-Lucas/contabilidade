@@ -11,7 +11,8 @@ from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, Co
 app_name = 'ctb'
 
 urlpatterns = [
-    url(r'^$', views.ctb_index, name='ctb-index'),
+    # url(r'^$', views.index, name='index'),
+    url(r'^home/', views.home, name='home'),
 
     # Contas
     url(r'^conta-list/$', ContaList.as_view(), name='conta-list'),

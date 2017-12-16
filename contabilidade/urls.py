@@ -24,18 +24,18 @@ from accounts import views as accounts_views
 from ctb import views
 
 urlpatterns = [
-    url(r'^$', views.ctb_index, name='home'),
+                  url(r'^$', views.index, name='index'),
     url(r'^acc/', include('accounts.urls')),
     url(r'^ctb/', include('ctb.urls')),
     url(r'^admin/', admin.site.urls, name='admin'),
 
-    #
+                  #
     # AUTENTICAÇÃO
     #
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    url(r'^signup/$', accounts_views.signup, name='signup'),
-
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+                  url(r'^signup/$', accounts_views.signup, name='signup'),
+
     url(r'^reset/$',
         auth_views.PasswordResetView.as_view(
             template_name='password_reset.html',
@@ -58,8 +58,7 @@ urlpatterns = [
     url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(
         template_name='password_change_done.html'), name='password_change_done'),
 
-]
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-if settings.DEBUG:
-    urlpatterns == static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+handler404 = 'ctb.views.error_404'
+handler500 = 'ctb.views.error_500'

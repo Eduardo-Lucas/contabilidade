@@ -1,0 +1,2 @@
+UPDATE comercial_toes.ctb_saldocontacontabil
+	SET saldo_inicial=0, debitos=0, creditos=0;

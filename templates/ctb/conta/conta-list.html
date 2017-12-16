@@ -19,17 +19,17 @@
                     <div class="col-md-3">
                         <form method="GET" action="" id="searchform" style="margin-top: 0px;">
                             {% csrf_token %}
-                            <input class="input-lg input-search" id="searchbox" name="q" type="text" value="{{ request.GET.q }}"
-                                placeholder="Pesquisa Contas..."/>
+                            <input class="input-lg input-search" id="searchbox" name="q" type="text"
+                                   value="{{ request.GET.q }}"
+                                   placeholder="Pesquisa Contas..."/>
                         </form>
                     </div>
 
                 <div class="btn-group">
-
-
                         <!-- PDF -->
                         <a href="#">
-                            <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera PDF"
+                            <button type="button" disabled class="btn btn-warning" data-toggle="tooltip"
+                                    title="Gera PDF"
                                     style="margin-top: 4px;">
                                 <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
                             </button>
@@ -37,7 +37,8 @@
 
                         <!-- EXCEL -->
                         <a href="#">
-                            <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera Excel"
+                            <button type="button" disabled class="btn btn-warning" data-toggle="tooltip"
+                                    title="Gera Excel"
                                     style="margin-top: 4px;">
                                 <span class="glyphicon glyphicon-download-alt"></span>&nbsp; Excel
                             </button>
@@ -45,7 +46,8 @@
 
                      <!-- Botão Cria Registro -->
                         <a href="{% url 'ctb:conta-add' %}">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" title="Cria um novo registro"
+                            <button type="button" class="btn btn-success" data-toggle="tooltip"
+                                    title="Cria um novo registro"
                                     style="margin-top: 4px;">
                                 <span class="glyphicon glyphicon-plus"></span>&nbsp; Novo registro
                             </button>
@@ -108,8 +110,9 @@
                                                style="display: inline;">
                                             {% csrf_token %}
                                             <input type="hidden" name="conta_id" value="{{ conta.id }}" />
-                                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                                        title="Exclui o registro">
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                    data-toggle="tooltip"
+                                                    title="Exclui o registro">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                         </form>
@@ -117,7 +120,7 @@
                                 </td>
                             </tr>
                             {% else %}
-            <tr class="success">>
+            <tr class="success">
 
                                 <td> <a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
@@ -141,10 +144,10 @@
                                                style="display: inline;">
                                             {% csrf_token %}
                                             <input type="hidden" name="conta_id" value="{{ conta.id }}" />
-                                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                                        title="Exclui o registro">
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                    title="Exclui o registro">
                                                     <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
@@ -168,7 +171,8 @@
                             <span class="step-links">
                                 {% if object_list.has_previous %}
                                     <a href="?page={{ object_list.previous_page_number }}">
-                                        <span data-toggle="tooltip" title="Página anterior" class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
+                                        <span data-toggle="tooltip" title="Página anterior"
+                                              class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></a>
                                 {% endif %}
 
                                 <span class="current">
@@ -177,7 +181,8 @@
 
                                 {% if object_list.has_next %}
                                     <a href="?page={{ object_list.next_page_number }}">
-                                        <span data-toggle="tooltip" title="Página seguinte" class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+                                        <span data-toggle="tooltip" title="Página seguinte"
+                                              class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
                                 {% endif %}
                             </span>
                         </div>

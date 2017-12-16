@@ -1,0 +1,3 @@
+SELECT id, natureza, saldo_inicial, debitos, creditos, conta_id, data_competencia_id
+	FROM comercial_toes.ctb_saldocontacontabil
+    where saldo_inicial+debitos-creditos<>0;

@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from accounts.views import UserprofileList, UserprofileDetalhe, UserprofileUpdate, userprofile_delete
 
-app_name = 'accounts'
+app_name = 'acc'
 
 urlpatterns = [
 
@@ -12,9 +12,3 @@ urlpatterns = [
     url(r'^userprofile/(?P<id>[0-9]+)/delete/$', userprofile_delete, name='userprofile-delete'),
 
 ]
-
-"""
-        url(r'^login/', login_view, name='login'),
-        url(r'^register/', register_view, name='register'),
-        url(r'^logout/', logout_view, name='logout'),
-"""

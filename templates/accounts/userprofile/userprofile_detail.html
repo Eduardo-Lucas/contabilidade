@@ -10,11 +10,11 @@
             <div class="panel-body">
 
                 {% if user.is_superuser %}
-                    <a href="{% url 'accounts:userprofile-list' %}">
+                <a href="{% url 'acc:userprofile-list' %}">
                         <span class="glyphicon glyphicon-arrow-left"></span> Voltar </span>
                     </a>
                 {% else %}
-                    <a href="{% url 'home' %}">
+                <a href="{% url 'ctb:home' %}">
                         <span class="glyphicon glyphicon-arrow-left"></span> Voltar </span>
                     </a>
                 {% endif %}

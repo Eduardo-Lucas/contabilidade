@@ -16,7 +16,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('home')
+            return redirect('ctb:index')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -72,7 +72,7 @@ def userprofile_delete(request, id=None):
     if request.method == 'POST':
         obj.delete()
         messages.success(request, 'Registro apagado com sucesso!')
-        return redirect('ctb:userprofile-list')
+        return redirect('acc:userprofile-list')
 
     context = {
         'object': obj
