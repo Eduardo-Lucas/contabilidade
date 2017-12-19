@@ -439,6 +439,9 @@ post_save.connect(aumenta_saldo, sender=LancamentoContabil)
 pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
 
 
+# TODO Alterar o arquivo hosts no diretório C:\Windows\System32\Drivers\etc\hosts e incluir os enderecos
+# TODO dos TENANTS. Exemplo: 127.0.0.1	comercialtoes-saas.com
+# TODO                       127.0.0.1  oleobahia-saas.com
 # TODO Contas Redutoras do Ativo:
 # TODO Também chamadas de retificadoras, as contas redutoras são contas que, embora apareçam num determinado
 # TODO grupo patrimonial (Ativo ou Passivo), TÊM SALDO CONTRÁRIO EM RELAÇÃO ÀS DEMAIS CONTAS DESSE GRUPO.
@@ -458,3 +461,4 @@ pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
 # TODO Mudar o static files para servir imagens na produção
 # TODO This method is grossly inefficient and probably insecure, so it is unsuitable for production.
 # TODO See Deploying static files for proper strategies to serve static files in production environments.
+

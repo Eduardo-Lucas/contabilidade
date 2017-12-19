@@ -23,8 +23,12 @@
 </head>
 <body>
 
-        <div class="nav-side-menu">
-            <div class="brand"><a href="{% url 'ctb:index' %}">Usesoft</a></div>
+<div class="col-md-offset-2">
+    <h5>{{ empresa }}</h5>
+</div>
+
+<div class="nav-side-menu">
+    <div class="brand"><a href="{% url 'index' %}">Usesoft</a></div>
             <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
                 <div class="menu-list">
@@ -112,6 +116,5 @@
 
         {% block body %}
         {% endblock %}
-
 </body>
 </html>

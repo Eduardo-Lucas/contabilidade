@@ -2,15 +2,155 @@
 {% load static %}
 {% block breadcrumb %}
 <li class="breadcrumb-item"><strong>Menu Principal</strong></li>
+<li class="breadcrumb-item"><strong>{{ empresa }}</strong></li>
 {% endblock %}
 
 {% block content %}
-<div class="card" style="width: 10rem;">
-    <img class="card-img-top" src="{% static 'ctb/img/planodecontas.jpg' %}" alt="Card image cap">
-    <div class="card-body">
-        <h4 class="card-title">Contas</h4>
-        <p class="card-text">Plano de contas</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Contas</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Contas</h4>-->
+                <!--<p class="card-text">Contas</p>-->
+                <a href="{% url 'ctb:conta-list' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
     </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Empresas</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Empresas</p>-->
+                <a href="{% url 'ctb:empresa-list' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Históricos</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Históricos</p>-->
+                <a href="{% url 'ctb:historico-list' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Competências</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Competências</p>-->
+                <a href="{% url 'ctb:competencia-list' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Lançamentos</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Lançamentos</p>-->
+                <a href="{% url 'ctb:lanc-add' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-warning mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Saldos</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Saldos</p>-->
+                <a href="{% url 'ctb:saldo-list' %}" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="card text-white text-center bg-dark mb-3" style="max-width: 10rem;">
+            <h6 class="card-header">Vago</h6>
+            <img class="card-img-top" src="{% static 'ctb/img/marca_edu.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+                <!--<h4 class="card-title">Empresas</h4>-->
+                <!--<p class="card-text">Vago 01</p>-->
+                <a href="#" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 {% endblock %}

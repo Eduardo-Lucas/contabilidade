@@ -19,9 +19,11 @@ from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabil
 
 
 def index(request):
+    empresa = Empresa.objects.all()
     context = {
                 'title': 'Menu Principal',
                 'current_user': request.user,
+        'empresa': empresa
     }
 
     return render(request, "index.html", context)
@@ -29,9 +31,11 @@ def index(request):
 
 @login_required()
 def home(request):
+    empresa = Empresa.objects.all()
     context = {
         'title': 'Home',
         'current_user': request.user,
+        'empresa': empresa
     }
 
     return render(request, "home.html", context)
