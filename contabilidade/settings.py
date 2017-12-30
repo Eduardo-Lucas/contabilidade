@@ -68,7 +68,6 @@ TENANT_APPS = (
     'accounts',
     'choices',
     'ctb',
-    'crispy_forms',
     'glb',
 
 )
@@ -86,7 +85,6 @@ INSTALLED_APPS = (
     'django.contrib.postgres',
     'django.contrib.humanize',
 
-    'crispy_forms',
     'widget_tweaks',
 
     'accounts',
@@ -94,6 +92,7 @@ INSTALLED_APPS = (
     'clientes',
     'ctb',
     'glb',
+
 )
 
 # During development only

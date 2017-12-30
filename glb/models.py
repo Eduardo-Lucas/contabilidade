@@ -119,7 +119,7 @@ class GlobalContaReferencialBacen(models.Model):
     data_fim = models.DateField("Data Final", max_length=8, null=True, blank=True)
     tipo_conta = models.CharField("Tipo de Conta", max_length=1, choices=TIPO_CONTA_REFERENCIAL_CHOICES)
 
-    conta_superior = models.ForeignKey('self', null=True, blank=True)
+    conta_superior = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     nivel_contabil = models.IntegerField("Nível Contábil")
     codigo_natureza = models.CharField("Natureza", max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
@@ -147,7 +147,7 @@ class GlobContaReferencialDinamica(models.Model):
     data_fim = models.DateField("Data Final", max_length=8, null=True, blank=True)
     tipo_conta = models.CharField("Tipo de Conta", max_length=1)
 
-    conta_superior = models.ForeignKey('self')
+    conta_superior = models.ForeignKey('self', on_delete=models.CASCADE)
 
     nivel_contabil = models.PositiveSmallIntegerField("Nível Contábil", validators=[MaxValueValidator(9)])
     codigo_natureza = models.CharField("Natureza", max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
@@ -175,7 +175,7 @@ class GlobContaReferencialSusep(models.Model):
     data_fim = models.DateField("Data Final", max_length=8)
     tipo_conta = models.CharField("Tipo de Conta", max_length=1)
 
-    conta_superior = models.ForeignKey('self')
+    conta_superior = models.ForeignKey('self', on_delete=models.CASCADE)
 
     nivel_contabil = models.IntegerField("Nível Contábil")
     codigo_natureza = models.CharField("Natureza", max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')

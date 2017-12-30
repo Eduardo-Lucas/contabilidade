@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
 from django.db import transaction
 from django.db.models.signals import post_save, pre_delete
+# from django.core.urlresolvers import reverse  -- ATE A VERSAO 1.9
+from django.urls import reverse  # A PARTIR DA VERSAO 2.0
 
 from choices.models import DEBITO_CREDITO_CHOICES, TIPO_CONTA_CHOICES, TIPO_EMPRESA_CHOICES, SIM_NAO_CHOICES, \
     STATUS_CHOICES
@@ -13,6 +14,8 @@ from glb.models import GlobContaReferencialDinamica, GlobContaReferencialSusep, 
 
 
 # Validators
+
+
 def validate_maior_que_zero(value):
     if value <= 0:
         raise ValidationError(
@@ -34,6 +37,20 @@ valor_numerico = RegexValidator(r'^[0-9]*$', 'Apenas valores numéricos, de 0 at
 
 # Create your models here.
 
+
+class TipoMovimento(models.Model):
+    descricao = models.CharField(max_length=50)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.descricao)
+
+    class Meta:
+        ordering = ['descricao']
+        verbose_name = 'Tipo de Movimento'
+        verbose_name_plural = 'Tipos de Movimentos'
+
+
 # **********************************************************************************************
 # ARQUIVO DE EMPRESAS USUARIAS DO SISTEMA - TABELAS GENERICAS DO SISTEMA USESOFT-R3
 # (usesoft=KSBIUS)
@@ -49,15 +66,15 @@ class Empresa(models.Model):
     numero = models.CharField('Número', max_length=10)
     bairro = models.CharField(max_length=30, null=False)
     cep = models.PositiveIntegerField("CEP", null=False, validators=[MaxValueValidator(99999999)])
-    municipio = models.ForeignKey(GlobalMunicipio, default=2927408)
-    estado = models.ForeignKey(GlobalCodigoEstado)
+    municipio = models.ForeignKey(GlobalMunicipio, default=2927408, on_delete=models.CASCADE)
+    estado = models.ForeignKey(GlobalCodigoEstado, on_delete=models.CASCADE)
     telefone1 = models.CharField("Telefone #1", max_length=15, default=0)
     telefone2 = models.CharField("Telefone #2", max_length=15, default=0)
 
     data_processamento = models.DateField(null=True, blank=True, auto_now_add=True)
     data_competencia = models.DateField('Data de Competência', null=True, blank=True)
 
-    natureza_juridica = models.ForeignKey(GlobalNaturezaJuridica)
+    natureza_juridica = models.ForeignKey(GlobalNaturezaJuridica, on_delete=models.CASCADE)
 
     site_empresa = models.CharField("Site da Empresa", max_length=100, blank=True, null=True)
     email_empresa = models.EmailField("Email da Empresa", max_length=100, blank=True, null=True)
@@ -71,14 +88,14 @@ class Empresa(models.Model):
 
     inscricao_estadual = models.CharField('Inscrição Estadual', max_length=15)
     inscricao_municipal = models.CharField('Inscrição Municipal', max_length=15, blank=True, null=True)
-    codigo_cnae = models.ForeignKey(GlobalCodigoCnae)
+    codigo_cnae = models.ForeignKey(GlobalCodigoCnae, on_delete=models.CASCADE)
     # "SN" - simples nacional
     # "LP" - Lucro presumido
     # "LR" - Lucro REAL
     tipo_empresa = models.CharField(max_length=2, choices=TIPO_EMPRESA_CHOICES, default='LR')
-    gerente_empresa = models.ForeignKey(User, related_name='gerente', blank=True, null=True)
-    diretor_empresa = models.ForeignKey(User, related_name='diretor', blank=True, null=True)
-    contador_empresa = models.ForeignKey(User, related_name='contador', blank=True, null=True)
+    gerente_empresa = models.ForeignKey(User, related_name='gerente', blank=True, null=True, on_delete=models.CASCADE)
+    diretor_empresa = models.ForeignKey(User, related_name='diretor', blank=True, null=True, on_delete=models.CASCADE)
+    contador_empresa = models.ForeignKey(User, related_name='contador', blank=True, null=True, on_delete=models.CASCADE)
 
     # configuracoes customizaveis por empresa
     # "S" neste campo para que sistema agrupe numero de itens na venda balcao por codigo se houver codigos repetidos
@@ -139,11 +156,12 @@ class Conta(models.Model):
     grau_conta = models.PositiveSmallIntegerField("Grau da Conta", null=False, validators=[MaxValueValidator(9)])
     # codigo da conta de grau imediatamente superior ao grau desta conta
     # tem como objetivo acumular valores no plano de contas automaticamente a cada lançamento
-    conta_superior = models.ForeignKey('self', related_name='Superior', blank=True, null=True)
+    conta_superior = models.ForeignKey('self', related_name='Superior', blank=True, null=True, on_delete=models.CASCADE)
     # codigo da conta do passivo para onde irão automaticamente os saldos de receita e despesa
     # quando for feita a apuração do resultado periódica
     # apuração zera receita e despesa e transfere resultado para conta de balanço
-    conta_saldo_balanco = models.ForeignKey('self', related_name='Resultado', blank=True, null=True)
+    conta_saldo_balanco = models.ForeignKey('self', related_name='Resultado', blank=True, null=True,
+                                            on_delete=models.CASCADE)
     # "M" = RAZAO E DIARIO SÃO CONCENTRADOS EM 1 LANÇAMENTO POR MÊS
     # "D" = RAZAO E DIARIO SERÃO CONCENTRADOS EM LANÇAMENTO POR DIA
     # ****************************************************************
@@ -156,11 +174,11 @@ class Conta(models.Model):
 
     data_inclusao = models.DateField("Data de Inclusão", null=False, blank=True, auto_now_add=True)
     conta_referencial_bacen = models.ForeignKey(GlobalContaReferencialBacen, related_name='Referencial_BACEN',
-                                                blank=True, null=True)
+                                                blank=True, null=True, on_delete=models.CASCADE)
     conta_referencial_dinamica = models.ForeignKey(GlobContaReferencialDinamica, related_name='Referencial_Dinamica',
-                                                   blank=True, null=True)
+                                                   blank=True, null=True, on_delete=models.CASCADE)
     conta_referencial_susep = models.ForeignKey(GlobContaReferencialSusep, related_name='Referencial_Susep',
-                                                blank=True, null=True)
+                                                blank=True, null=True, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('ctb:conta-detail', kwargs={'pk': self.pk})
@@ -202,18 +220,6 @@ class Competencia(models.Model):
         verbose_name_plural = 'Competências'
 
 
-class Modulo(models.Model):
-    descricao = models.CharField(max_length=50)
-
-    def __str__(self):
-        return str(self.descricao)
-
-    class Meta:
-        ordering = ['descricao']
-        verbose_name = 'Módulo'
-        verbose_name_plural = 'Módulos'
-
-
 class Participante(models.Model):
     descricao = models.CharField(max_length=50)
 
@@ -224,20 +230,6 @@ class Participante(models.Model):
         ordering = ['descricao']
         verbose_name = 'Participante'
         verbose_name_plural = 'Participantes'
-
-
-class TipoMovimento(models.Model):
-    descricao = models.CharField(max_length=50)
-    status = models.BooleanField(default=True)
-    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.descricao) + " - " + str(self.modulo)
-
-    class Meta:
-        ordering = ['descricao']
-        verbose_name = 'Tipo de Movimento'
-        verbose_name_plural = 'Tipos de Movimentos'
 
 
 class TipoDocumento(models.Model):
@@ -258,9 +250,9 @@ class TipoDocumento(models.Model):
 # MOVIMENTOS CONTABEIS HEADER
 class MovimentoContabilHeader(models.Model):
     tipo_movimento = models.ForeignKey(TipoMovimento, on_delete=models.CASCADE, null=True, blank=True)
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_lancamento = models.DateField(null=False, blank=False, auto_now_add=True)
-    data_competencia = models.ForeignKey(Competencia)
+    data_competencia = models.ForeignKey(Competencia, on_delete=models.CASCADE)
     total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
 
@@ -288,15 +280,15 @@ class MovimentoContabilHeader(models.Model):
 # LANCAMENTOS CONTABEIS
 class LancamentoContabil(models.Model):
     header = models.ForeignKey(MovimentoContabilHeader, on_delete=models.CASCADE)
-    conta = models.ForeignKey(Conta)
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
     saldo_anterior = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     valor = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00,
                                 validators=[validate_valor_minimo], help_text='Informe valor positivo.')
     d_c = models.CharField('D/C', max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
     saldo_final = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
-    codigo_historico = models.ForeignKey(Historico)
+    codigo_historico = models.ForeignKey(Historico, on_delete=models.CASCADE)
     historico = models.TextField('Histórico', max_length=200)
-    codigo_participante = models.ForeignKey(Participante, blank=True, null=True, default='')
+    codigo_participante = models.ForeignKey(Participante, blank=True, null=True, default='', on_delete=models.CASCADE)
     tipo_documento = models.ForeignKey(TipoDocumento, max_length=3, blank=True, null=True, on_delete=models.CASCADE)
     numero_documento = models.CharField('Número do Documento', max_length=10, blank=True, null=True, default='')
     data_documento = models.DateField('Data do Documento', blank=True, null=True)
@@ -315,7 +307,7 @@ class LancamentoContabil(models.Model):
 
 
 class SaldoContaContabil(models.Model):
-    data_competencia = models.ForeignKey(Competencia)
+    data_competencia = models.ForeignKey(Competencia, on_delete=models.CASCADE)
     conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
     natureza = models.CharField(max_length=1, default='D')
     saldo_inicial = models.DecimalField(max_digits=16, decimal_places=2, default=0)

@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     cep = models.IntegerField(default=0, null=True, blank=True)
     bairro = models.CharField(max_length=30, default='Bairro')
     cidade = models.CharField(max_length=50, default='Cidade')
-    uf = models.ForeignKey(GlobalCodigoEstado, default='', null=True, blank=True)
+    uf = models.ForeignKey(GlobalCodigoEstado, default='', null=True, blank=True, on_delete=models.CASCADE)
     # Login e Senha vem da tabela User
     nivel_acesso = models.IntegerField(default=0)
     supervisor = models.BooleanField(default=False)
