@@ -55,6 +55,7 @@ SHARED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
 
+
 )
 
 TENANT_APPS = (
@@ -64,11 +65,13 @@ TENANT_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+
     # your tenant specific apps
     'accounts',
     'choices',
     'ctb',
     'glb',
+
 
 )
 
@@ -85,9 +88,9 @@ INSTALLED_APPS = (
     'django.contrib.postgres',
     'django.contrib.humanize',
 
-    'widget_tweaks',
 
     'accounts',
+    'cart',
     'choices',
     'clientes',
     'ctb',
@@ -127,6 +130,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -254,3 +258,5 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
+
+CART_SESSION_ID = 'cart'

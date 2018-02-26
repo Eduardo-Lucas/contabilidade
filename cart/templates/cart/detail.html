@@ -1,0 +1,46 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load l10n %}
+
+{% block title %}
+Contabilização em andamento
+{% endblock %}
+
+{% block content %}
+<h1>Contabilização</h1>
+<table class="cart">
+    <thead>
+    <tr>
+        <th>Conta</th>
+        <th>Valor</th>
+        <th>D_C</th>
+        <th>Código Histórico</th>
+        <th>Histórico</th>
+        <th>Ação</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+    {% with conta=item.conta %}
+    <tr>
+        <td>{{ item.conta }}</td>
+        <td class="num">{{ item.valor}}</td>
+        <td class="char">{{ item.d_c }}</td>
+        <td class="char">{{ item.codigo_historico }}</td>
+        <td class="char">{{ item.historico }}</td>
+        <td><a href="{% url 'cart:cart_remove' conta.id %}">Remover</a></td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+    <tr class="total">
+        <td>Total</td>
+        <td colspan="3"></td>
+        <td class="num">Débitos : R${{ cart.get_total_debito }}</td>
+        <td class="num">Créditos: R${{ cart.get_total_credito }}</td>
+    </tr>
+    </tbody>
+</table>
+<p class="text-right">
+    <a href="{% url 'ctb:conta-list' %}" class="button light">Continuar Contabilizando</a>
+</p>
+{% endblock %}

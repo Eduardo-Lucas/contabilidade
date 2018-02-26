@@ -83,7 +83,7 @@
                         </tfoot>
                         {% for conta in object_list %}
             {% if conta.conta_negrito %}
-                            <tr>
+            <tr class="success">
 
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>
@@ -117,7 +117,7 @@
                                 </td>
                             </tr>
                             {% else %}
-            <tr class="success">
+            <tr>
 
                                 <td> <a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.codigo_conta  }}</a></td>
                                 <td><a href="{% url 'ctb:conta-detail' conta.id %}">{{ conta.descricao  }}</a></td>

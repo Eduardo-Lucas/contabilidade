@@ -25,6 +25,7 @@ from ctb import views
 
 urlpatterns = [
                   url(r'^$', views.index, name='index'),
+                  url(r'^cart/', include('cart.urls')),
     url(r'^acc/', include('accounts.urls')),
     url(r'^ctb/', include('ctb.urls')),
     url(r'^admin/', admin.site.urls, name='admin'),

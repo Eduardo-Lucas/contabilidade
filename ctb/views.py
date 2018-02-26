@@ -1,15 +1,16 @@
+# coding=utf-8
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import transaction
-from django.db.models import Sum, Q, Max
+from django.db.models import Q, Max
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
-from ctb.forms import ContaForm, LancamentoContabilForm, LancamentoContabilFormSet, MovimentoContabilHeaderForm
+from ctb.forms import ContaForm, LancamentoContabilForm, MovimentoContabilHeaderForm, LancamentoContabilFormSet
 from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, LancamentoContabil, \
     SaldoContaContabil
 
@@ -39,8 +40,6 @@ def home(request):
     }
 
     return render(request, "home.html", context)
-
-
 
 
 """
@@ -427,6 +426,22 @@ class MovimentoContabilHeaderCreate(SuccessMessageMixin, LoginRequiredMixin, Cre
     template_name = "ctb/movimento_contabil_header/movimentocontabilheader_form.html"
 
 
+# def totaliza_lancamentos(movimentocontabilheader_id):
+#     movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
+#     header_lancamentos = movimentocontabilheader.lancamentocontabil_set.all()
+#
+#     tot_deb, tot_cred = 0, 0
+#     for l in header_lancamentos:
+#         if l.d_c == 'D':
+#             tot_deb += l.valor
+#         else:
+#             l.tot_deb += l.valor
+#
+#     movimentocontabilheader.total_debito = tot_deb
+#     movimentocontabilheader.total_credito = tot_cred
+#     movimentocontabilheader.save()
+
+
 class MovimentoContabilHeaderDetalhe(SuccessMessageMixin, LoginRequiredMixin, DetailView):
     model = MovimentoContabilHeader
     context_object_name = 'movimentocontabilheader'
@@ -499,29 +514,13 @@ class RazaoContabilList(SuccessMessageMixin, LoginRequiredMixin, ListView):
         return queryset
 
 
-def totaliza_lancamentos(movimentocontabilheader_id):
-    movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
-    header_lancamentos = movimentocontabilheader.lancamentocontabil_set.all()
-
-    total_debito = header_lancamentos.filter(d_c='D').aggregate(Sum('valor'))
-    total_credito = header_lancamentos.filter(d_c='C').aggregate(Sum('valor'))
-
-    # total_debito = total_debito.values()
-
-    # total_credito = total_credito.values()
-
-    # movimentocontabilheader.total_debito = total_debito
-    # movimentocontabilheader.total_credito = total_credito
-    # movimentocontabilheader.save()
-
-
 def saldo_anterior(codigo_conta):
     ultimo_id = LancamentoContabil.objects.filter(conta=codigo_conta).aggregate(Max('id'))
-    if not ultimo_id:
+    if ultimo_id['id__max'] is None:
         return 0
     else:
-        lancamento = LancamentoContabil.objects.filter(pk=ultimo_id['id__max'])
-        if not lancamento:
+        lancamento = LancamentoContabil.objects.get(pk=ultimo_id['id__max'])
+        if lancamento is None:
             return 0
         else:
             return lancamento.saldo_final
@@ -532,11 +531,29 @@ def pega_natureza_conta(conta_id):
     return obj.natureza
 
 
+# def create_lancamento(request, movimentocontabilheader_id):
+#     LancamentoContabilFormSet = formset_factory(LancamentoContabilForm)
+#     if request.method == 'POST':
+#         formset = LancamentoContabilFormSet(request.POST, request.FILES)
+#         if formset.is_valid():
+#             # do something with the formset.cleaned_data
+#             pass
+#     else:
+#         formset = LancamentoContabilFormSet(initial=[{'header_id': 'movimentocontabilheader_id', }])
+#     return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', {'formset': formset})
+
+
+"""
+Essa função foi a primeira que codifiquei antes de usar o FORMSET
+"""
+
+
 def create_lancamento(request, movimentocontabilheader_id):
     form = LancamentoContabilForm(request.POST or None, request.FILES or None)
     movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
     if form.is_valid():
         header_lancamentos = movimentocontabilheader.lancamentocontabil_set.all()
+        tot_deb, tot_cred = 0, 0
         for l in header_lancamentos:
             if l.conta == form.cleaned_data.get("conta"):
                 context = {
@@ -545,6 +562,11 @@ def create_lancamento(request, movimentocontabilheader_id):
                     'error_message': 'Você já utilizou esse código de Conta',
                 }
                 return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', context)
+
+            if l.d_c == 'D':
+                tot_deb += l.valor
+            else:
+                tot_cred += l.valor
 
         lancamentocontabil = form.save(commit=False)
         lancamentocontabil.header = movimentocontabilheader
@@ -571,10 +593,12 @@ def create_lancamento(request, movimentocontabilheader_id):
         lancamentocontabil.save()
 
         if lancamentocontabil.d_c == 'D':
-            movimentocontabilheader.total_debito += lancamentocontabil.valor
+            tot_deb += lancamentocontabil.valor
         else:
-            movimentocontabilheader.total_credito += lancamentocontabil.valor
+            tot_cred += lancamentocontabil.valor
 
+        movimentocontabilheader.total_debito = tot_deb
+        movimentocontabilheader.total_credito = tot_cred
         movimentocontabilheader.save()
 
         return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
@@ -584,13 +608,6 @@ def create_lancamento(request, movimentocontabilheader_id):
         'form': form,
     }
     return render(request, 'ctb/lancamento_contabil/create_lancamentocontabil.html', context)
-
-
-# def detail_lancamento(request, movimentocontabilheader_id):
-#         user = request.user
-#         movimentocontabilheader = get_object_or_404(MovimentoContabilHeader, pk=movimentocontabilheader_id)
-#         return render(request, 'ctb/lancamento_contabil/lancamento_contabil_detail.html',
-#                       {'movimentocontabilheader': movimentocontabilheader, 'user': user})
 
 
 def delete_lancamento(request, movimentocontabilheader_id, lancamentocontabil_id):
@@ -606,7 +623,7 @@ def delete_lancamento(request, movimentocontabilheader_id, lancamentocontabil_id
 
     lancamento.delete()
 
-    totaliza_lancamentos(movimentocontabilheader_id)
+    # totaliza_lancamentos(movimentocontabilheader_id)
 
     return render(request, 'ctb/movimento_contabil_header/movimento_contabil_header_detail.html',
                   {'movimentocontabilheader': movimentocontabilheader})
@@ -714,12 +731,12 @@ class SaldoUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 """
 
 
-class LancamentoContabilCreate(CreateView):
+class CreateMovimentoContabilHeader(CreateView):
     model = MovimentoContabilHeader
     context_object_name = 'header'
     fields = ['tipo_movimento', 'usuario', 'data_competencia']
-    success_message = '%(name) criado com sucesso!'
-    success_url = reverse_lazy('ctb:movimento-list')
+    # success_url = reverse_lazy('ctb:movimento-list')
+    success_url = reverse_lazy('ctb:lanc-add')
     template_name = "ctb/movimento_contabil_header/movimentocontabilheader_form.html"
 
     def get_success_message(self, cleaned_data):
@@ -729,7 +746,7 @@ class LancamentoContabilCreate(CreateView):
         )
 
     def get_context_data(self, **kwargs):
-        data = super(LancamentoContabilCreate, self).get_context_data(**kwargs)
+        data = super(CreateMovimentoContabilHeader, self).get_context_data(**kwargs)
         if self.request.POST:
             data['lancamentos'] = LancamentoContabilFormSet(self.request.POST)
         else:
@@ -739,13 +756,19 @@ class LancamentoContabilCreate(CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         lancamentos = context['lancamentos']
-        with transaction.atomic():
-            self.object = form.save()
 
+        with transaction.atomic():
             if lancamentos.is_valid():
+                self.object = form.save()
                 lancamentos.instance = self.object
                 lancamentos.save()
-        return super(LancamentoContabilCreate, self).form_valid(form)
+                messages.success(self.request, 'Lançamento criado com sucesso!')
+
+            else:
+                messages.warning(self.request, 'Houve um problema no lançamento e não foi realizado!!')
+
+        return super(CreateMovimentoContabilHeader, self).form_valid(form)
+
 
 
 """

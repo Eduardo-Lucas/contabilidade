@@ -1,3 +1,6 @@
+# coding=utf-8
+from decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, RegexValidator
@@ -184,10 +187,10 @@ class Conta(models.Model):
         return reverse('ctb:conta-detail', kwargs={'pk': self.pk})
 
     def conta_negrito(self):
-        if self.grau_conta == 4:
-            return False
-        else:
+        if self.tipo_conta == 'A':
             return True
+        else:
+            return False
 
     def __str__(self):
         return str(self.codigo_conta) + " " + str(self.descricao)
@@ -249,12 +252,17 @@ class TipoDocumento(models.Model):
 
 # MOVIMENTOS CONTABEIS HEADER
 class MovimentoContabilHeader(models.Model):
-    tipo_movimento = models.ForeignKey(TipoMovimento, on_delete=models.CASCADE, null=True, blank=True)
+    tipo_movimento = models.ForeignKey(TipoMovimento, on_delete=models.CASCADE, null=True, blank=True, default='Manual')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_lancamento = models.DateField(null=False, blank=False, auto_now_add=True)
     data_competencia = models.ForeignKey(Competencia, on_delete=models.CASCADE)
     total_debito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     total_credito = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Movimento Contábil'
+        verbose_name_plural = 'Movimentos Contábeis (Header)'
 
     def get_absolute_url(self):
         return reverse('ctb:movimento-detail', kwargs={'pk': self.pk})
@@ -263,18 +271,19 @@ class MovimentoContabilHeader(models.Model):
         return "Comp.: " + str(self.data_competencia) + " - " + "Mov.: " + str(self.tipo_movimento) + \
                " Seq.: " + str(self.id)
 
-    def status_header(self):
-        if self.total_debito != self.total_credito:
-            return False
-        elif self.total_debito + self.total_credito == 0:
-            return False
-        else:
-            return True
+    def total_debitos(self):
+        return str(sum(lancamentocontabil.tot_debitos() for lancamentocontabil in self.lancamentocontabil_set.all()))
 
-    class Meta:
-        ordering = ['-id']
-        verbose_name = 'Movimento Contábil'
-        verbose_name_plural = 'Movimentos Contábeis (Header)'
+    def total_creditos(self):
+        return str(sum(lancamentocontabil.tot_creditos() for lancamentocontabil in self.lancamentocontabil_set.all()))
+
+    def status_header(self):
+        if self.total_debitos != self.total_creditos:
+            return True
+        elif self.total_debitos + self.total_creditos == 0:
+            return True
+        else:
+            return False
 
 
 # LANCAMENTOS CONTABEIS
@@ -287,11 +296,16 @@ class LancamentoContabil(models.Model):
     d_c = models.CharField('D/C', max_length=1, choices=DEBITO_CREDITO_CHOICES, default='D')
     saldo_final = models.DecimalField(max_length=16, max_digits=16, decimal_places=2, default=0.00)
     codigo_historico = models.ForeignKey(Historico, on_delete=models.CASCADE)
-    historico = models.TextField('Histórico', max_length=200)
+    historico = models.CharField('Histórico', max_length=250)
     codigo_participante = models.ForeignKey(Participante, blank=True, null=True, default='', on_delete=models.CASCADE)
     tipo_documento = models.ForeignKey(TipoDocumento, max_length=3, blank=True, null=True, on_delete=models.CASCADE)
     numero_documento = models.CharField('Número do Documento', max_length=10, blank=True, null=True, default='')
     data_documento = models.DateField('Data do Documento', blank=True, null=True)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Lançamento Contábil'
+        verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'
 
     def get_absolute_url(self):
         return reverse('ctb:lancamento-detail', kwargs={'pk': self.pk})
@@ -300,10 +314,17 @@ class LancamentoContabil(models.Model):
         return "Header: " + str(self.header) + " Conta: " + str(self.conta) + " Valor: " + str(
             self.valor) + " D_C: " + str(self.d_c)
 
-    class Meta:
-        ordering = ['-id']
-        verbose_name = 'Lançamento Contábil'
-        verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'
+    def tot_debitos(self):
+        if self.d_c == 'D':
+            return self.valor
+        else:
+            return Decimal(0.00)
+
+    def tot_creditos(self):
+        if self.d_c == 'C':
+            return self.valor
+        else:
+            return Decimal(0.00)
 
 
 class SaldoContaContabil(models.Model):
@@ -430,8 +451,7 @@ post_save.connect(cria_saldo_contabil, sender=Conta)
 post_save.connect(aumenta_saldo, sender=LancamentoContabil)
 pre_delete.connect(diminui_saldo, sender=LancamentoContabil)
 
-
-# TODO Alterar o arquivo hosts no diretório C:\Windows\System32\Drivers\etc\hosts e incluir os enderecos
+# TODO Alterar o arquivo hosts no diretório C:\Windows\System32\Drivers\etc\hosts e incluir os endereços
 # TODO dos TENANTS. Exemplo: 127.0.0.1	comercialtoes-saas.com
 # TODO                       127.0.0.1  oleobahia-saas.com
 # TODO Contas Redutoras do Ativo:

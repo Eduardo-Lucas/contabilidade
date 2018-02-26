@@ -15,7 +15,7 @@
   background-color: #2e353d;
   position: fixed;
   top: 0px;
-  width: 225px;
+  width: 150px;
   height: 100%;
   color: #e1ffff;
 }
@@ -151,4 +151,8 @@
 body {
   margin: 0px;
   padding: 0px;
+}
+
+.alert alert-danger {
+    color: #D62D20;
 }

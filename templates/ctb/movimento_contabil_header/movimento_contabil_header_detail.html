@@ -1,5 +1,4 @@
 {% extends 'ctb/base_sidebar.html' %}
-{% load crispy_forms_tags %}
 
 {% block body %}
 
@@ -17,11 +16,11 @@
                     <h4>Data do Lançamento: {{ movimentocontabilheader.data_lancamento }} </h4>
                     <h4>Origem do Lançamento: {{movimentocontabilheader.origem }}</h4>
                     {% if not movimentocontabilheader.status_header %}
-                    <h4 class="text-danger">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
-                    <h4 class="text-danger">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
+                    <h4 class="text-danger">Total de Débitos : {{ movimentocontabilheader.total_debitos }}</h4>
+                    <h4 class="text-danger">Total de Créditos : {{ movimentocontabilheader.total_creditos }}</h4>
                     {% else %}
-                    <h4 class="text-success">Total de Débitos : {{ movimentocontabilheader.total_debito }}</h4>
-                    <h4 class="text-success">Total de Créditos : {{ movimentocontabilheader.total_credito }}</h4>
+                    <h4 class="text-success">Total de Débitos : {{ movimentocontabilheader.total_debitos }}</h4>
+                    <h4 class="text-success">Total de Créditos: {{ movimentocontabilheader.total_creditos }}</h4>
                     {% endif %}
                 </div>
                 <div align="center">
@@ -43,13 +42,13 @@
                     Novo Lançamento</a></li>
             </ul>
             {% if movimentocontabilheader.lancamentocontabil_set.all %}
+
             <div class="panel panel-default">
                 <div class="panel-body">
 
                     {% if error_message %}
                     <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-
                     <table class="responsive table table-responsive table-condensed table-bordered table-hover table-striped">
                         <thead>
                         <tr>

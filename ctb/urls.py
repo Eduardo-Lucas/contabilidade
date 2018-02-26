@@ -6,7 +6,8 @@ from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, Co
     EmpresaList, EmpresaDetalhe, EmpresaCreate, EmpresaUpdate, empresa_delete, \
     HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, MovimentoContabilHeaderList, \
     MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete, \
-    MovimentoContabilHeaderDetalhe, SaldoContaContabilList, SaldoDetalhe, RazaoContabilList, LancamentoContabilCreate
+    MovimentoContabilHeaderDetalhe, SaldoContaContabilList, SaldoDetalhe, RazaoContabilList, \
+    CreateMovimentoContabilHeader
 
 app_name = 'ctb'
 
@@ -43,7 +44,7 @@ urlpatterns = [
     url(r'^competencia/(?P<id>[0-9]+)/delete/$', competencia_delete, name='competencia-delete'),
 
     # FORMSET: Lancamento Contabil
-    url(r'^lanc-add/$', LancamentoContabilCreate.as_view(), name='lanc-add'),
+    url(r'^lanc-add/$', CreateMovimentoContabilHeader.as_view(), name='lanc-add'),
 
 
     # Movimentos Header

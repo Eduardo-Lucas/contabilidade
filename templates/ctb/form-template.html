@@ -1,7 +1,7 @@
 {% for field in form %}
     <div class="fieldWrapper">
         {{ field.errors }}
-        <label for="{{ field.label }}">{{ field.label_tag }}
+        <label for='{{ field.label }}'>{{ field.label_tag }}
             {% if field.field.required %}<span class="special_class">*</span>{% endif %}</label>
 
         {{ field }}

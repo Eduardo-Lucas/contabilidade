@@ -2,15 +2,14 @@
 
 {% block body %}
 
-<
 <div class="col-md-offset-2"> <!-- Header -->
     <!-- Left Contato Info -->
     <div class="panel panel-default">
         <div class="panel-body">
             {% if header.id %}
-            <h3>Edita o Registro de: {{header.id}}</h3>
+            <h4>Edita o Registro de: {{header.id}}</h4>
             {% else %}
-            <h3>Cria um Novo Movimento Contábil</h3>
+            <h4>Cria um Novo Movimento Contábil</h4>
             {% endif %}
 
             <div align="right">
@@ -21,14 +20,30 @@
         </div>
     </div>
 
+
     <form action="" method="post">{% csrf_token %}
 
         <div class="container">
             {{ form.as_table }}
-            </div>
+        </div>
 
         <table class="table table-responsive table-condensed table-bordered table-hover table-striped">
             {{ lancamentos.management_form }}
+
+            {% if formset.errors %}
+            {% for field in formset %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% for error in formset.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
 
             {% for form in lancamentos.forms %}
             {% if forloop.first %}
@@ -56,9 +71,11 @@
             </tr>
             {% endfor %}
         </table>
-        <input type="submit" value="Gravar"/>
+        <div align="right">
+            <input type="submit" value="Gravar"/>
+        </div>
     </form>
-    </div>
+</div>
 
 
 {% endblock %}

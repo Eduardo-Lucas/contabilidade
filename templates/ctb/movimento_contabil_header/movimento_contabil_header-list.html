@@ -87,8 +87,8 @@
             {% if not movimento.status_header %}
 
             <a href="{% url 'ctb:movimento-detail' movimento.id %}"><p class="bg-danger">Seq.:
-                {{movimento.id}} - Diferença: Débitos = {{movimento.total_debito}} Créditos =
-                {{movimento.total_credito}}</p>
+                {{movimento.id}} - Diferença: Débitos = {{ movimento.total_debitos }} Créditos =
+                {{ movimento.total_creditos }}</p>
             </a>
 
             <tr class="danger">
@@ -101,10 +101,10 @@
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debito|intcomma
-                    }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_credito|intcomma
-                    }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debitos}}</a>
+                </td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_creditos}}</a>
+                </td>
 
                 <!-- Detalhes -->
                 <td>
@@ -140,9 +140,9 @@
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debito|intcomma
-                    }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_credito|intcomma
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
+                    movimento.total_debitos }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_creditos
                     }}</a></td>
 
                 <!-- Detalhes -->
