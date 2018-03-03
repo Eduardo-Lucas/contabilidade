@@ -6,7 +6,7 @@
 
     <form method="POST" class="form-signin" action='' enctype="multipart/form-data" >{% csrf_token %}
         <h2 class="form-signin-heading">Edita Perfil</h2>
-        {{ form | crispy }}
+        {{ form }}
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ title }}" />
 
     </form>

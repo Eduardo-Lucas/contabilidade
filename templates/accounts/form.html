@@ -6,8 +6,8 @@
 
     <form method="POST" class="form-signin" action='' enctype="multipart/form-data" >{% csrf_token %}
         <h2 class="form-signin-heading">Informe suas credenciais</h2>
-        {{ form | crispy }}
-        <a href="/acc/reset-password">Esqueci a senha</a>
+        {{ form }}
+        <a href="/accounts/reset-password">Esqueci a senha</a>
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ title }}" />
 
     </form>

@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from accounts.views import UserprofileList, UserprofileDetalhe, UserprofileUpdate, userprofile_delete
 
-app_name = 'acc'
+app_name = 'accounts'
 
 urlpatterns = [
 

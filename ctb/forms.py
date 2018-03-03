@@ -1,7 +1,7 @@
 # coding=utf-8
 from decimal import Decimal
 
-from django.forms import ModelForm, inlineformset_factory, BaseInlineFormSet, forms
+from django.forms import ModelForm, inlineformset_factory, BaseInlineFormSet
 
 from ctb.models import Conta, MovimentoContabilHeader, LancamentoContabil
 
@@ -45,9 +45,9 @@ class CustomLancamentoInlineFormSet(BaseInlineFormSet):
                     tot_cred += valor
 
         if tot_deb != tot_cred:
-            raise forms.ValidationError('A soma de Débitos e Créditos está DIFERENTE!')
-        else:
-            return True
+            self.add_error('valor', 'A soma de Débitos e Créditos está DIFERENTE!')
+
+        return self.cleaned_data
 
 
 LancamentoContabilFormSet = inlineformset_factory(MovimentoContabilHeader, LancamentoContabil,

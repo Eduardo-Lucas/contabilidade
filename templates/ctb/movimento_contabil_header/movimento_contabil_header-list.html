@@ -1,10 +1,44 @@
 {% extends 'ctb/base_sidebar.html' %}
 {% block historico_active %}active{% endblock %}
 {% load humanize %}
-{% load l10n %}
+{% load l10n widget_tweaks %}
 
 
 {% block body %}
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="{% url 'ctb:generate_pdf' %}">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="container">
     <div class="col-md-offset-2"> <!-- Header -->
         <div class="panel panel-default">
@@ -25,12 +59,11 @@
                 <div class="btn-group">
 
                     <!-- PDF -->
-                    <a href="#">
-                        <button type="button" disabled class="btn btn-warning" data-toggle="tooltip" title="Gera PDF"
-                                style="margin-top: 4px;">
+                    <button type="button" class="btn btn-warning" data-target="#exampleModal"
+                            data-toggle="tooltip modal" title="Gera PDF"
+                            style="margin-top: 4px;">
                             <span class="glyphicon glyphicon-download-alt"></span>&nbsp; PDF
                         </button>
-                    </a>
 
                     <!-- EXCEL -->
                     <a href="#">
@@ -95,9 +128,10 @@
                 <td style="text-align:center"><a href="{% url 'ctb:movimento-detail' movimento.id %}"><span
                         class="glyphicon glyphicon-thumbs-down" data-toggle="tooltip"
                         title="Diferença entre Débitos e Créditos"
-                        aria-hidden="true"></span></a></td>
+                        aria-hidden="true"></span></a>
+                </td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia}}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.data_competencia}}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
@@ -136,14 +170,14 @@
                         class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
                         title="Lançamento ok!" aria-hidden="true"></span></a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.id }}</a></td>
-                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_competencia}}</a></td>
+                <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.data_competencia}}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.tipo_movimento }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.usuario }}</a></td>
                 <td><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{ movimento.data_lancamento }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{
-                    movimento.total_debitos }}</a></td>
-                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_creditos
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_debitos
                     }}</a></td>
+                <td style="text-align:right"><a href="{% url 'ctb:movimento-detail' movimento.id %}">{{movimento.total_creditos}}</a>
+                </td>
 
                 <!-- Detalhes -->
                 <td>

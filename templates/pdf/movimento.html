@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <style type="text/css">
+             body {
+                 font-weight: 200;
+                 font-size: 14px;
+             }
+             .header {
+                 font-size: 20px;
+                 font-weight: 100;
+                 text-align: center;
+                 color: #007cae;
+             }
+             .title {
+                 font-size: 22px;
+                 font-weight: 100;
+                /* text-align: right;*/
+                padding: 10px 20px 0px 20px;
+             }
+             .title span {
+                 color: #007cae;
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: left !important;
+                 /*margin-left: 40%;*/
+             }
+             .hrItem {
+                 border: none;
+                 height: 1px;
+                 /* Set the hr color */
+                 color: #333; /* old IE */
+                 background-color: #fff; /* Modern Browsers */
+             }
+
+    </style>
+</head>
+<body>
+{% load l10n %}
+<div class='wrapper'>
+    <div class='header'>
+        <p class='title'>Movimento # </p>
+    </div>
+</div>
+<table class="table">
+    <div class='details'>
+        <tbody>
+        {% for h in header %}
+        <tr>
+            <td><span style="font-weight:bold">Tipo Movimento: </span>{{ h.tipo_movimento }}</td>
+            <td><span style="font-weight:bold">Sequencial: </span>{{ h.id }}</td>
+            <td><span style="font-weight:bold">Usuário: </span>{{ h.usuario}}</td>
+            <td><span style="font-weight:bold">Data da Competência: </span>{{ h.data_competencia }}
+        </tr>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th align="left">Conta</th>
+                <th align="left">Valor</th>
+                <th align="center">D_C</th>
+                <th align="right">Código Histórico</th>
+                <th>Histórico</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for l in h.lancamentocontabil_set.all %}
+            <tr>
+                <td width="38%">{{ l.conta}}</td>
+                {% localize on %}
+                <td width="20%">{{ l.valor }}</td>
+                {% endlocalize %}
+                <td width="2%">{{ l.d_c }}</td>
+                <td width="20%" align="right">{{ l.codigo_historico}}</td>
+                <td width="20%" align="center">{{ l.historico}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <span style="font-weight:bold">Total de Débitos:</span> {{ h.total_debitos }}
+        <span style="font-weight:bold">Total de Créditos:</span> {{ h.total_creditos }}
+
+        <hr class='hrItem'/>
+        {% endfor %}
+        </tbody>
+    </div>
+</table>
+</body>
+</html>

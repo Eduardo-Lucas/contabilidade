@@ -7,7 +7,7 @@ from ctb.views import CompetenciaList, CompetenciaDetalhe, CompetenciaCreate, Co
     HistoricoList, HistoricoDetalhe, HistoricoCreate, HistoricoUpdate, historico_delete, MovimentoContabilHeaderList, \
     MovimentoContabilHeaderCreate, MovimentoContabilHeaderUpdate, movimento_contabil_header_delete, \
     MovimentoContabilHeaderDetalhe, SaldoContaContabilList, SaldoDetalhe, RazaoContabilList, \
-    CreateMovimentoContabilHeader
+    CreateMovimentoContabilHeader, GeneratePdf
 
 app_name = 'ctb'
 
@@ -67,5 +67,8 @@ urlpatterns = [
 
     # WORK IN PROGRESS
     url(r'^wip/$', views.work_in_progress, name="wip"),
+
+    # ReportLab
+    url(r'^pdf/$', GeneratePdf.as_view(), name='generate_pdf'),
 
 ]

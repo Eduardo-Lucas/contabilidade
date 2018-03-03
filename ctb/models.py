@@ -214,8 +214,8 @@ class Competencia(models.Model):
         return reverse('ctb:competencia-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return str(self.data_competencia.strftime('%Y-%m-%d'))
-        # return str(self.data_competencia.strftime('%d/%m/%Y'))
+        # return str(self.data_competencia.strftime('%Y-%m-%d'))
+        return str(self.data_competencia.strftime('%d/%m/%Y'))
 
     class Meta:
         ordering = ['-data_competencia']
@@ -303,7 +303,7 @@ class LancamentoContabil(models.Model):
     data_documento = models.DateField('Data do Documento', blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['id']
         verbose_name = 'Lançamento Contábil'
         verbose_name_plural = 'Lançamentos Contábeis (Lançamentos)'
 

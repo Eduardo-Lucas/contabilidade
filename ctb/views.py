@@ -6,10 +6,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import transaction
 from django.db.models import Q, Max
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic.base import View
 
+from contabilidade.utils import render_to_pdf
 from ctb.forms import ContaForm, LancamentoContabilForm, MovimentoContabilHeaderForm, LancamentoContabilFormSet
 from ctb.models import Conta, Historico, Empresa, Competencia, MovimentoContabilHeader, LancamentoContabil, \
     SaldoContaContabil
@@ -764,9 +767,6 @@ class CreateMovimentoContabilHeader(CreateView):
                 lancamentos.save()
                 messages.success(self.request, 'Lançamento criado com sucesso!')
 
-            else:
-                messages.warning(self.request, 'Houve um problema no lançamento e não foi realizado!!')
-
         return super(CreateMovimentoContabilHeader, self).form_valid(form)
 
 
@@ -786,3 +786,13 @@ def error_404(request):
 
 def error_500(request):
     return render(request, '500.html', {})
+
+
+class GeneratePdf(View):
+
+    def get(self, request, *args, **kwargs):
+        content = {
+            'header': MovimentoContabilHeader.objects.order_by('id'),
+        }
+        pdf = render_to_pdf('pdf/movimento.html', content)
+        return HttpResponse(pdf, content_type='application/pdf')
